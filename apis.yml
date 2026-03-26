@@ -1,0 +1,28 @@
+aid: incus
+name: Incus
+description: >-
+  Incus is a modern system container and virtual machine manager that provides a unified experience for running and managing containers and VMs.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Containers
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: incus:incus
+    name: Incus
+    description: >-
+      Incus is a modern system container and virtual machine manager that provides a unified experience for running and managing containers and VMs.
+    humanURL: https://linuxcontainers.org/incus/
+    tags:
+      - Containers
+    properties: []
+common:
+  - type: Website
+    url: https://linuxcontainers.org/incus/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
