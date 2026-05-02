@@ -1,0 +1,51 @@
+aid: incus:incus-rest-api
+name: Incus REST API Rules
+description: >-
+  Operational guardrails and conventions for working with the Incus REST API.
+  These rules document expectations around authentication, project scoping,
+  asynchronous operations, and safe defaults for cluster, instance, image,
+  and storage management.
+rules:
+  - id: incus-auth-tls
+    name: Use TLS client certificates for remote access
+    description: >-
+      Remote Incus API access must be authenticated with a trusted client
+      certificate or trust token. Plain HTTP access is only available over
+      the local Unix socket and must not be exposed remotely.
+  - id: incus-project-scope
+    name: Scope operations to a project
+    description: >-
+      Use the project query parameter on instance, image, network, profile,
+      and storage volume operations to keep tenants isolated. Avoid relying
+      on the default project for multi-tenant deployments.
+  - id: incus-async-operations
+    name: Track asynchronous operations
+    description: >-
+      Long-running operations (instance create, copy, migrate, image import)
+      return a background operation. Poll /1.0/operations/{id} or subscribe
+      to the events WebSocket rather than blocking on the initial response.
+  - id: incus-recursion-filter
+    name: Use recursion and filter for collection queries
+    description: >-
+      When listing instances, images, or volumes, prefer recursion=1 to
+      retrieve full objects in a single call and use the filter parameter
+      to narrow result sets server-side instead of pulling and filtering
+      client-side.
+  - id: incus-cluster-target
+    name: Pin cluster operations with target
+    description: >-
+      In clustered deployments, set the target query parameter when an
+      operation must run on a specific member, particularly for storage
+      volume creation, instance placement, and certificate management.
+  - id: incus-storage-volumes-naming
+    name: Stable storage volume naming
+    description: >-
+      Storage volumes are addressed by pool, type, and name. Treat these
+      identifiers as stable and avoid renaming volumes that are attached
+      to running instances.
+  - id: incus-image-fingerprints
+    name: Pin images by fingerprint
+    description: >-
+      Reference images by SHA-256 fingerprint in automation. Aliases are
+      mutable and may move between releases; fingerprints guarantee a
+      reproducible build.
