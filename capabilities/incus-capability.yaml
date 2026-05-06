@@ -1,0 +1,2757 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API
+  description: This is the REST API used by all Incus clients. Internal endpoints aren't included in this documentation. The
+    Incus API is available over both a local unix+http and remote https API. Authentication for local users relies on group
+    membership and access to the unix socket. For remote users, the default authentication method is TLS client certificates.
+  tags:
+  - Incus
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: incus
+    baseUri: https://api.example.com
+    description: Incus external REST API HTTP API.
+    resources:
+    - name: resource
+      path: /
+      operations:
+      - name: api-get
+        method: GET
+        description: Get the supported API endpoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0
+      path: /1.0
+      operations:
+      - name: server-get
+        method: GET
+        description: Get the server environment and configuration
+        inputParameters:
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: server-patch
+        method: PATCH
+        description: Partially update the server configuration
+        inputParameters:
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: server-put
+        method: PUT
+        description: Update the server configuration
+        inputParameters:
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-certificates
+      path: /1.0/certificates
+      operations:
+      - name: certificates-get
+        method: GET
+        description: Get the trusted certificates
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: certificates-post
+        method: POST
+        description: Add a trusted certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-certificates-fingerprint
+      path: /1.0/certificates/{fingerprint}
+      operations:
+      - name: certificate-delete
+        method: DELETE
+        description: Delete the trusted certificate
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: certificate-get
+        method: GET
+        description: Get the trusted certificate
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: certificate-patch
+        method: PATCH
+        description: Partially update the trusted certificate
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: certificate-put
+        method: PUT
+        description: Update the trusted certificate
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-certificates-public
+      path: /1.0/certificates?public
+      operations:
+      - name: certificates-post-untrusted
+        method: POST
+        description: Add a trusted certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-certificates-recursion-1
+      path: /1.0/certificates?recursion=1
+      operations:
+      - name: certificates-get-recursion1
+        method: GET
+        description: Get the trusted certificates
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster
+      path: /1.0/cluster
+      operations:
+      - name: cluster-get
+        method: GET
+        description: Get the cluster configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-put
+        method: PUT
+        description: Update the cluster configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-certificate
+      path: /1.0/cluster/certificate
+      operations:
+      - name: clustering-update-cert
+        method: PUT
+        description: Update the certificate for the cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-groups
+      path: /1.0/cluster/groups
+      operations:
+      - name: cluster-groups-get
+        method: GET
+        description: Get the cluster groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-groups-post
+        method: POST
+        description: Create a cluster group.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-groups-name
+      path: /1.0/cluster/groups/{name}
+      operations:
+      - name: cluster-group-delete
+        method: DELETE
+        description: Delete the cluster group.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster group name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-group-get
+        method: GET
+        description: Get the cluster group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster group name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-group-patch
+        method: PATCH
+        description: Update the cluster group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster group name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-group-post
+        method: POST
+        description: Rename the cluster group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster group name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-group-put
+        method: PUT
+        description: Update the cluster group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster group name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-groups-recursion-1
+      path: /1.0/cluster/groups?recursion=1
+      operations:
+      - name: cluster-groups-get-recursion1
+        method: GET
+        description: Get the cluster groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-members
+      path: /1.0/cluster/members
+      operations:
+      - name: cluster-members-get
+        method: GET
+        description: Get the cluster members
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-members-post
+        method: POST
+        description: Request a join token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-members-name
+      path: /1.0/cluster/members/{name}
+      operations:
+      - name: cluster-member-delete
+        method: DELETE
+        description: Delete the cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-member-get
+        method: GET
+        description: Get the cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-member-patch
+        method: PATCH
+        description: Partially update the cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-member-post
+        method: POST
+        description: Rename the cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-member-put
+        method: PUT
+        description: Update the cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-members-name-state
+      path: /1.0/cluster/members/{name}/state
+      operations:
+      - name: cluster-member-state-get
+        method: GET
+        description: Get state of the cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cluster-member-state-post
+        method: POST
+        description: Evacuate or restore a cluster member
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Cluster member name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-cluster-members-recursion-1
+      path: /1.0/cluster/members?recursion=1
+      operations:
+      - name: cluster-members-get-recursion1
+        method: GET
+        description: Get the cluster members
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-events
+      path: /1.0/events
+      operations:
+      - name: events-get
+        method: GET
+        description: Get the event stream
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: type
+          in: query
+          type: string
+          description: Event type(s), comma separated (valid types are logging, operation or lifecycle)
+        - name: all-projects
+          in: query
+          type: string
+          description: Retrieve instances from all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images
+      path: /1.0/images
+      operations:
+      - name: images-get
+        method: GET
+        description: Get the images
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        - name: all-projects
+          in: query
+          type: string
+          description: Retrieve images from all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-post
+        method: POST
+        description: Add an image
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: X-Incus-secret
+          in: header
+          type: string
+          description: Push secret for server to server communication
+        - name: X-Incus-fingerprint
+          in: header
+          type: string
+          description: Expected fingerprint when pushing a raw image
+        - name: X-Incus-aliases
+          in: header
+          type: array
+          description: List of aliases to assign
+        - name: X-Incus-properties
+          in: header
+          type: object
+          description: Descriptive properties
+        - name: X-Incus-public
+          in: header
+          type: boolean
+          description: Whether the image is available to unauthenticated users
+        - name: X-Incus-filename
+          in: header
+          type: string
+          description: Original filename of the image
+        - name: X-Incus-profiles
+          in: header
+          type: array
+          description: List of profiles to use
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-fingerprint
+      path: /1.0/images/{fingerprint}
+      operations:
+      - name: image-delete
+        method: DELETE
+        description: Delete the image
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: image-get
+        method: GET
+        description: Get the image
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: image-patch
+        method: PATCH
+        description: Partially update the image
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: image-put
+        method: PUT
+        description: Update the image
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-fingerprint-export
+      path: /1.0/images/{fingerprint}/export
+      operations:
+      - name: image-export-get
+        method: GET
+        description: Get the raw image file(s)
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-export-post
+        method: POST
+        description: Make the server push the image to a remote server
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-fingerprint-export-public
+      path: /1.0/images/{fingerprint}/export?public
+      operations:
+      - name: image-export-get-untrusted
+        method: GET
+        description: Get the raw image file(s)
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: secret
+          in: query
+          type: string
+          description: Secret token to retrieve a private image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-fingerprint-refresh
+      path: /1.0/images/{fingerprint}/refresh
+      operations:
+      - name: images-refresh-post
+        method: POST
+        description: Refresh an image
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-fingerprint-secret
+      path: /1.0/images/{fingerprint}/secret
+      operations:
+      - name: images-secret-post
+        method: POST
+        description: Generate secret for retrieval of the image by an untrusted client
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-fingerprint-public
+      path: /1.0/images/{fingerprint}?public
+      operations:
+      - name: image-get-untrusted
+        method: GET
+        description: Get the public image
+        inputParameters:
+        - name: fingerprint
+          in: path
+          type: string
+          required: true
+          description: Fingerprint
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: secret
+          in: query
+          type: string
+          description: Secret token to retrieve a private image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-aliases
+      path: /1.0/images/aliases
+      operations:
+      - name: images-aliases-get
+        method: GET
+        description: Get the image aliases
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-aliases-post
+        method: POST
+        description: Add an image alias
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-aliases-name
+      path: /1.0/images/aliases/{name}
+      operations:
+      - name: image-alias-delete
+        method: DELETE
+        description: Delete the image alias
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Alias name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: image-alias-get
+        method: GET
+        description: Get the image alias
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Alias name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-alias-patch
+        method: PATCH
+        description: Partially update the image alias
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Alias name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-alias-post
+        method: POST
+        description: Rename the image alias
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Alias name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-aliases-put
+        method: PUT
+        description: Update the image alias
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Alias name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-aliases-name-public
+      path: /1.0/images/aliases/{name}?public
+      operations:
+      - name: image-alias-get-untrusted
+        method: GET
+        description: Get the public image alias
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: Alias name
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-aliases-recursion-1
+      path: /1.0/images/aliases?recursion=1
+      operations:
+      - name: images-aliases-get-recursion1
+        method: GET
+        description: Get the image aliases
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-public
+      path: /1.0/images?public
+      operations:
+      - name: images-get-untrusted
+        method: GET
+        description: Get the public images
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        - name: all-projects
+          in: query
+          type: string
+          description: Retrieve images from all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: images-post-untrusted
+        method: POST
+        description: Add an image
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-public-recursion-1
+      path: /1.0/images?public&recursion=1
+      operations:
+      - name: images-get-recursion1-untrusted
+        method: GET
+        description: Get the public images
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        - name: all-projects
+          in: query
+          type: string
+          description: Retrieve images from all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-images-recursion-1
+      path: /1.0/images?recursion=1
+      operations:
+      - name: images-get-recursion1
+        method: GET
+        description: Get the images
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        - name: all-projects
+          in: query
+          type: string
+          description: Retrieve images from all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 1-0-instances
+      path: /1.0/instances
+      operations:
+      - name: instances-get
+        method: GET
+        description: Get the instances
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+        - name: all-projects
+          in: query
+          type: string
+          description: Retrieve instances from all projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: incus-rest
+    description: REST adapter for Incus external REST API.
+    resources:
+    - path: /
+      name: api-get
+      operations:
+      - method: GET
+        name: api-get
+        description: Get the supported API endpoints
+        call: incus.api-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0
+      name: server-get
+      operations:
+      - method: GET
+        name: server-get
+        description: Get the server environment and configuration
+        call: incus.server-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0
+      name: server-patch
+      operations:
+      - method: PATCH
+        name: server-patch
+        description: Partially update the server configuration
+        call: incus.server-patch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0
+      name: server-put
+      operations:
+      - method: PUT
+        name: server-put
+        description: Update the server configuration
+        call: incus.server-put
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates
+      name: certificates-get
+      operations:
+      - method: GET
+        name: certificates-get
+        description: Get the trusted certificates
+        call: incus.certificates-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates
+      name: certificates-post
+      operations:
+      - method: POST
+        name: certificates-post
+        description: Add a trusted certificate
+        call: incus.certificates-post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates/{fingerprint}
+      name: certificate-delete
+      operations:
+      - method: DELETE
+        name: certificate-delete
+        description: Delete the trusted certificate
+        call: incus.certificate-delete
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates/{fingerprint}
+      name: certificate-get
+      operations:
+      - method: GET
+        name: certificate-get
+        description: Get the trusted certificate
+        call: incus.certificate-get
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates/{fingerprint}
+      name: certificate-patch
+      operations:
+      - method: PATCH
+        name: certificate-patch
+        description: Partially update the trusted certificate
+        call: incus.certificate-patch
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates/{fingerprint}
+      name: certificate-put
+      operations:
+      - method: PUT
+        name: certificate-put
+        description: Update the trusted certificate
+        call: incus.certificate-put
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates?public
+      name: certificates-post-untrusted
+      operations:
+      - method: POST
+        name: certificates-post-untrusted
+        description: Add a trusted certificate
+        call: incus.certificates-post-untrusted
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/certificates?recursion=1
+      name: certificates-get-recursion1
+      operations:
+      - method: GET
+        name: certificates-get-recursion1
+        description: Get the trusted certificates
+        call: incus.certificates-get-recursion1
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster
+      name: cluster-get
+      operations:
+      - method: GET
+        name: cluster-get
+        description: Get the cluster configuration
+        call: incus.cluster-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster
+      name: cluster-put
+      operations:
+      - method: PUT
+        name: cluster-put
+        description: Update the cluster configuration
+        call: incus.cluster-put
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/certificate
+      name: clustering-update-cert
+      operations:
+      - method: PUT
+        name: clustering-update-cert
+        description: Update the certificate for the cluster
+        call: incus.clustering-update-cert
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups
+      name: cluster-groups-get
+      operations:
+      - method: GET
+        name: cluster-groups-get
+        description: Get the cluster groups
+        call: incus.cluster-groups-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups
+      name: cluster-groups-post
+      operations:
+      - method: POST
+        name: cluster-groups-post
+        description: Create a cluster group.
+        call: incus.cluster-groups-post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups/{name}
+      name: cluster-group-delete
+      operations:
+      - method: DELETE
+        name: cluster-group-delete
+        description: Delete the cluster group.
+        call: incus.cluster-group-delete
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups/{name}
+      name: cluster-group-get
+      operations:
+      - method: GET
+        name: cluster-group-get
+        description: Get the cluster group
+        call: incus.cluster-group-get
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups/{name}
+      name: cluster-group-patch
+      operations:
+      - method: PATCH
+        name: cluster-group-patch
+        description: Update the cluster group
+        call: incus.cluster-group-patch
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups/{name}
+      name: cluster-group-post
+      operations:
+      - method: POST
+        name: cluster-group-post
+        description: Rename the cluster group
+        call: incus.cluster-group-post
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups/{name}
+      name: cluster-group-put
+      operations:
+      - method: PUT
+        name: cluster-group-put
+        description: Update the cluster group
+        call: incus.cluster-group-put
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/groups?recursion=1
+      name: cluster-groups-get-recursion1
+      operations:
+      - method: GET
+        name: cluster-groups-get-recursion1
+        description: Get the cluster groups
+        call: incus.cluster-groups-get-recursion1
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members
+      name: cluster-members-get
+      operations:
+      - method: GET
+        name: cluster-members-get
+        description: Get the cluster members
+        call: incus.cluster-members-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members
+      name: cluster-members-post
+      operations:
+      - method: POST
+        name: cluster-members-post
+        description: Request a join token
+        call: incus.cluster-members-post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}
+      name: cluster-member-delete
+      operations:
+      - method: DELETE
+        name: cluster-member-delete
+        description: Delete the cluster member
+        call: incus.cluster-member-delete
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}
+      name: cluster-member-get
+      operations:
+      - method: GET
+        name: cluster-member-get
+        description: Get the cluster member
+        call: incus.cluster-member-get
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}
+      name: cluster-member-patch
+      operations:
+      - method: PATCH
+        name: cluster-member-patch
+        description: Partially update the cluster member
+        call: incus.cluster-member-patch
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}
+      name: cluster-member-post
+      operations:
+      - method: POST
+        name: cluster-member-post
+        description: Rename the cluster member
+        call: incus.cluster-member-post
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}
+      name: cluster-member-put
+      operations:
+      - method: PUT
+        name: cluster-member-put
+        description: Update the cluster member
+        call: incus.cluster-member-put
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}/state
+      name: cluster-member-state-get
+      operations:
+      - method: GET
+        name: cluster-member-state-get
+        description: Get state of the cluster member
+        call: incus.cluster-member-state-get
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members/{name}/state
+      name: cluster-member-state-post
+      operations:
+      - method: POST
+        name: cluster-member-state-post
+        description: Evacuate or restore a cluster member
+        call: incus.cluster-member-state-post
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/cluster/members?recursion=1
+      name: cluster-members-get-recursion1
+      operations:
+      - method: GET
+        name: cluster-members-get-recursion1
+        description: Get the cluster members
+        call: incus.cluster-members-get-recursion1
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/events
+      name: events-get
+      operations:
+      - method: GET
+        name: events-get
+        description: Get the event stream
+        call: incus.events-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images
+      name: images-get
+      operations:
+      - method: GET
+        name: images-get
+        description: Get the images
+        call: incus.images-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images
+      name: images-post
+      operations:
+      - method: POST
+        name: images-post
+        description: Add an image
+        call: incus.images-post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}
+      name: image-delete
+      operations:
+      - method: DELETE
+        name: image-delete
+        description: Delete the image
+        call: incus.image-delete
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}
+      name: image-get
+      operations:
+      - method: GET
+        name: image-get
+        description: Get the image
+        call: incus.image-get
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}
+      name: image-patch
+      operations:
+      - method: PATCH
+        name: image-patch
+        description: Partially update the image
+        call: incus.image-patch
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}
+      name: image-put
+      operations:
+      - method: PUT
+        name: image-put
+        description: Update the image
+        call: incus.image-put
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}/export
+      name: image-export-get
+      operations:
+      - method: GET
+        name: image-export-get
+        description: Get the raw image file(s)
+        call: incus.image-export-get
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}/export
+      name: images-export-post
+      operations:
+      - method: POST
+        name: images-export-post
+        description: Make the server push the image to a remote server
+        call: incus.images-export-post
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}/export?public
+      name: image-export-get-untrusted
+      operations:
+      - method: GET
+        name: image-export-get-untrusted
+        description: Get the raw image file(s)
+        call: incus.image-export-get-untrusted
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}/refresh
+      name: images-refresh-post
+      operations:
+      - method: POST
+        name: images-refresh-post
+        description: Refresh an image
+        call: incus.images-refresh-post
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}/secret
+      name: images-secret-post
+      operations:
+      - method: POST
+        name: images-secret-post
+        description: Generate secret for retrieval of the image by an untrusted client
+        call: incus.images-secret-post
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/{fingerprint}?public
+      name: image-get-untrusted
+      operations:
+      - method: GET
+        name: image-get-untrusted
+        description: Get the public image
+        call: incus.image-get-untrusted
+        with:
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases
+      name: images-aliases-get
+      operations:
+      - method: GET
+        name: images-aliases-get
+        description: Get the image aliases
+        call: incus.images-aliases-get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases
+      name: images-aliases-post
+      operations:
+      - method: POST
+        name: images-aliases-post
+        description: Add an image alias
+        call: incus.images-aliases-post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases/{name}
+      name: image-alias-delete
+      operations:
+      - method: DELETE
+        name: image-alias-delete
+        description: Delete the image alias
+        call: incus.image-alias-delete
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases/{name}
+      name: image-alias-get
+      operations:
+      - method: GET
+        name: image-alias-get
+        description: Get the image alias
+        call: incus.image-alias-get
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases/{name}
+      name: images-alias-patch
+      operations:
+      - method: PATCH
+        name: images-alias-patch
+        description: Partially update the image alias
+        call: incus.images-alias-patch
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases/{name}
+      name: images-alias-post
+      operations:
+      - method: POST
+        name: images-alias-post
+        description: Rename the image alias
+        call: incus.images-alias-post
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases/{name}
+      name: images-aliases-put
+      operations:
+      - method: PUT
+        name: images-aliases-put
+        description: Update the image alias
+        call: incus.images-aliases-put
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases/{name}?public
+      name: image-alias-get-untrusted
+      operations:
+      - method: GET
+        name: image-alias-get-untrusted
+        description: Get the public image alias
+        call: incus.image-alias-get-untrusted
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images/aliases?recursion=1
+      name: images-aliases-get-recursion1
+      operations:
+      - method: GET
+        name: images-aliases-get-recursion1
+        description: Get the image aliases
+        call: incus.images-aliases-get-recursion1
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images?public
+      name: images-get-untrusted
+      operations:
+      - method: GET
+        name: images-get-untrusted
+        description: Get the public images
+        call: incus.images-get-untrusted
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images?public
+      name: images-post-untrusted
+      operations:
+      - method: POST
+        name: images-post-untrusted
+        description: Add an image
+        call: incus.images-post-untrusted
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images?public&recursion=1
+      name: images-get-recursion1-untrusted
+      operations:
+      - method: GET
+        name: images-get-recursion1-untrusted
+        description: Get the public images
+        call: incus.images-get-recursion1-untrusted
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/images?recursion=1
+      name: images-get-recursion1
+      operations:
+      - method: GET
+        name: images-get-recursion1
+        description: Get the images
+        call: incus.images-get-recursion1
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /1.0/instances
+      name: instances-get
+      operations:
+      - method: GET
+        name: instances-get
+        description: Get the instances
+        call: incus.instances-get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: incus-mcp
+    transport: http
+    description: MCP adapter for Incus external REST API for AI agent use.
+    tools:
+    - name: api-get
+      description: Get the supported API endpoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.api-get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: server-get
+      description: Get the server environment and configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.server-get
+      with:
+        target: tools.target
+        project: tools.project
+      inputParameters:
+      - name: target
+        type: string
+        description: Cluster member name
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: server-patch
+      description: Partially update the server configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.server-patch
+      with:
+        target: tools.target
+      inputParameters:
+      - name: target
+        type: string
+        description: Cluster member name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: server-put
+      description: Update the server configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.server-put
+      with:
+        target: tools.target
+      inputParameters:
+      - name: target
+        type: string
+        description: Cluster member name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificates-get
+      description: Get the trusted certificates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.certificates-get
+      with:
+        filter: tools.filter
+      inputParameters:
+      - name: filter
+        type: string
+        description: Collection filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificates-post
+      description: Add a trusted certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.certificates-post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificate-delete
+      description: Delete the trusted certificate
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus.certificate-delete
+      with:
+        fingerprint: tools.fingerprint
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificate-get
+      description: Get the trusted certificate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.certificate-get
+      with:
+        fingerprint: tools.fingerprint
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificate-patch
+      description: Partially update the trusted certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.certificate-patch
+      with:
+        fingerprint: tools.fingerprint
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificate-put
+      description: Update the trusted certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.certificate-put
+      with:
+        fingerprint: tools.fingerprint
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificates-post-untrusted
+      description: Add a trusted certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.certificates-post-untrusted
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: certificates-get-recursion1
+      description: Get the trusted certificates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.certificates-get-recursion1
+      with:
+        filter: tools.filter
+      inputParameters:
+      - name: filter
+        type: string
+        description: Collection filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-get
+      description: Get the cluster configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-put
+      description: Update the cluster configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.cluster-put
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clustering-update-cert
+      description: Update the certificate for the cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.clustering-update-cert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-groups-get
+      description: Get the cluster groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-groups-get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-groups-post
+      description: Create a cluster group.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-groups-post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-group-delete
+      description: Delete the cluster group.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus.cluster-group-delete
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster group name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-group-get
+      description: Get the cluster group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-group-get
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster group name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-group-patch
+      description: Update the cluster group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-group-patch
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster group name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-group-post
+      description: Rename the cluster group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-group-post
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster group name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-group-put
+      description: Update the cluster group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.cluster-group-put
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster group name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-groups-get-recursion1
+      description: Get the cluster groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-groups-get-recursion1
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-members-get
+      description: Get the cluster members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-members-get
+      with:
+        filter: tools.filter
+      inputParameters:
+      - name: filter
+        type: string
+        description: Collection filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-members-post
+      description: Request a join token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-members-post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-delete
+      description: Delete the cluster member
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus.cluster-member-delete
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-get
+      description: Get the cluster member
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-member-get
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-patch
+      description: Partially update the cluster member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-member-patch
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-post
+      description: Rename the cluster member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-member-post
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-put
+      description: Update the cluster member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.cluster-member-put
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-state-get
+      description: Get state of the cluster member
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-member-state-get
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-member-state-post
+      description: Evacuate or restore a cluster member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.cluster-member-state-post
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Cluster member name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cluster-members-get-recursion1
+      description: Get the cluster members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.cluster-members-get-recursion1
+      with:
+        filter: tools.filter
+      inputParameters:
+      - name: filter
+        type: string
+        description: Collection filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: events-get
+      description: Get the event stream
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.events-get
+      with:
+        project: tools.project
+        type: tools.type
+        all-projects: tools.all-projects
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      - name: type
+        type: string
+        description: Event type(s), comma separated (valid types are logging, operation or lifecycle)
+      - name: all-projects
+        type: string
+        description: Retrieve instances from all projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-get
+      description: Get the images
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.images-get
+      with:
+        project: tools.project
+        filter: tools.filter
+        all-projects: tools.all-projects
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      - name: filter
+        type: string
+        description: Collection filter
+      - name: all-projects
+        type: string
+        description: Retrieve images from all projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-post
+      description: Add an image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-post
+      with:
+        project: tools.project
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-delete
+      description: Delete the image
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus.image-delete
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-get
+      description: Get the image
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.image-get
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-patch
+      description: Partially update the image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.image-patch
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-put
+      description: Update the image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.image-put
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-export-get
+      description: Get the raw image file(s)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.image-export-get
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-export-post
+      description: Make the server push the image to a remote server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-export-post
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-export-get-untrusted
+      description: Get the raw image file(s)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.image-export-get-untrusted
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+        secret: tools.secret
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      - name: secret
+        type: string
+        description: Secret token to retrieve a private image
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-refresh-post
+      description: Refresh an image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-refresh-post
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-secret-post
+      description: Generate secret for retrieval of the image by an untrusted client
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-secret-post
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-get-untrusted
+      description: Get the public image
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.image-get-untrusted
+      with:
+        fingerprint: tools.fingerprint
+        project: tools.project
+        secret: tools.secret
+      inputParameters:
+      - name: fingerprint
+        type: string
+        description: Fingerprint
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      - name: secret
+        type: string
+        description: Secret token to retrieve a private image
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-aliases-get
+      description: Get the image aliases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.images-aliases-get
+      with:
+        project: tools.project
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-aliases-post
+      description: Add an image alias
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-aliases-post
+      with:
+        project: tools.project
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-alias-delete
+      description: Delete the image alias
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus.image-alias-delete
+      with:
+        name: tools.name
+        project: tools.project
+      inputParameters:
+      - name: name
+        type: string
+        description: Alias name
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-alias-get
+      description: Get the image alias
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.image-alias-get
+      with:
+        name: tools.name
+        project: tools.project
+      inputParameters:
+      - name: name
+        type: string
+        description: Alias name
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-alias-patch
+      description: Partially update the image alias
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-alias-patch
+      with:
+        name: tools.name
+        project: tools.project
+      inputParameters:
+      - name: name
+        type: string
+        description: Alias name
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-alias-post
+      description: Rename the image alias
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-alias-post
+      with:
+        name: tools.name
+        project: tools.project
+      inputParameters:
+      - name: name
+        type: string
+        description: Alias name
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-aliases-put
+      description: Update the image alias
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus.images-aliases-put
+      with:
+        name: tools.name
+        project: tools.project
+      inputParameters:
+      - name: name
+        type: string
+        description: Alias name
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: image-alias-get-untrusted
+      description: Get the public image alias
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.image-alias-get-untrusted
+      with:
+        name: tools.name
+        project: tools.project
+      inputParameters:
+      - name: name
+        type: string
+        description: Alias name
+        required: true
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-aliases-get-recursion1
+      description: Get the image aliases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.images-aliases-get-recursion1
+      with:
+        project: tools.project
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-get-untrusted
+      description: Get the public images
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.images-get-untrusted
+      with:
+        project: tools.project
+        filter: tools.filter
+        all-projects: tools.all-projects
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      - name: filter
+        type: string
+        description: Collection filter
+      - name: all-projects
+        type: string
+        description: Retrieve images from all projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-post-untrusted
+      description: Add an image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus.images-post-untrusted
+      with:
+        project: tools.project
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-get-recursion1-untrusted
+      description: Get the public images
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.images-get-recursion1-untrusted
+      with:
+        project: tools.project
+        filter: tools.filter
+        all-projects: tools.all-projects
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      - name: filter
+        type: string
+        description: Collection filter
+      - name: all-projects
+        type: string
+        description: Retrieve images from all projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: images-get-recursion1
+      description: Get the images
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.images-get-recursion1
+      with:
+        project: tools.project
+        filter: tools.filter
+        all-projects: tools.all-projects
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      - name: filter
+        type: string
+        description: Collection filter
+      - name: all-projects
+        type: string
+        description: Retrieve images from all projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: instances-get
+      description: Get the instances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus.instances-get
+      with:
+        project: tools.project
+        filter: tools.filter
+        all-projects: tools.all-projects
+      inputParameters:
+      - name: project
+        type: string
+        description: Project name
+      - name: filter
+        type: string
+        description: Collection filter
+      - name: all-projects
+        type: string
+        description: Retrieve instances from all projects
+      outputParameters:
+      - type: object
+        mapping: $.
