@@ -54,7 +54,7 @@ common:
     url: https://linuxcontainers.org/incus/
   - type: Documentation
     url: https://linuxcontainers.org/incus/docs/main/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://linuxcontainers.org/incus/docs/main/tutorial/first_steps/
   - type: GitHubRepository
     url: https://github.com/lxc/incus
