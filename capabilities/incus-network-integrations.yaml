@@ -1,0 +1,349 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — network-integrations
+  description: 'Incus external REST API — network-integrations. 8 operations. Lead operation: Get the network integrations.
+    Self-contained Naftiko capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - network-integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-network-integrations
+    baseUri: ''
+    description: Incus external REST API — network-integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-network-integrations
+      path: /1.0/network-integrations
+      operations:
+      - name: networkintegrationsget
+        method: GET
+        description: Get the network integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: networkintegrationspost
+        method: POST
+        description: Add a network integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: integration
+          in: body
+          type: string
+          description: integration
+          required: true
+    - name: 1.0-network-integrations-integration
+      path: /1.0/network-integrations/{integration}
+      operations:
+      - name: networkintegrationdelete
+        method: DELETE
+        description: Delete the network integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: integration
+          in: path
+          type: string
+          description: Integration name
+          required: true
+      - name: networkintegrationget
+        method: GET
+        description: Get the network integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: integration
+          in: path
+          type: string
+          description: Integration name
+          required: true
+      - name: networkintegrationpatch
+        method: PATCH
+        description: Partially update the network integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: integration
+          in: path
+          type: string
+          description: Integration name
+          required: true
+        - name: integration
+          in: body
+          type: string
+          description: integration configuration
+          required: true
+      - name: networkintegrationpost
+        method: POST
+        description: Rename the network integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: integration
+          in: path
+          type: string
+          description: Integration name
+          required: true
+        - name: integration
+          in: body
+          type: string
+          description: integration configuration
+          required: true
+      - name: networkintegrationput
+        method: PUT
+        description: Update the network integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: integration
+          in: path
+          type: string
+          description: Integration name
+          required: true
+        - name: integration
+          in: body
+          type: string
+          description: integration configuration
+          required: true
+    - name: 1.0-network-integrations?recursion=1
+      path: /1.0/network-integrations?recursion=1
+      operations:
+      - name: networkintegrationsgetrecursion1
+        method: GET
+        description: Get the network integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+  exposes:
+  - type: rest
+    namespace: incus-network-integrations-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — network-integrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/1-0/network-integrations
+      name: 1-0-network-integrations
+      description: REST surface for 1.0-network-integrations.
+      operations:
+      - method: GET
+        name: networkintegrationsget
+        description: Get the network integrations
+        call: incus-network-integrations.networkintegrationsget
+        with:
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkintegrationspost
+        description: Add a network integration
+        call: incus-network-integrations.networkintegrationspost
+        with:
+          integration: rest.integration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-integrations/{integration}
+      name: 1-0-network-integrations-integration
+      description: REST surface for 1.0-network-integrations-integration.
+      operations:
+      - method: DELETE
+        name: networkintegrationdelete
+        description: Delete the network integration
+        call: incus-network-integrations.networkintegrationdelete
+        with:
+          integration: rest.integration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: networkintegrationget
+        description: Get the network integration
+        call: incus-network-integrations.networkintegrationget
+        with:
+          integration: rest.integration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: networkintegrationpatch
+        description: Partially update the network integration
+        call: incus-network-integrations.networkintegrationpatch
+        with:
+          integration: rest.integration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkintegrationpost
+        description: Rename the network integration
+        call: incus-network-integrations.networkintegrationpost
+        with:
+          integration: rest.integration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: networkintegrationput
+        description: Update the network integration
+        call: incus-network-integrations.networkintegrationput
+        with:
+          integration: rest.integration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-integrations-recursion-1
+      name: 1-0-network-integrations-recursion-1
+      description: REST surface for 1.0-network-integrations?recursion=1.
+      operations:
+      - method: GET
+        name: networkintegrationsgetrecursion1
+        description: Get the network integrations
+        call: incus-network-integrations.networkintegrationsgetrecursion1
+        with:
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-network-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — network-integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-network-integrations
+      description: Get the network integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-integrations.networkintegrationsget
+      with:
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-network-integration
+      description: Add a network integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-integrations.networkintegrationspost
+      with:
+        integration: tools.integration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-integration
+      description: Delete the network integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-network-integrations.networkintegrationdelete
+      with:
+        integration: tools.integration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-integration
+      description: Get the network integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-integrations.networkintegrationget
+      with:
+        integration: tools.integration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-network-integration
+      description: Partially update the network integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-integrations.networkintegrationpatch
+      with:
+        integration: tools.integration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-network-integration
+      description: Rename the network integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-integrations.networkintegrationpost
+      with:
+        integration: tools.integration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-integration
+      description: Update the network integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-integrations.networkintegrationput
+      with:
+        integration: tools.integration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-integrations-2
+      description: Get the network integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-integrations.networkintegrationsgetrecursion1
+      with:
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.

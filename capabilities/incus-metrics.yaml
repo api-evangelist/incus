@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — metrics
+  description: 'Incus external REST API — metrics. 1 operations. Lead operation: Get metrics. Self-contained Naftiko capability
+    covering one Incus business surface.'
+  tags:
+  - Incus
+  - metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-metrics
+    baseUri: ''
+    description: Incus external REST API — metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-metrics
+      path: /1.0/metrics
+      operations:
+      - name: metricsget
+        method: GET
+        description: Get metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+  exposes:
+  - type: rest
+    namespace: incus-metrics-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — metrics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/1-0/metrics
+      name: 1-0-metrics
+      description: REST surface for 1.0-metrics.
+      operations:
+      - method: GET
+        name: metricsget
+        description: Get metrics
+        call: incus-metrics.metricsget
+        with:
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — metrics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-metrics
+      description: Get metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-metrics.metricsget
+      with:
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,463 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — network-acls
+  description: 'Incus external REST API — network-acls. 9 operations. Lead operation: Get the network ACLs. Self-contained
+    Naftiko capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - network-acls
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-network-acls
+    baseUri: ''
+    description: Incus external REST API — network-acls business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-network-acls
+      path: /1.0/network-acls
+      operations:
+      - name: networkaclsget
+        method: GET
+        description: Get the network ACLs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve network ACLs from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: networkaclspost
+        method: POST
+        description: Add a network ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: acl
+          in: body
+          type: string
+          description: ACL
+          required: true
+    - name: 1.0-network-acls-name
+      path: /1.0/network-acls/{name}
+      operations:
+      - name: networkacldelete
+        method: DELETE
+        description: Delete the network ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: ACL name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkaclget
+        method: GET
+        description: Get the network ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: ACL name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkaclpatch
+        method: PATCH
+        description: Partially update the network ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: ACL name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: acl
+          in: body
+          type: string
+          description: ACL configuration
+          required: true
+      - name: networkaclpost
+        method: POST
+        description: Rename the network ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: ACL name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: acl
+          in: body
+          type: string
+          description: ACL rename request
+          required: true
+      - name: networkaclput
+        method: PUT
+        description: Update the network ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: ACL name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: acl
+          in: body
+          type: string
+          description: ACL configuration
+          required: true
+    - name: 1.0-network-acls-name-log
+      path: /1.0/network-acls/{name}/log
+      operations:
+      - name: networkacllogget
+        method: GET
+        description: Get the network ACL log
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: ACL name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+    - name: 1.0-network-acls?recursion=1
+      path: /1.0/network-acls?recursion=1
+      operations:
+      - name: networkaclsgetrecursion1
+        method: GET
+        description: Get the network ACLs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve network ACLs from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+  exposes:
+  - type: rest
+    namespace: incus-network-acls-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — network-acls. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/1-0/network-acls
+      name: 1-0-network-acls
+      description: REST surface for 1.0-network-acls.
+      operations:
+      - method: GET
+        name: networkaclsget
+        description: Get the network ACLs
+        call: incus-network-acls.networkaclsget
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkaclspost
+        description: Add a network ACL
+        call: incus-network-acls.networkaclspost
+        with:
+          project: rest.project
+          acl: rest.acl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-acls/{name}
+      name: 1-0-network-acls-name
+      description: REST surface for 1.0-network-acls-name.
+      operations:
+      - method: DELETE
+        name: networkacldelete
+        description: Delete the network ACL
+        call: incus-network-acls.networkacldelete
+        with:
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: networkaclget
+        description: Get the network ACL
+        call: incus-network-acls.networkaclget
+        with:
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: networkaclpatch
+        description: Partially update the network ACL
+        call: incus-network-acls.networkaclpatch
+        with:
+          name: rest.name
+          project: rest.project
+          acl: rest.acl
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkaclpost
+        description: Rename the network ACL
+        call: incus-network-acls.networkaclpost
+        with:
+          name: rest.name
+          project: rest.project
+          acl: rest.acl
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: networkaclput
+        description: Update the network ACL
+        call: incus-network-acls.networkaclput
+        with:
+          name: rest.name
+          project: rest.project
+          acl: rest.acl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-acls/{name}/log
+      name: 1-0-network-acls-name-log
+      description: REST surface for 1.0-network-acls-name-log.
+      operations:
+      - method: GET
+        name: networkacllogget
+        description: Get the network ACL log
+        call: incus-network-acls.networkacllogget
+        with:
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-acls-recursion-1
+      name: 1-0-network-acls-recursion-1
+      description: REST surface for 1.0-network-acls?recursion=1.
+      operations:
+      - method: GET
+        name: networkaclsgetrecursion1
+        description: Get the network ACLs
+        call: incus-network-acls.networkaclsgetrecursion1
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-network-acls-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — network-acls. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-network-acls
+      description: Get the network ACLs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-acls.networkaclsget
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-network-acl
+      description: Add a network ACL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-acls.networkaclspost
+      with:
+        project: tools.project
+        acl: tools.acl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-acl
+      description: Delete the network ACL
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-network-acls.networkacldelete
+      with:
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-acl
+      description: Get the network ACL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-acls.networkaclget
+      with:
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-network-acl
+      description: Partially update the network ACL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-acls.networkaclpatch
+      with:
+        name: tools.name
+        project: tools.project
+        acl: tools.acl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-network-acl
+      description: Rename the network ACL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-acls.networkaclpost
+      with:
+        name: tools.name
+        project: tools.project
+        acl: tools.acl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-acl
+      description: Update the network ACL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-acls.networkaclput
+      with:
+        name: tools.name
+        project: tools.project
+        acl: tools.acl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-acl-log
+      description: Get the network ACL log
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-acls.networkacllogget
+      with:
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-acls-2
+      description: Get the network ACLs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-acls.networkaclsgetrecursion1
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.

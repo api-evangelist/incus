@@ -1,0 +1,4466 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — storage
+  description: 'Incus external REST API — storage. 70 operations. Lead operation: Get the storage pools. Self-contained Naftiko
+    capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - storage
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-storage
+    baseUri: ''
+    description: Incus external REST API — storage business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-storage-pools
+      path: /1.0/storage-pools
+      operations:
+      - name: storagepoolsget
+        method: GET
+        description: Get the storage pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: storagepoolspost
+        method: POST
+        description: Add a storage pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage
+          in: body
+          type: string
+          description: Storage pool
+          required: true
+    - name: 1.0-storage-pools-name-buckets-bucketName
+      path: /1.0/storage-pools/{name}/buckets/{bucketName}
+      operations:
+      - name: storagepoolbucketdelete
+        method: DELETE
+        description: Delete the storage bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Resource name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolbucketpatch
+        method: PATCH
+        description: Partially update the storage bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Resource name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage bucket
+          in: body
+          type: string
+          description: Storage bucket configuration
+          required: true
+      - name: storagepoolbucketput
+        method: PUT
+        description: Update the storage bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Resource name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage bucket
+          in: body
+          type: string
+          description: Storage bucket configuration
+          required: true
+    - name: 1.0-storage-pools-name-buckets-bucketName-keys-keyName
+      path: /1.0/storage-pools/{name}/buckets/{bucketName}/keys/{keyName}
+      operations:
+      - name: storagepoolbucketkeydelete
+        method: DELETE
+        description: Delete the storage bucket key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Resource name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: keyName
+          in: path
+          type: string
+          description: Storage bucket key name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolbucketkeyput
+        method: PUT
+        description: Update the storage bucket key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Resource name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: keyName
+          in: path
+          type: string
+          description: Storage bucket key name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage bucket
+          in: body
+          type: string
+          description: Storage bucket key configuration
+          required: true
+    - name: 1.0-storage-pools-name-resources
+      path: /1.0/storage-pools/{name}/resources
+      operations:
+      - name: storagepoolresources
+        method: GET
+        description: Get storage pool resources information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Resource name
+          required: true
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName
+      path: /1.0/storage-pools/{poolName}
+      operations:
+      - name: storagepoolsdelete
+        method: DELETE
+        description: Delete the storage pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: storagepoolget
+        method: GET
+        description: Get the storage pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolpatch
+        method: PATCH
+        description: Partially update the storage pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage pool
+          in: body
+          type: string
+          description: Storage pool configuration
+          required: true
+      - name: storagepoolput
+        method: PUT
+        description: Update the storage pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage pool
+          in: body
+          type: string
+          description: Storage pool configuration
+          required: true
+    - name: 1.0-storage-pools-poolName-buckets
+      path: /1.0/storage-pools/{poolName}/buckets
+      operations:
+      - name: storagepoolbucketsget
+        method: GET
+        description: Get the storage pool buckets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve storage pool buckets from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: storagepoolbucketpost
+        method: POST
+        description: Add a storage pool bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: bucket
+          in: body
+          type: string
+          description: Bucket
+          required: true
+    - name: 1.0-storage-pools-poolName-buckets-bucketName
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}
+      operations:
+      - name: storagepoolbucketget
+        method: GET
+        description: Get the storage pool bucket
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-backups
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups
+      operations:
+      - name: storagepoolbucketsbackupsget
+        method: GET
+        description: Get the storage bucket backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolbucketsbackupspost
+        method: POST
+        description: Create a storage bucket backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: bucket
+          in: body
+          type: string
+          description: Storage bucket backup
+          required: true
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-backups-backupName
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups/{backupName}
+      operations:
+      - name: storagepoolbucketsbackupdelete
+        method: DELETE
+        description: Delete a storage bucket backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolbucketsbackupget
+        method: GET
+        description: Get the storage bucket backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolbucketsbackuppost
+        method: POST
+        description: Rename a storage bucket backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: bucket rename
+          in: body
+          type: string
+          description: Storage bucket backup
+          required: true
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-backups-backupName-export
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups/{backupName}/export
+      operations:
+      - name: storagepoolbucketsbackupexportget
+        method: GET
+        description: Get the raw backup file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-backups?recursion=1
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups?recursion=1
+      operations:
+      - name: storagepoolbucketsbackupsgetrecursion1
+        method: GET
+        description: Get the storage bucket backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-keys
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/keys
+      operations:
+      - name: storagepoolbucketkeysget
+        method: GET
+        description: Get the storage pool bucket keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: storagepoolbucketkeypost
+        method: POST
+        description: Add a storage pool bucket key.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: bucket
+          in: body
+          type: string
+          description: Bucket
+          required: true
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-keys-keyName
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/keys/{keyName}
+      operations:
+      - name: storagepoolbucketkeyget
+        method: GET
+        description: Get the storage pool bucket key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: keyName
+          in: path
+          type: string
+          description: Storage bucket key name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+    - name: 1.0-storage-pools-poolName-buckets-bucketName-keys?recursion=1
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}/keys?recursion=1
+      operations:
+      - name: storagepoolbucketkeysgetrecursion1
+        method: GET
+        description: Get the storage pool bucket keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+    - name: 1.0-storage-pools-poolName-buckets-bucketName}?recursion=1
+      path: /1.0/storage-pools/{poolName}/buckets/{bucketName}?recursion=1
+      operations:
+      - name: storagepoolbucketgetrecursion1
+        method: GET
+        description: Get the full storage pool bucket details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: bucketName
+          in: path
+          type: string
+          description: Storage bucket name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+    - name: 1.0-storage-pools-poolName-buckets?recursion=1
+      path: /1.0/storage-pools/{poolName}/buckets?recursion=1
+      operations:
+      - name: storagepoolbucketsgetrecursion1
+        method: GET
+        description: Get the storage pool buckets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve storage pool buckets from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+    - name: 1.0-storage-pools-poolName-buckets?recursion=2
+      path: /1.0/storage-pools/{poolName}/buckets?recursion=2
+      operations:
+      - name: storagepoolbucketsgetrecursion2
+        method: GET
+        description: Get the storage pool bucket details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve storage pool buckets from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+    - name: 1.0-storage-pools-poolName-volumes
+      path: /1.0/storage-pools/{poolName}/volumes
+      operations:
+      - name: storagepoolvolumesget
+        method: GET
+        description: Get the storage volumes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: storagepoolvolumespost
+        method: POST
+        description: Add a storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume
+          in: body
+          type: string
+          description: Storage volume
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type
+      path: /1.0/storage-pools/{poolName}/volumes/{type}
+      operations:
+      - name: storagepoolvolumestypeget
+        method: GET
+        description: Get the storage volumes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypepost
+        method: POST
+        description: Add a storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume
+          in: body
+          type: string
+          description: Storage volume
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}
+      operations:
+      - name: storagepoolvolumetypedelete
+        method: DELETE
+        description: Delete the storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumetypeget
+        method: GET
+        description: Get the storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumetypepatch
+        method: PATCH
+        description: Partially update the storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage volume
+          in: body
+          type: string
+          description: Storage volume configuration
+          required: true
+      - name: storagepoolvolumetypepost
+        method: POST
+        description: Rename or move/migrate a storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: migration
+          in: body
+          type: string
+          description: Migration request
+      - name: storagepoolvolumetypeput
+        method: PUT
+        description: Update the storage volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage volume
+          in: body
+          type: string
+          description: Storage volume configuration
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-backups
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups
+      operations:
+      - name: storagepoolvolumestypebackupsget
+        method: GET
+        description: Get the storage volume backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypebackupspost
+        method: POST
+        description: Create a storage volume backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume
+          in: body
+          type: string
+          description: Storage volume backup
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-backups-backupName
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups/{backupName}
+      operations:
+      - name: storagepoolvolumestypebackupdelete
+        method: DELETE
+        description: Delete a storage volume backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypebackupget
+        method: GET
+        description: Get the storage volume backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypebackuppost
+        method: POST
+        description: Rename a storage volume backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume rename
+          in: body
+          type: string
+          description: Storage volume backup
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-backups-backupName-export
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups/{backupName}/export
+      operations:
+      - name: storagepoolvolumestypebackupexportget
+        method: GET
+        description: Get the raw backup file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: backupName
+          in: path
+          type: string
+          description: Backup name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-backups?recursion=1
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups?recursion=1
+      operations:
+      - name: storagepoolvolumestypebackupsgetrecursion1
+        method: GET
+        description: Get the storage volume backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-bitmaps
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/bitmaps
+      operations:
+      - name: storagepoolvolumetypebitmapsget
+        method: GET
+        description: Get the storage volume dirty bitmaps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypebitmapspost
+        method: POST
+        description: Create a storage volume bitmap
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume
+          in: body
+          type: string
+          description: Storage volume bitmap
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-bitmaps-bitmapName
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/bitmaps/{bitmapName}
+      operations:
+      - name: storagepoolvolumestypebitmapdelete
+        method: DELETE
+        description: Delete a storage volume bitmap
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: bitmapName
+          in: path
+          type: string
+          description: Bitmap name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumetypebitmapget
+        method: GET
+        description: Get the storage volume dirty bitmap
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: bitmapName
+          in: path
+          type: string
+          description: Bitmap name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-bitmaps?recursion=1
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/bitmaps?recursion=1
+      operations:
+      - name: storagepoolvolumetypebitmapsgetrecursion1
+        method: GET
+        description: Get the storage volume dirty bitmaps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-files
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/files
+      operations:
+      - name: storagepoolvolumetypefilesdelete
+        method: DELETE
+        description: Delete a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: path
+          in: query
+          type: string
+          description: Path to the file
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: X-Incus-force
+          in: header
+          type: boolean
+          description: Perform recursive deletion
+      - name: storagepoolvolumetypefilesget
+        method: GET
+        description: Get a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: path
+          in: query
+          type: string
+          description: Path to the file
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: storagepoolvolumetypefileshead
+        method: HEAD
+        description: Get metadata for a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: path
+          in: query
+          type: string
+          description: Path to the file
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: storagepoolvolumetypefilespost
+        method: POST
+        description: Create or replace a file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: path
+          in: query
+          type: string
+          description: Path to the file
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: raw_file
+          in: body
+          type: string
+          description: Raw file content
+        - name: X-Incus-uid
+          in: header
+          type: integer
+          description: File owner UID
+        - name: X-Incus-gid
+          in: header
+          type: integer
+          description: File owner GID
+        - name: X-Incus-mode
+          in: header
+          type: integer
+          description: File mode
+        - name: X-Incus-type
+          in: header
+          type: string
+          description: Type of file (file, symlink or directory)
+        - name: X-Incus-write
+          in: header
+          type: string
+          description: Write mode (overwrite or append)
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-nbd
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/nbd
+      operations:
+      - name: storagepoolvolumetypenbdget
+        method: GET
+        description: Get the storage volume NBD connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-sftp
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/sftp
+      operations:
+      - name: storagepoolvolumetypesftpget
+        method: GET
+        description: Get the storage volume SFTP connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-snapshots
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/snapshots
+      operations:
+      - name: storagepoolvolumestypesnapshotsget
+        method: GET
+        description: Get the storage volume snapshots
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypesnapshotspost
+        method: POST
+        description: Create a storage volume snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume
+          in: body
+          type: string
+          description: Storage volume snapshot
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-snapshots-snapshotName
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/snapshots/{snapshotName}
+      operations:
+      - name: storagepoolvolumestypesnapshotdelete
+        method: DELETE
+        description: Delete a storage volume snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: snapshotName
+          in: path
+          type: string
+          description: Snapshot name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypesnapshotget
+        method: GET
+        description: Get the storage volume snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: snapshotName
+          in: path
+          type: string
+          description: Snapshot name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: storagepoolvolumestypesnapshotpatch
+        method: PATCH
+        description: Partially update the storage volume snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: snapshotName
+          in: path
+          type: string
+          description: Snapshot name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage volume snapshot
+          in: body
+          type: string
+          description: Storage volume snapshot configuration
+          required: true
+      - name: storagepoolvolumestypesnapshotpost
+        method: POST
+        description: Rename a storage volume snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: snapshotName
+          in: path
+          type: string
+          description: Snapshot name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: volume rename
+          in: body
+          type: string
+          description: Storage volume snapshot
+          required: true
+      - name: storagepoolvolumestypesnapshotput
+        method: PUT
+        description: Update the storage volume snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: snapshotName
+          in: path
+          type: string
+          description: Snapshot name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: storage volume snapshot
+          in: body
+          type: string
+          description: Storage volume snapshot configuration
+          required: true
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-snapshots?recursion=1
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/snapshots?recursion=1
+      operations:
+      - name: storagepoolvolumestypesnapshotsgetrecursion1
+        method: GET
+        description: Get the storage volume snapshots
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName-state
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/state
+      operations:
+      - name: storagepoolvolumetypestateget
+        method: GET
+        description: Get the storage volume state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type-volumeName}?recursion=1
+      path: /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}?recursion=1
+      operations:
+      - name: storagepoolvolumetypegetrecursion1
+        method: GET
+        description: Get the full storage volume details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: volumeName
+          in: path
+          type: string
+          description: Storage volume name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type}?recursion=1
+      path: /1.0/storage-pools/{poolName}/volumes/{type}?recursion=1
+      operations:
+      - name: storagepoolvolumestypegetrecursion1
+        method: GET
+        description: Get the storage volumes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes-type}?recursion=2
+      path: /1.0/storage-pools/{poolName}/volumes/{type}?recursion=2
+      operations:
+      - name: storagepoolvolumestypegetrecursion2
+        method: GET
+        description: Get the storage volumes with all details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: type
+          in: path
+          type: string
+          description: Storage volume type
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-storage-pools-poolName-volumes?recursion=1
+      path: /1.0/storage-pools/{poolName}/volumes?recursion=1
+      operations:
+      - name: storagepoolvolumesgetrecursion1
+        method: GET
+        description: Get the storage volumes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: poolName
+          in: path
+          type: string
+          description: Storage pool name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+    - name: 1.0-storage-pools?recursion=1
+      path: /1.0/storage-pools?recursion=1
+      operations:
+      - name: storagepoolsgetrecursion1
+        method: GET
+        description: Get the storage pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+  exposes:
+  - type: rest
+    namespace: incus-storage-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — storage. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/1-0/storage-pools
+      name: 1-0-storage-pools
+      description: REST surface for 1.0-storage-pools.
+      operations:
+      - method: GET
+        name: storagepoolsget
+        description: Get the storage pools
+        call: incus-storage.storagepoolsget
+        with:
+          project: rest.project
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolspost
+        description: Add a storage pool
+        call: incus-storage.storagepoolspost
+        with:
+          project: rest.project
+          target: rest.target
+          storage: rest.storage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{name}/buckets/{bucketname}
+      name: 1-0-storage-pools-name-buckets-bucketname
+      description: REST surface for 1.0-storage-pools-name-buckets-bucketName.
+      operations:
+      - method: DELETE
+        name: storagepoolbucketdelete
+        description: Delete the storage bucket
+        call: incus-storage.storagepoolbucketdelete
+        with:
+          name: rest.name
+          bucketName: rest.bucketName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: storagepoolbucketpatch
+        description: Partially update the storage bucket.
+        call: incus-storage.storagepoolbucketpatch
+        with:
+          name: rest.name
+          bucketName: rest.bucketName
+          project: rest.project
+          target: rest.target
+          storage bucket: rest.storage bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: storagepoolbucketput
+        description: Update the storage bucket
+        call: incus-storage.storagepoolbucketput
+        with:
+          name: rest.name
+          bucketName: rest.bucketName
+          project: rest.project
+          target: rest.target
+          storage bucket: rest.storage bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{name}/buckets/{bucketname}/keys/{keyname}
+      name: 1-0-storage-pools-name-buckets-bucketname-keys-keyname
+      description: REST surface for 1.0-storage-pools-name-buckets-bucketName-keys-keyName.
+      operations:
+      - method: DELETE
+        name: storagepoolbucketkeydelete
+        description: Delete the storage bucket key
+        call: incus-storage.storagepoolbucketkeydelete
+        with:
+          name: rest.name
+          bucketName: rest.bucketName
+          keyName: rest.keyName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: storagepoolbucketkeyput
+        description: Update the storage bucket key
+        call: incus-storage.storagepoolbucketkeyput
+        with:
+          name: rest.name
+          bucketName: rest.bucketName
+          keyName: rest.keyName
+          project: rest.project
+          target: rest.target
+          storage bucket: rest.storage bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{name}/resources
+      name: 1-0-storage-pools-name-resources
+      description: REST surface for 1.0-storage-pools-name-resources.
+      operations:
+      - method: GET
+        name: storagepoolresources
+        description: Get storage pool resources information
+        call: incus-storage.storagepoolresources
+        with:
+          name: rest.name
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}
+      name: 1-0-storage-pools-poolname
+      description: REST surface for 1.0-storage-pools-poolName.
+      operations:
+      - method: DELETE
+        name: storagepoolsdelete
+        description: Delete the storage pool
+        call: incus-storage.storagepoolsdelete
+        with:
+          poolName: rest.poolName
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolget
+        description: Get the storage pool
+        call: incus-storage.storagepoolget
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: storagepoolpatch
+        description: Partially update the storage pool
+        call: incus-storage.storagepoolpatch
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          target: rest.target
+          storage pool: rest.storage pool
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: storagepoolput
+        description: Update the storage pool
+        call: incus-storage.storagepoolput
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          target: rest.target
+          storage pool: rest.storage pool
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets
+      name: 1-0-storage-pools-poolname-buckets
+      description: REST surface for 1.0-storage-pools-poolName-buckets.
+      operations:
+      - method: GET
+        name: storagepoolbucketsget
+        description: Get the storage pool buckets
+        call: incus-storage.storagepoolbucketsget
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolbucketpost
+        description: Add a storage pool bucket.
+        call: incus-storage.storagepoolbucketpost
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}
+      name: 1-0-storage-pools-poolname-buckets-bucketname
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName.
+      operations:
+      - method: GET
+        name: storagepoolbucketget
+        description: Get the storage pool bucket
+        call: incus-storage.storagepoolbucketget
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/backups
+      name: 1-0-storage-pools-poolname-buckets-bucketname-backups
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-backups.
+      operations:
+      - method: GET
+        name: storagepoolbucketsbackupsget
+        description: Get the storage bucket backups
+        call: incus-storage.storagepoolbucketsbackupsget
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolbucketsbackupspost
+        description: Create a storage bucket backup
+        call: incus-storage.storagepoolbucketsbackupspost
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+          target: rest.target
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/backups/{backupname}
+      name: 1-0-storage-pools-poolname-buckets-bucketname-backups-backupname
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-backups-backupName.
+      operations:
+      - method: DELETE
+        name: storagepoolbucketsbackupdelete
+        description: Delete a storage bucket backup
+        call: incus-storage.storagepoolbucketsbackupdelete
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolbucketsbackupget
+        description: Get the storage bucket backup
+        call: incus-storage.storagepoolbucketsbackupget
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolbucketsbackuppost
+        description: Rename a storage bucket backup
+        call: incus-storage.storagepoolbucketsbackuppost
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+          bucket rename: rest.bucket rename
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/backups/{backupname}/export
+      name: 1-0-storage-pools-poolname-buckets-bucketname-backups-backupname-export
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-backups-backupName-export.
+      operations:
+      - method: GET
+        name: storagepoolbucketsbackupexportget
+        description: Get the raw backup file
+        call: incus-storage.storagepoolbucketsbackupexportget
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/backups-recursion-1
+      name: 1-0-storage-pools-poolname-buckets-bucketname-backups-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-backups?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolbucketsbackupsgetrecursion1
+        description: Get the storage bucket backups
+        call: incus-storage.storagepoolbucketsbackupsgetrecursion1
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/keys
+      name: 1-0-storage-pools-poolname-buckets-bucketname-keys
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-keys.
+      operations:
+      - method: GET
+        name: storagepoolbucketkeysget
+        description: Get the storage pool bucket keys
+        call: incus-storage.storagepoolbucketkeysget
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolbucketkeypost
+        description: Add a storage pool bucket key.
+        call: incus-storage.storagepoolbucketkeypost
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+          bucket: rest.bucket
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/keys/{keyname}
+      name: 1-0-storage-pools-poolname-buckets-bucketname-keys-keyname
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-keys-keyName.
+      operations:
+      - method: GET
+        name: storagepoolbucketkeyget
+        description: Get the storage pool bucket key
+        call: incus-storage.storagepoolbucketkeyget
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          keyName: rest.keyName
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/{bucketname}/keys-recursion-1
+      name: 1-0-storage-pools-poolname-buckets-bucketname-keys-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName-keys?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolbucketkeysgetrecursion1
+        description: Get the storage pool bucket keys
+        call: incus-storage.storagepoolbucketkeysgetrecursion1
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets/bucketname-recursion-1
+      name: 1-0-storage-pools-poolname-buckets-bucketname-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-buckets-bucketName}?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolbucketgetrecursion1
+        description: Get the full storage pool bucket details
+        call: incus-storage.storagepoolbucketgetrecursion1
+        with:
+          poolName: rest.poolName
+          bucketName: rest.bucketName
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets-recursion-1
+      name: 1-0-storage-pools-poolname-buckets-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-buckets?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolbucketsgetrecursion1
+        description: Get the storage pool buckets
+        call: incus-storage.storagepoolbucketsgetrecursion1
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/buckets-recursion-2
+      name: 1-0-storage-pools-poolname-buckets-recursion-2
+      description: REST surface for 1.0-storage-pools-poolName-buckets?recursion=2.
+      operations:
+      - method: GET
+        name: storagepoolbucketsgetrecursion2
+        description: Get the storage pool bucket details
+        call: incus-storage.storagepoolbucketsgetrecursion2
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes
+      name: 1-0-storage-pools-poolname-volumes
+      description: REST surface for 1.0-storage-pools-poolName-volumes.
+      operations:
+      - method: GET
+        name: storagepoolvolumesget
+        description: Get the storage volumes
+        call: incus-storage.storagepoolvolumesget
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          target: rest.target
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumespost
+        description: Add a storage volume
+        call: incus-storage.storagepoolvolumespost
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          target: rest.target
+          volume: rest.volume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}
+      name: 1-0-storage-pools-poolname-volumes-type
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypeget
+        description: Get the storage volumes
+        call: incus-storage.storagepoolvolumestypeget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumestypepost
+        description: Add a storage volume
+        call: incus-storage.storagepoolvolumestypepost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          project: rest.project
+          target: rest.target
+          volume: rest.volume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}
+      name: 1-0-storage-pools-poolname-volumes-type-volumename
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName.
+      operations:
+      - method: DELETE
+        name: storagepoolvolumetypedelete
+        description: Delete the storage volume
+        call: incus-storage.storagepoolvolumetypedelete
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolvolumetypeget
+        description: Get the storage volume
+        call: incus-storage.storagepoolvolumetypeget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: storagepoolvolumetypepatch
+        description: Partially update the storage volume
+        call: incus-storage.storagepoolvolumetypepatch
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+          storage volume: rest.storage volume
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumetypepost
+        description: Rename or move/migrate a storage volume
+        call: incus-storage.storagepoolvolumetypepost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+          migration: rest.migration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: storagepoolvolumetypeput
+        description: Update the storage volume
+        call: incus-storage.storagepoolvolumetypeput
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+          storage volume: rest.storage volume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/backups
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-backups
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-backups.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypebackupsget
+        description: Get the storage volume backups
+        call: incus-storage.storagepoolvolumestypebackupsget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumestypebackupspost
+        description: Create a storage volume backup
+        call: incus-storage.storagepoolvolumestypebackupspost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+          volume: rest.volume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/backups/{backupname}
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-backups-backupname
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-backups-backupName.
+      operations:
+      - method: DELETE
+        name: storagepoolvolumestypebackupdelete
+        description: Delete a storage volume backup
+        call: incus-storage.storagepoolvolumestypebackupdelete
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolvolumestypebackupget
+        description: Get the storage volume backup
+        call: incus-storage.storagepoolvolumestypebackupget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumestypebackuppost
+        description: Rename a storage volume backup
+        call: incus-storage.storagepoolvolumestypebackuppost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+          volume rename: rest.volume rename
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/backups/{backupname}/export
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-backups-backupname-export
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-backups-backupName-export.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypebackupexportget
+        description: Get the raw backup file
+        call: incus-storage.storagepoolvolumestypebackupexportget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          backupName: rest.backupName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/backups-recursion-1
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-backups-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-backups?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypebackupsgetrecursion1
+        description: Get the storage volume backups
+        call: incus-storage.storagepoolvolumestypebackupsgetrecursion1
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/bitmaps
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-bitmaps
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-bitmaps.
+      operations:
+      - method: GET
+        name: storagepoolvolumetypebitmapsget
+        description: Get the storage volume dirty bitmaps
+        call: incus-storage.storagepoolvolumetypebitmapsget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumestypebitmapspost
+        description: Create a storage volume bitmap
+        call: incus-storage.storagepoolvolumestypebitmapspost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+          volume: rest.volume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/bitmaps/{bitmapname}
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-bitmaps-bitmapname
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-bitmaps-bitmapName.
+      operations:
+      - method: DELETE
+        name: storagepoolvolumestypebitmapdelete
+        description: Delete a storage volume bitmap
+        call: incus-storage.storagepoolvolumestypebitmapdelete
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          bitmapName: rest.bitmapName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolvolumetypebitmapget
+        description: Get the storage volume dirty bitmap
+        call: incus-storage.storagepoolvolumetypebitmapget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          bitmapName: rest.bitmapName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/bitmaps-recursion-1
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-bitmaps-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-bitmaps?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolvolumetypebitmapsgetrecursion1
+        description: Get the storage volume dirty bitmaps
+        call: incus-storage.storagepoolvolumetypebitmapsgetrecursion1
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/files
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-files
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-files.
+      operations:
+      - method: DELETE
+        name: storagepoolvolumetypefilesdelete
+        description: Delete a file
+        call: incus-storage.storagepoolvolumetypefilesdelete
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          path: rest.path
+          project: rest.project
+          X-Incus-force: rest.X-Incus-force
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolvolumetypefilesget
+        description: Get a file
+        call: incus-storage.storagepoolvolumetypefilesget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          path: rest.path
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: HEAD
+        name: storagepoolvolumetypefileshead
+        description: Get metadata for a file
+        call: incus-storage.storagepoolvolumetypefileshead
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          path: rest.path
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumetypefilespost
+        description: Create or replace a file
+        call: incus-storage.storagepoolvolumetypefilespost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          path: rest.path
+          project: rest.project
+          raw_file: rest.raw_file
+          X-Incus-uid: rest.X-Incus-uid
+          X-Incus-gid: rest.X-Incus-gid
+          X-Incus-mode: rest.X-Incus-mode
+          X-Incus-type: rest.X-Incus-type
+          X-Incus-write: rest.X-Incus-write
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/nbd
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-nbd
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-nbd.
+      operations:
+      - method: GET
+        name: storagepoolvolumetypenbdget
+        description: Get the storage volume NBD connection
+        call: incus-storage.storagepoolvolumetypenbdget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/sftp
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-sftp
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-sftp.
+      operations:
+      - method: GET
+        name: storagepoolvolumetypesftpget
+        description: Get the storage volume SFTP connection
+        call: incus-storage.storagepoolvolumetypesftpget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/snapshots
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-snapshots
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-snapshots.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypesnapshotsget
+        description: Get the storage volume snapshots
+        call: incus-storage.storagepoolvolumestypesnapshotsget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumestypesnapshotspost
+        description: Create a storage volume snapshot
+        call: incus-storage.storagepoolvolumestypesnapshotspost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+          volume: rest.volume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/snapshots/{snapshotname}
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-snapshots-snapshotname
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-snapshots-snapshotName.
+      operations:
+      - method: DELETE
+        name: storagepoolvolumestypesnapshotdelete
+        description: Delete a storage volume snapshot
+        call: incus-storage.storagepoolvolumestypesnapshotdelete
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          snapshotName: rest.snapshotName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: storagepoolvolumestypesnapshotget
+        description: Get the storage volume snapshot
+        call: incus-storage.storagepoolvolumestypesnapshotget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          snapshotName: rest.snapshotName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: storagepoolvolumestypesnapshotpatch
+        description: Partially update the storage volume snapshot
+        call: incus-storage.storagepoolvolumestypesnapshotpatch
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          snapshotName: rest.snapshotName
+          project: rest.project
+          target: rest.target
+          storage volume snapshot: rest.storage volume snapshot
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: storagepoolvolumestypesnapshotpost
+        description: Rename a storage volume snapshot
+        call: incus-storage.storagepoolvolumestypesnapshotpost
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          snapshotName: rest.snapshotName
+          project: rest.project
+          target: rest.target
+          volume rename: rest.volume rename
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: storagepoolvolumestypesnapshotput
+        description: Update the storage volume snapshot
+        call: incus-storage.storagepoolvolumestypesnapshotput
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          snapshotName: rest.snapshotName
+          project: rest.project
+          target: rest.target
+          storage volume snapshot: rest.storage volume snapshot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/snapshots-recursion-1
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-snapshots-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-snapshots?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypesnapshotsgetrecursion1
+        description: Get the storage volume snapshots
+        call: incus-storage.storagepoolvolumestypesnapshotsgetrecursion1
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/{volumename}/state
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-state
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName-state.
+      operations:
+      - method: GET
+        name: storagepoolvolumetypestateget
+        description: Get the storage volume state
+        call: incus-storage.storagepoolvolumetypestateget
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/{type}/volumename-recursion-1
+      name: 1-0-storage-pools-poolname-volumes-type-volumename-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type-volumeName}?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolvolumetypegetrecursion1
+        description: Get the full storage volume details
+        call: incus-storage.storagepoolvolumetypegetrecursion1
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          volumeName: rest.volumeName
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/type-recursion-1
+      name: 1-0-storage-pools-poolname-volumes-type-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type}?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypegetrecursion1
+        description: Get the storage volumes
+        call: incus-storage.storagepoolvolumestypegetrecursion1
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes/type-recursion-2
+      name: 1-0-storage-pools-poolname-volumes-type-recursion-2
+      description: REST surface for 1.0-storage-pools-poolName-volumes-type}?recursion=2.
+      operations:
+      - method: GET
+        name: storagepoolvolumestypegetrecursion2
+        description: Get the storage volumes with all details
+        call: incus-storage.storagepoolvolumestypegetrecursion2
+        with:
+          poolName: rest.poolName
+          type: rest.type
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools/{poolname}/volumes-recursion-1
+      name: 1-0-storage-pools-poolname-volumes-recursion-1
+      description: REST surface for 1.0-storage-pools-poolName-volumes?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolvolumesgetrecursion1
+        description: Get the storage volumes
+        call: incus-storage.storagepoolvolumesgetrecursion1
+        with:
+          poolName: rest.poolName
+          project: rest.project
+          target: rest.target
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/storage-pools-recursion-1
+      name: 1-0-storage-pools-recursion-1
+      description: REST surface for 1.0-storage-pools?recursion=1.
+      operations:
+      - method: GET
+        name: storagepoolsgetrecursion1
+        description: Get the storage pools
+        call: incus-storage.storagepoolsgetrecursion1
+        with:
+          project: rest.project
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-storage-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — storage. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-storage-pools
+      description: Get the storage pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolsget
+      with:
+        project: tools.project
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-storage-pool
+      description: Add a storage pool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolspost
+      with:
+        project: tools.project
+        target: tools.target
+        storage: tools.storage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-bucket
+      description: Delete the storage bucket
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolbucketdelete
+      with:
+        name: tools.name
+        bucketName: tools.bucketName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-storage-bucket
+      description: Partially update the storage bucket.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketpatch
+      with:
+        name: tools.name
+        bucketName: tools.bucketName
+        project: tools.project
+        target: tools.target
+        storage bucket: tools.storage bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-storage-bucket
+      description: Update the storage bucket
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketput
+      with:
+        name: tools.name
+        bucketName: tools.bucketName
+        project: tools.project
+        target: tools.target
+        storage bucket: tools.storage bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-bucket-key
+      description: Delete the storage bucket key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolbucketkeydelete
+      with:
+        name: tools.name
+        bucketName: tools.bucketName
+        keyName: tools.keyName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-storage-bucket-key
+      description: Update the storage bucket key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketkeyput
+      with:
+        name: tools.name
+        bucketName: tools.bucketName
+        keyName: tools.keyName
+        project: tools.project
+        target: tools.target
+        storage bucket: tools.storage bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-resources-information
+      description: Get storage pool resources information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolresources
+      with:
+        name: tools.name
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-pool
+      description: Delete the storage pool
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolsdelete
+      with:
+        poolName: tools.poolName
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool
+      description: Get the storage pool
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolget
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-storage-pool
+      description: Partially update the storage pool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolpatch
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        target: tools.target
+        storage pool: tools.storage pool
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-storage-pool
+      description: Update the storage pool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolput
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        target: tools.target
+        storage pool: tools.storage pool
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-buckets
+      description: Get the storage pool buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsget
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-storage-pool-bucket
+      description: Add a storage pool bucket.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolbucketpost
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        bucket: tools.bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-bucket
+      description: Get the storage pool bucket
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketget
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-bucket-backups
+      description: Get the storage bucket backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsbackupsget
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-storage-bucket-backup
+      description: Create a storage bucket backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolbucketsbackupspost
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+        target: tools.target
+        bucket: tools.bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-bucket-backup
+      description: Delete a storage bucket backup
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolbucketsbackupdelete
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-bucket-backup
+      description: Get the storage bucket backup
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsbackupget
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-storage-bucket-backup
+      description: Rename a storage bucket backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolbucketsbackuppost
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+        bucket rename: tools.bucket rename
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-backup-file
+      description: Get the raw backup file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsbackupexportget
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-bucket-backups-2
+      description: Get the storage bucket backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsbackupsgetrecursion1
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-bucket-keys
+      description: Get the storage pool bucket keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketkeysget
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-storage-pool-bucket-key
+      description: Add a storage pool bucket key.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolbucketkeypost
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+        bucket: tools.bucket
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-bucket-key
+      description: Get the storage pool bucket key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketkeyget
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        keyName: tools.keyName
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-bucket-keys-2
+      description: Get the storage pool bucket keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketkeysgetrecursion1
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-full-storage-pool-bucket
+      description: Get the full storage pool bucket details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketgetrecursion1
+      with:
+        poolName: tools.poolName
+        bucketName: tools.bucketName
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-buckets-2
+      description: Get the storage pool buckets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsgetrecursion1
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pool-bucket-details
+      description: Get the storage pool bucket details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolbucketsgetrecursion2
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volumes
+      description: Get the storage volumes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumesget
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        target: tools.target
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-storage-volume
+      description: Add a storage volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumespost
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        target: tools.target
+        volume: tools.volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volumes-2
+      description: Get the storage volumes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypeget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-storage-volume-2
+      description: Add a storage volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumestypepost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        project: tools.project
+        target: tools.target
+        volume: tools.volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-volume
+      description: Delete the storage volume
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypedelete
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume
+      description: Get the storage volume
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypeget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-storage-volume
+      description: Partially update the storage volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypepatch
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+        storage volume: tools.storage volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-move-migrate-storage-volume
+      description: Rename or move/migrate a storage volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumetypepost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+        migration: tools.migration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-storage-volume
+      description: Update the storage volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypeput
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+        storage volume: tools.storage volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-backups
+      description: Get the storage volume backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypebackupsget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-storage-volume-backup
+      description: Create a storage volume backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumestypebackupspost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+        volume: tools.volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-volume-backup
+      description: Delete a storage volume backup
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypebackupdelete
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-backup
+      description: Get the storage volume backup
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypebackupget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-storage-volume-backup
+      description: Rename a storage volume backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumestypebackuppost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+        volume rename: tools.volume rename
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-raw-backup-file-2
+      description: Get the raw backup file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypebackupexportget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        backupName: tools.backupName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-backups-2
+      description: Get the storage volume backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypebackupsgetrecursion1
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-dirty-bitmaps
+      description: Get the storage volume dirty bitmaps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypebitmapsget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-storage-volume-bitmap
+      description: Create a storage volume bitmap
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumestypebitmapspost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+        volume: tools.volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-volume-bitmap
+      description: Delete a storage volume bitmap
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypebitmapdelete
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        bitmapName: tools.bitmapName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-dirty-bitmap
+      description: Get the storage volume dirty bitmap
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypebitmapget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        bitmapName: tools.bitmapName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-dirty-bitmaps-2
+      description: Get the storage volume dirty bitmaps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypebitmapsgetrecursion1
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-file
+      description: Delete a file
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypefilesdelete
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        path: tools.path
+        project: tools.project
+        X-Incus-force: tools.X-Incus-force
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-file
+      description: Get a file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypefilesget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        path: tools.path
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-metadata-file
+      description: Get metadata for a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumetypefileshead
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        path: tools.path
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-replace-file
+      description: Create or replace a file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumetypefilespost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        path: tools.path
+        project: tools.project
+        raw_file: tools.raw_file
+        X-Incus-uid: tools.X-Incus-uid
+        X-Incus-gid: tools.X-Incus-gid
+        X-Incus-mode: tools.X-Incus-mode
+        X-Incus-type: tools.X-Incus-type
+        X-Incus-write: tools.X-Incus-write
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-nbd-connection
+      description: Get the storage volume NBD connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypenbdget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-sftp-connection
+      description: Get the storage volume SFTP connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypesftpget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-snapshots
+      description: Get the storage volume snapshots
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypesnapshotsget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-storage-volume-snapshot
+      description: Create a storage volume snapshot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumestypesnapshotspost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+        volume: tools.volume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-storage-volume-snapshot
+      description: Delete a storage volume snapshot
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypesnapshotdelete
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        snapshotName: tools.snapshotName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-snapshot
+      description: Get the storage volume snapshot
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypesnapshotget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        snapshotName: tools.snapshotName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-storage-volume-snapshot
+      description: Partially update the storage volume snapshot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypesnapshotpatch
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        snapshotName: tools.snapshotName
+        project: tools.project
+        target: tools.target
+        storage volume snapshot: tools.storage volume snapshot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-storage-volume-snapshot
+      description: Rename a storage volume snapshot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-storage.storagepoolvolumestypesnapshotpost
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        snapshotName: tools.snapshotName
+        project: tools.project
+        target: tools.target
+        volume rename: tools.volume rename
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-storage-volume-snapshot
+      description: Update the storage volume snapshot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypesnapshotput
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        snapshotName: tools.snapshotName
+        project: tools.project
+        target: tools.target
+        storage volume snapshot: tools.storage volume snapshot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-snapshots-2
+      description: Get the storage volume snapshots
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypesnapshotsgetrecursion1
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volume-state
+      description: Get the storage volume state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypestateget
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-full-storage-volume-details
+      description: Get the full storage volume details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumetypegetrecursion1
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        volumeName: tools.volumeName
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volumes-3
+      description: Get the storage volumes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypegetrecursion1
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volumes-all-details
+      description: Get the storage volumes with all details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumestypegetrecursion2
+      with:
+        poolName: tools.poolName
+        type: tools.type
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-volumes-4
+      description: Get the storage volumes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolvolumesgetrecursion1
+      with:
+        poolName: tools.poolName
+        project: tools.project
+        target: tools.target
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-pools-2
+      description: Get the storage pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-storage.storagepoolsgetrecursion1
+      with:
+        project: tools.project
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,404 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — network-forwards
+  description: 'Incus external REST API — network-forwards. 7 operations. Lead operation: Get the network address forwards.
+    Self-contained Naftiko capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - network-forwards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-network-forwards
+    baseUri: ''
+    description: Incus external REST API — network-forwards business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-networks-networkName-forwards
+      path: /1.0/networks/{networkName}/forwards
+      operations:
+      - name: networkforwardsget
+        method: GET
+        description: Get the network address forwards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: networkforwardspost
+        method: POST
+        description: Add a network address forward
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: forward
+          in: body
+          type: string
+          description: Forward
+          required: true
+    - name: 1.0-networks-networkName-forwards-listenAddress
+      path: /1.0/networks/{networkName}/forwards/{listenAddress}
+      operations:
+      - name: networkforwarddelete
+        method: DELETE
+        description: Delete the network address forward
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: listenAddress
+          in: path
+          type: string
+          description: Listen address
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkforwardget
+        method: GET
+        description: Get the network address forward
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: listenAddress
+          in: path
+          type: string
+          description: Listen address
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkforwardpatch
+        method: PATCH
+        description: Partially update the network address forward
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: listenAddress
+          in: path
+          type: string
+          description: Listen address
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: forward
+          in: body
+          type: string
+          description: Address forward configuration
+          required: true
+      - name: networkforwardput
+        method: PUT
+        description: Update the network address forward
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: listenAddress
+          in: path
+          type: string
+          description: Listen address
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: forward
+          in: body
+          type: string
+          description: Address forward configuration
+          required: true
+    - name: 1.0-networks-networkName-forwards?recursion=1
+      path: /1.0/networks/{networkName}/forwards?recursion=1
+      operations:
+      - name: networkforwardgetrecursion1
+        method: GET
+        description: Get the network address forwards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkName
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+  exposes:
+  - type: rest
+    namespace: incus-network-forwards-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — network-forwards. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/1-0/networks/{networkname}/forwards
+      name: 1-0-networks-networkname-forwards
+      description: REST surface for 1.0-networks-networkName-forwards.
+      operations:
+      - method: GET
+        name: networkforwardsget
+        description: Get the network address forwards
+        call: incus-network-forwards.networkforwardsget
+        with:
+          networkName: rest.networkName
+          project: rest.project
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkforwardspost
+        description: Add a network address forward
+        call: incus-network-forwards.networkforwardspost
+        with:
+          networkName: rest.networkName
+          project: rest.project
+          forward: rest.forward
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/networks/{networkname}/forwards/{listenaddress}
+      name: 1-0-networks-networkname-forwards-listenaddress
+      description: REST surface for 1.0-networks-networkName-forwards-listenAddress.
+      operations:
+      - method: DELETE
+        name: networkforwarddelete
+        description: Delete the network address forward
+        call: incus-network-forwards.networkforwarddelete
+        with:
+          networkName: rest.networkName
+          listenAddress: rest.listenAddress
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: networkforwardget
+        description: Get the network address forward
+        call: incus-network-forwards.networkforwardget
+        with:
+          networkName: rest.networkName
+          listenAddress: rest.listenAddress
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: networkforwardpatch
+        description: Partially update the network address forward
+        call: incus-network-forwards.networkforwardpatch
+        with:
+          networkName: rest.networkName
+          listenAddress: rest.listenAddress
+          project: rest.project
+          forward: rest.forward
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: networkforwardput
+        description: Update the network address forward
+        call: incus-network-forwards.networkforwardput
+        with:
+          networkName: rest.networkName
+          listenAddress: rest.listenAddress
+          project: rest.project
+          forward: rest.forward
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/networks/{networkname}/forwards-recursion-1
+      name: 1-0-networks-networkname-forwards-recursion-1
+      description: REST surface for 1.0-networks-networkName-forwards?recursion=1.
+      operations:
+      - method: GET
+        name: networkforwardgetrecursion1
+        description: Get the network address forwards
+        call: incus-network-forwards.networkforwardgetrecursion1
+        with:
+          networkName: rest.networkName
+          project: rest.project
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-network-forwards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — network-forwards. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-network-address-forwards
+      description: Get the network address forwards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-forwards.networkforwardsget
+      with:
+        networkName: tools.networkName
+        project: tools.project
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-network-address-forward
+      description: Add a network address forward
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-forwards.networkforwardspost
+      with:
+        networkName: tools.networkName
+        project: tools.project
+        forward: tools.forward
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-address-forward
+      description: Delete the network address forward
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-network-forwards.networkforwarddelete
+      with:
+        networkName: tools.networkName
+        listenAddress: tools.listenAddress
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-address-forward
+      description: Get the network address forward
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-forwards.networkforwardget
+      with:
+        networkName: tools.networkName
+        listenAddress: tools.listenAddress
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-network-address-forward
+      description: Partially update the network address forward
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-forwards.networkforwardpatch
+      with:
+        networkName: tools.networkName
+        listenAddress: tools.listenAddress
+        project: tools.project
+        forward: tools.forward
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-address-forward
+      description: Update the network address forward
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-forwards.networkforwardput
+      with:
+        networkName: tools.networkName
+        listenAddress: tools.listenAddress
+        project: tools.project
+        forward: tools.forward
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-address-forwards-2
+      description: Get the network address forwards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-forwards.networkforwardgetrecursion1
+      with:
+        networkName: tools.networkName
+        project: tools.project
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.

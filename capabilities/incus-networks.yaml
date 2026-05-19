@@ -1,0 +1,547 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — networks
+  description: 'Incus external REST API — networks. 10 operations. Lead operation: Get the networks. Self-contained Naftiko
+    capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - networks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-networks
+    baseUri: ''
+    description: Incus external REST API — networks business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-networks
+      path: /1.0/networks
+      operations:
+      - name: networksget
+        method: GET
+        description: Get the networks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve networks from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: networkspost
+        method: POST
+        description: Add a network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: network
+          in: body
+          type: string
+          description: Network
+          required: true
+    - name: 1.0-networks-name
+      path: /1.0/networks/{name}
+      operations:
+      - name: networkdelete
+        method: DELETE
+        description: Delete the network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkget
+        method: GET
+        description: Get the network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+      - name: networkpatch
+        method: PATCH
+        description: Partially update the network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: network
+          in: body
+          type: string
+          description: Network configuration
+          required: true
+      - name: networkpost
+        method: POST
+        description: Rename the network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: network
+          in: body
+          type: string
+          description: Network rename request
+          required: true
+      - name: networkput
+        method: PUT
+        description: Update the network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+        - name: network
+          in: body
+          type: string
+          description: Network configuration
+          required: true
+    - name: 1.0-networks-name-leases
+      path: /1.0/networks/{name}/leases
+      operations:
+      - name: networksleasesget
+        method: GET
+        description: Get the DHCP leases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-networks-name-state
+      path: /1.0/networks/{name}/state
+      operations:
+      - name: networksstateget
+        method: GET
+        description: Get the network state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Network name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: target
+          in: query
+          type: string
+          description: Cluster member name
+    - name: 1.0-networks?recursion=1
+      path: /1.0/networks?recursion=1
+      operations:
+      - name: networksgetrecursion1
+        method: GET
+        description: Get the networks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve networks from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+  exposes:
+  - type: rest
+    namespace: incus-networks-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — networks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/1-0/networks
+      name: 1-0-networks
+      description: REST surface for 1.0-networks.
+      operations:
+      - method: GET
+        name: networksget
+        description: Get the networks
+        call: incus-networks.networksget
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkspost
+        description: Add a network
+        call: incus-networks.networkspost
+        with:
+          project: rest.project
+          target: rest.target
+          network: rest.network
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/networks/{name}
+      name: 1-0-networks-name
+      description: REST surface for 1.0-networks-name.
+      operations:
+      - method: DELETE
+        name: networkdelete
+        description: Delete the network
+        call: incus-networks.networkdelete
+        with:
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: networkget
+        description: Get the network
+        call: incus-networks.networkget
+        with:
+          name: rest.name
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: networkpatch
+        description: Partially update the network
+        call: incus-networks.networkpatch
+        with:
+          name: rest.name
+          project: rest.project
+          target: rest.target
+          network: rest.network
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkpost
+        description: Rename the network
+        call: incus-networks.networkpost
+        with:
+          name: rest.name
+          project: rest.project
+          network: rest.network
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: networkput
+        description: Update the network
+        call: incus-networks.networkput
+        with:
+          name: rest.name
+          project: rest.project
+          target: rest.target
+          network: rest.network
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/networks/{name}/leases
+      name: 1-0-networks-name-leases
+      description: REST surface for 1.0-networks-name-leases.
+      operations:
+      - method: GET
+        name: networksleasesget
+        description: Get the DHCP leases
+        call: incus-networks.networksleasesget
+        with:
+          name: rest.name
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/networks/{name}/state
+      name: 1-0-networks-name-state
+      description: REST surface for 1.0-networks-name-state.
+      operations:
+      - method: GET
+        name: networksstateget
+        description: Get the network state
+        call: incus-networks.networksstateget
+        with:
+          name: rest.name
+          project: rest.project
+          target: rest.target
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/networks-recursion-1
+      name: 1-0-networks-recursion-1
+      description: REST surface for 1.0-networks?recursion=1.
+      operations:
+      - method: GET
+        name: networksgetrecursion1
+        description: Get the networks
+        call: incus-networks.networksgetrecursion1
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-networks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — networks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-networks
+      description: Get the networks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-networks.networksget
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-network
+      description: Add a network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-networks.networkspost
+      with:
+        project: tools.project
+        target: tools.target
+        network: tools.network
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network
+      description: Delete the network
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-networks.networkdelete
+      with:
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network
+      description: Get the network
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-networks.networkget
+      with:
+        name: tools.name
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-network
+      description: Partially update the network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-networks.networkpatch
+      with:
+        name: tools.name
+        project: tools.project
+        target: tools.target
+        network: tools.network
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-network
+      description: Rename the network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-networks.networkpost
+      with:
+        name: tools.name
+        project: tools.project
+        network: tools.network
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network
+      description: Update the network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-networks.networkput
+      with:
+        name: tools.name
+        project: tools.project
+        target: tools.target
+        network: tools.network
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dhcp-leases
+      description: Get the DHCP leases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-networks.networksleasesget
+      with:
+        name: tools.name
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-state
+      description: Get the network state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-networks.networksstateget
+      with:
+        name: tools.name
+        project: tools.project
+        target: tools.target
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-networks-2
+      description: Get the networks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-networks.networksgetrecursion1
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,67 +1,103 @@
 aid: incus
 name: Incus
-description: >-
-  Incus is a modern open source system container and virtual machine manager
-  maintained by LinuxContainers.org as a community-led fork of Canonical's LXD.
-  It provides a unified experience for running and managing system containers
-  and VMs across single hosts and clusters, with image-based deployment, live
-  migration, snapshots, projects, and a comprehensive RESTful API for
-  automation and tooling integration.
+description: Incus is a modern open source system container and virtual machine manager maintained by LinuxContainers.org
+  as a community-led fork of Canonical's LXD. It provides a unified experience for running and managing system containers
+  and VMs across single hosts and clusters, with image-based deployment, live migration, snapshots, projects, and a comprehensive
+  RESTful API for automation and tooling integration.
 type: Index
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Containers
-  - Virtual Machines
-  - Virtualization
-  - Linux
-  - Open Source
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml
+- Containers
+- Virtual Machines
+- Virtualization
+- Linux
+- Open Source
+url: https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml
 created: '2026-03-26'
-modified: '2026-04-28'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: incus:incus-rest-api
-    name: Incus REST API
-    description: >-
-      The Incus REST API is the canonical interface to the Incus container
-      and virtual machine manager. All communication between Incus and its
-      clients happens over HTTP, using TLS for remote access or a Unix socket
-      for local access. The API covers the complete lifecycle of instances,
-      images, networks, storage pools, projects, profiles, certificates, and
-      cluster members, with support for asynchronous operations and
-      WebSocket-based event streams.
-    humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    tags:
-      - Containers
-      - Virtual Machines
-      - Cluster Management
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://linuxcontainers.org/incus/docs/main/rest-api/
-      - type: Authentication
-        url: https://linuxcontainers.org/incus/docs/main/authentication/
-      - type: GitHubRepository
-        url: https://github.com/lxc/incus
-      - type: OpenAPI
-        url: openapi/incus-openapi.yml
-      - type: Rules
-        url: rules/incus-rules.yml
-common:
-  - type: Website
-    url: https://linuxcontainers.org/incus/
+- aid: incus:incus-rest-api
+  name: Incus REST API
+  description: The Incus REST API is the canonical interface to the Incus container and virtual machine manager. All communication
+    between Incus and its clients happens over HTTP, using TLS for remote access or a Unix socket for local access. The API
+    covers the complete lifecycle of instances, images, networks, storage pools, projects, profiles, certificates, and cluster
+    members, with support for asynchronous operations and WebSocket-based event streams.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  tags:
+  - Containers
+  - Virtual Machines
+  - Cluster Management
+  - REST API
+  properties:
   - type: Documentation
-    url: https://linuxcontainers.org/incus/docs/main/
-  - type: GettingStarted
-    url: https://linuxcontainers.org/incus/docs/main/tutorial/first_steps/
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
   - type: GitHubRepository
     url: https://github.com/lxc/incus
-  - type: Forum
-    url: https://discuss.linuxcontainers.org/
-  - type: Issues
-    url: https://github.com/lxc/incus/issues
+  - type: OpenAPI
+    url: openapi/incus-openapi.yml
+  - type: Rules
+    url: rules/incus-rules.yml
+  - type: NaftikoCapability
+    url: capabilities/incus-general.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-certificates.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-cluster.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-cluster-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-images.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-instances.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-metrics.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-acls.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-address-sets.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-allocations.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-forwards.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-load-balancers.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-peers.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-network-zones.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-networks.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-operations.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-profiles.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-projects.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-server.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-storage.yaml
+  - type: NaftikoCapability
+    url: capabilities/incus-warnings.yaml
+common:
+- type: Website
+  url: https://linuxcontainers.org/incus/
+- type: Documentation
+  url: https://linuxcontainers.org/incus/docs/main/
+- type: GettingStarted
+  url: https://linuxcontainers.org/incus/docs/main/tutorial/first_steps/
+- type: GitHubRepository
+  url: https://github.com/lxc/incus
+- type: Forum
+  url: https://discuss.linuxcontainers.org/
+- type: Issues
+  url: https://github.com/lxc/incus/issues
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

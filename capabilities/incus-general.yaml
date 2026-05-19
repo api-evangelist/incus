@@ -1,0 +1,66 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API
+  description: 'Incus external REST API. 1 operations. Lead operation: Get the metadata configuration. Self-contained Naftiko
+    capability covering one Incus business surface.'
+  tags:
+  - Incus
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-general
+    baseUri: ''
+    description: Incus external REST API business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-metadata-configuration
+      path: /1.0/metadata/configuration
+      operations:
+      - name: metadataconfigurationget
+        method: GET
+        description: Get the metadata configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: incus-general-rest
+    port: 8080
+    description: REST adapter for Incus external REST API. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/1-0/metadata/configuration
+      name: 1-0-metadata-configuration
+      description: REST surface for 1.0-metadata-configuration.
+      operations:
+      - method: GET
+        name: metadataconfigurationget
+        description: Get the metadata configuration
+        call: incus-general.metadataconfigurationget
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-metadata-configuration
+      description: Get the metadata configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-general.metadataconfigurationget
+      outputParameters:
+      - type: object
+        mapping: $.

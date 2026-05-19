@@ -1,0 +1,726 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — network-zones
+  description: 'Incus external REST API — network-zones. 14 operations. Lead operation: Get the network zones. Self-contained
+    Naftiko capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - network-zones
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-network-zones
+    baseUri: ''
+    description: Incus external REST API — network-zones business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-network-zones
+      path: /1.0/network-zones
+      operations:
+      - name: networkzonesget
+        method: GET
+        description: Get the network zones
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve network zones from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: networkzonespost
+        method: POST
+        description: Add a network zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: zone
+          in: body
+          type: string
+          description: zone
+          required: true
+    - name: 1.0-network-zones-zone
+      path: /1.0/network-zones/{zone}
+      operations:
+      - name: networkzonedelete
+        method: DELETE
+        description: Delete the network zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkzoneget
+        method: GET
+        description: Get the network zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkzonepatch
+        method: PATCH
+        description: Partially update the network zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: zone
+          in: body
+          type: string
+          description: zone configuration
+          required: true
+      - name: networkzoneput
+        method: PUT
+        description: Update the network zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: zone
+          in: body
+          type: string
+          description: zone configuration
+          required: true
+    - name: 1.0-network-zones-zone-records
+      path: /1.0/network-zones/{zone}/records
+      operations:
+      - name: networkzonerecordsget
+        method: GET
+        description: Get the network zone records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+      - name: networkzonerecordspost
+        method: POST
+        description: Add a network zone record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: zone
+          in: body
+          type: string
+          description: zone
+          required: true
+    - name: 1.0-network-zones-zone-records-name
+      path: /1.0/network-zones/{zone}/records/{name}
+      operations:
+      - name: networkzonerecorddelete
+        method: DELETE
+        description: Delete the network zone record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: Record name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkzonerecordget
+        method: GET
+        description: Get the network zone record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: Record name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+      - name: networkzonerecordpatch
+        method: PATCH
+        description: Partially update the network zone record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: Record name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: zone
+          in: body
+          type: string
+          description: zone record configuration
+          required: true
+      - name: networkzonerecordput
+        method: PUT
+        description: Update the network zone record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: Record name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: zone
+          in: body
+          type: string
+          description: zone record configuration
+          required: true
+    - name: 1.0-network-zones-zone-records?recursion=1
+      path: /1.0/network-zones/{zone}/records?recursion=1
+      operations:
+      - name: networkzonerecordsgetrecursion1
+        method: GET
+        description: Get the network zone records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zone
+          in: path
+          type: string
+          description: Network zone name
+          required: true
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+    - name: 1.0-network-zones?recursion=1
+      path: /1.0/network-zones?recursion=1
+      operations:
+      - name: networkzonesgetrecursion1
+        method: GET
+        description: Get the network zones
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve network zones from all projects
+        - name: filter
+          in: query
+          type: string
+          description: Collection filter
+  exposes:
+  - type: rest
+    namespace: incus-network-zones-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — network-zones. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/1-0/network-zones
+      name: 1-0-network-zones
+      description: REST surface for 1.0-network-zones.
+      operations:
+      - method: GET
+        name: networkzonesget
+        description: Get the network zones
+        call: incus-network-zones.networkzonesget
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkzonespost
+        description: Add a network zone
+        call: incus-network-zones.networkzonespost
+        with:
+          project: rest.project
+          zone: rest.zone
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-zones/{zone}
+      name: 1-0-network-zones-zone
+      description: REST surface for 1.0-network-zones-zone.
+      operations:
+      - method: DELETE
+        name: networkzonedelete
+        description: Delete the network zone
+        call: incus-network-zones.networkzonedelete
+        with:
+          zone: rest.zone
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: networkzoneget
+        description: Get the network zone
+        call: incus-network-zones.networkzoneget
+        with:
+          zone: rest.zone
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: networkzonepatch
+        description: Partially update the network zone
+        call: incus-network-zones.networkzonepatch
+        with:
+          zone: rest.zone
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: networkzoneput
+        description: Update the network zone
+        call: incus-network-zones.networkzoneput
+        with:
+          zone: rest.zone
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-zones/{zone}/records
+      name: 1-0-network-zones-zone-records
+      description: REST surface for 1.0-network-zones-zone-records.
+      operations:
+      - method: GET
+        name: networkzonerecordsget
+        description: Get the network zone records
+        call: incus-network-zones.networkzonerecordsget
+        with:
+          zone: rest.zone
+          project: rest.project
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: networkzonerecordspost
+        description: Add a network zone record
+        call: incus-network-zones.networkzonerecordspost
+        with:
+          zone: rest.zone
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-zones/{zone}/records/{name}
+      name: 1-0-network-zones-zone-records-name
+      description: REST surface for 1.0-network-zones-zone-records-name.
+      operations:
+      - method: DELETE
+        name: networkzonerecorddelete
+        description: Delete the network zone record
+        call: incus-network-zones.networkzonerecorddelete
+        with:
+          zone: rest.zone
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: networkzonerecordget
+        description: Get the network zone record
+        call: incus-network-zones.networkzonerecordget
+        with:
+          zone: rest.zone
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: networkzonerecordpatch
+        description: Partially update the network zone record
+        call: incus-network-zones.networkzonerecordpatch
+        with:
+          zone: rest.zone
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: networkzonerecordput
+        description: Update the network zone record
+        call: incus-network-zones.networkzonerecordput
+        with:
+          zone: rest.zone
+          name: rest.name
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-zones/{zone}/records-recursion-1
+      name: 1-0-network-zones-zone-records-recursion-1
+      description: REST surface for 1.0-network-zones-zone-records?recursion=1.
+      operations:
+      - method: GET
+        name: networkzonerecordsgetrecursion1
+        description: Get the network zone records
+        call: incus-network-zones.networkzonerecordsgetrecursion1
+        with:
+          zone: rest.zone
+          project: rest.project
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/network-zones-recursion-1
+      name: 1-0-network-zones-recursion-1
+      description: REST surface for 1.0-network-zones?recursion=1.
+      operations:
+      - method: GET
+        name: networkzonesgetrecursion1
+        description: Get the network zones
+        call: incus-network-zones.networkzonesgetrecursion1
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-network-zones-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — network-zones. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-network-zones
+      description: Get the network zones
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonesget
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-network-zone
+      description: Add a network zone
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-zones.networkzonespost
+      with:
+        project: tools.project
+        zone: tools.zone
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-zone
+      description: Delete the network zone
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-network-zones.networkzonedelete
+      with:
+        zone: tools.zone
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-zone
+      description: Get the network zone
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzoneget
+      with:
+        zone: tools.zone
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-network-zone
+      description: Partially update the network zone
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonepatch
+      with:
+        zone: tools.zone
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-zone
+      description: Update the network zone
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzoneput
+      with:
+        zone: tools.zone
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-zone-records
+      description: Get the network zone records
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonerecordsget
+      with:
+        zone: tools.zone
+        project: tools.project
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-network-zone-record
+      description: Add a network zone record
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: incus-network-zones.networkzonerecordspost
+      with:
+        zone: tools.zone
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-zone-record
+      description: Delete the network zone record
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-network-zones.networkzonerecorddelete
+      with:
+        zone: tools.zone
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-zone-record
+      description: Get the network zone record
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonerecordget
+      with:
+        zone: tools.zone
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partially-update-network-zone-record
+      description: Partially update the network zone record
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonerecordpatch
+      with:
+        zone: tools.zone
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-zone-record
+      description: Update the network zone record
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonerecordput
+      with:
+        zone: tools.zone
+        name: tools.name
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-zone-records-2
+      description: Get the network zone records
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonerecordsgetrecursion1
+      with:
+        zone: tools.zone
+        project: tools.project
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-zones-2
+      description: Get the network zones
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-zones.networkzonesgetrecursion1
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.

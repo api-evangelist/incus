@@ -1,0 +1,404 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — operations
+  description: 'Incus external REST API — operations. 8 operations. Lead operation: Get the operations. Self-contained Naftiko
+    capability covering one Incus business surface.'
+  tags:
+  - Incus
+  - operations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-operations
+    baseUri: ''
+    description: Incus external REST API — operations business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-operations
+      path: /1.0/operations
+      operations:
+      - name: operationsget
+        method: GET
+        description: Get the operations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve operations from all projects
+    - name: 1.0-operations-id
+      path: /1.0/operations/{id}
+      operations:
+      - name: operationdelete
+        method: DELETE
+        description: Cancel the operation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Operation ID
+          required: true
+      - name: operationget
+        method: GET
+        description: Get the operation state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Operation ID
+          required: true
+    - name: 1.0-operations-id-wait
+      path: /1.0/operations/{id}/wait
+      operations:
+      - name: operationwaitget
+        method: GET
+        description: Wait for the operation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Operation ID
+          required: true
+        - name: timeout
+          in: query
+          type: integer
+          description: Timeout in seconds (-1 means never)
+    - name: 1.0-operations-id-wait?public
+      path: /1.0/operations/{id}/wait?public
+      operations:
+      - name: operationwaitgetuntrusted
+        method: GET
+        description: Wait for the operation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Operation ID
+          required: true
+        - name: secret
+          in: query
+          type: string
+          description: Authentication token
+        - name: timeout
+          in: query
+          type: integer
+          description: Timeout in seconds (-1 means never)
+    - name: 1.0-operations-id-websocket
+      path: /1.0/operations/{id}/websocket
+      operations:
+      - name: operationwebsocketget
+        method: GET
+        description: Get the websocket stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Operation ID
+          required: true
+        - name: secret
+          in: query
+          type: string
+          description: Authentication token
+    - name: 1.0-operations-id-websocket?public
+      path: /1.0/operations/{id}/websocket?public
+      operations:
+      - name: operationwebsocketgetuntrusted
+        method: GET
+        description: Get the websocket stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Operation ID
+          required: true
+        - name: secret
+          in: query
+          type: string
+          description: Authentication token
+    - name: 1.0-operations?recursion=1
+      path: /1.0/operations?recursion=1
+      operations:
+      - name: operationsgetrecursion1
+        method: GET
+        description: Get the operations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve operations from all projects
+  exposes:
+  - type: rest
+    namespace: incus-operations-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — operations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/1-0/operations
+      name: 1-0-operations
+      description: REST surface for 1.0-operations.
+      operations:
+      - method: GET
+        name: operationsget
+        description: Get the operations
+        call: incus-operations.operationsget
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/operations/{id}
+      name: 1-0-operations-id
+      description: REST surface for 1.0-operations-id.
+      operations:
+      - method: DELETE
+        name: operationdelete
+        description: Cancel the operation
+        call: incus-operations.operationdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: operationget
+        description: Get the operation state
+        call: incus-operations.operationget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/operations/{id}/wait
+      name: 1-0-operations-id-wait
+      description: REST surface for 1.0-operations-id-wait.
+      operations:
+      - method: GET
+        name: operationwaitget
+        description: Wait for the operation
+        call: incus-operations.operationwaitget
+        with:
+          id: rest.id
+          timeout: rest.timeout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/operations/{id}/wait-public
+      name: 1-0-operations-id-wait-public
+      description: REST surface for 1.0-operations-id-wait?public.
+      operations:
+      - method: GET
+        name: operationwaitgetuntrusted
+        description: Wait for the operation
+        call: incus-operations.operationwaitgetuntrusted
+        with:
+          id: rest.id
+          secret: rest.secret
+          timeout: rest.timeout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/operations/{id}/websocket
+      name: 1-0-operations-id-websocket
+      description: REST surface for 1.0-operations-id-websocket.
+      operations:
+      - method: GET
+        name: operationwebsocketget
+        description: Get the websocket stream
+        call: incus-operations.operationwebsocketget
+        with:
+          id: rest.id
+          secret: rest.secret
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/operations/{id}/websocket-public
+      name: 1-0-operations-id-websocket-public
+      description: REST surface for 1.0-operations-id-websocket?public.
+      operations:
+      - method: GET
+        name: operationwebsocketgetuntrusted
+        description: Get the websocket stream
+        call: incus-operations.operationwebsocketgetuntrusted
+        with:
+          id: rest.id
+          secret: rest.secret
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/1-0/operations-recursion-1
+      name: 1-0-operations-recursion-1
+      description: REST surface for 1.0-operations?recursion=1.
+      operations:
+      - method: GET
+        name: operationsgetrecursion1
+        description: Get the operations
+        call: incus-operations.operationsgetrecursion1
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-operations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — operations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-operations
+      description: Get the operations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationsget
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-operation
+      description: Cancel the operation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: incus-operations.operationdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-operation-state
+      description: Get the operation state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: wait-operation
+      description: Wait for the operation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationwaitget
+      with:
+        id: tools.id
+        timeout: tools.timeout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: wait-operation-2
+      description: Wait for the operation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationwaitgetuntrusted
+      with:
+        id: tools.id
+        secret: tools.secret
+        timeout: tools.timeout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-websocket-stream
+      description: Get the websocket stream
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationwebsocketget
+      with:
+        id: tools.id
+        secret: tools.secret
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-websocket-stream-2
+      description: Get the websocket stream
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationwebsocketgetuntrusted
+      with:
+        id: tools.id
+        secret: tools.secret
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-operations-2
+      description: Get the operations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-operations.operationsgetrecursion1
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Incus external REST API — network-allocations
+  description: 'Incus external REST API — network-allocations. 1 operations. Lead operation: Get the network allocations in
+    use (`network`, `network-forward` and `load-balancer` and `instance`). Self-contained Naftiko capability covering one
+    Incus business surface.'
+  tags:
+  - Incus
+  - network-allocations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INCUS_API_KEY: INCUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: incus-network-allocations
+    baseUri: ''
+    description: Incus external REST API — network-allocations business capability. Self-contained, no shared references.
+    resources:
+    - name: 1.0-network-allocations
+      path: /1.0/network-allocations
+      operations:
+      - name: networkallocationsget
+        method: GET
+        description: Get the network allocations in use (`network`, `network-forward` and `load-balancer` and `instance`)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: query
+          type: string
+          description: Project name
+        - name: all-projects
+          in: query
+          type: boolean
+          description: Retrieve entities from all projects
+  exposes:
+  - type: rest
+    namespace: incus-network-allocations-rest
+    port: 8080
+    description: REST adapter for Incus external REST API — network-allocations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/1-0/network-allocations
+      name: 1-0-network-allocations
+      description: REST surface for 1.0-network-allocations.
+      operations:
+      - method: GET
+        name: networkallocationsget
+        description: Get the network allocations in use (`network`, `network-forward` and `load-balancer` and `instance`)
+        call: incus-network-allocations.networkallocationsget
+        with:
+          project: rest.project
+          all-projects: rest.all-projects
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: incus-network-allocations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Incus external REST API — network-allocations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-network-allocations-use-network
+      description: Get the network allocations in use (`network`, `network-forward` and `load-balancer` and `instance`)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: incus-network-allocations.networkallocationsget
+      with:
+        project: tools.project
+        all-projects: tools.all-projects
+      outputParameters:
+      - type: object
+        mapping: $.
