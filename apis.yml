@@ -6,7 +6,7 @@ description: >-
   VMs across single hosts and clusters, with image-based deployment, live migration, snapshots, projects, and a
   comprehensive RESTful API for automation and tooling integration.
 type: Index
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Containers
   - Virtual Machines
@@ -27,7 +27,7 @@ apis:
       profiles, certificates, and cluster members, with support for asynchronous operations and WebSocket-based event
       streams.
     humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - Containers
       - Virtual Machines
