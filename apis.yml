@@ -53,7 +53,7 @@ common:
     url: https://linuxcontainers.org/incus/docs/main/tutorial/first_steps/
   - type: GitHubRepository
     url: https://github.com/lxc/incus
-  - type: Forum
+  - type: Forums
     url: https://discuss.linuxcontainers.org/
   - type: Issues
     url: https://github.com/lxc/incus/issues
