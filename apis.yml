@@ -45,6 +45,8 @@ apis:
       - type: Rules
         url: rules/incus-rules.yml
 common:
+  - type: DomainSecurity
+    url: security/incus-domain-security.yml
   - type: Website
     url: https://linuxcontainers.org/incus/
   - type: Documentation
@@ -57,6 +59,8 @@ common:
     url: https://discuss.linuxcontainers.org/
   - type: Issues
     url: https://github.com/lxc/incus/issues
+  - type: Blog
+    url: https://linuxcontainers.org/incus/news.rss
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
