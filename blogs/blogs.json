@@ -1,0 +1,21 @@
+{
+  "repo": "incus",
+  "feeds": [
+    {
+      "source": "https://linuxcontainers.org/incus/news.rss",
+      "feed_url": "https://linuxcontainers.org/incus/news.rss",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://github.com/lxc/incus/issues",
+      "feed_url": "https://github.com/lxc/incus/issues",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 40
+}
