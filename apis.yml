@@ -45,6 +45,8 @@ apis:
       - type: Rules
         url: rules/incus-rules.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/incus-agentic-access.yml
   - type: DomainSecurity
     url: security/incus-domain-security.yml
   - type: Website
