@@ -1,0 +1,4961 @@
+swagger: '2.0'
+info:
+  contact:
+    email: lxc-devel@lists.linuxcontainers.org
+    name: Incus upstream
+    url: https://github.com/lxc/incus
+  description: 'This is the REST API used by all Incus clients.
+
+    Internal endpoints aren''t included in this documentation.
+
+
+    The Incus API is available over both a local unix+http and remote https API.
+
+    Authentication for local users relies on group membership and access to the unix socket.
+
+    For remote users, the default authentication method is TLS client
+
+    certificates.'
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Incus external REST certificates storage API
+  version: '1.0'
+tags:
+- name: storage
+paths:
+  /1.0/storage-pools:
+    get:
+      description: Returns a list of storage pools (URLs).
+      operationId: storage_pools_get
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/local\",\n  \"/1.0/storage-pools/remote\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pools
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: 'Creates a new storage pool.
+
+        When clustered, storage pools require individual POST for each cluster member prior to a global POST.'
+      operationId: storage_pools_post
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage pool
+        in: body
+        name: storage
+        required: true
+        schema:
+          $ref: '#/definitions/StoragePoolsPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a storage pool
+      tags:
+      - storage
+  /1.0/storage-pools/{name}/buckets/{bucketName}:
+    delete:
+      description: Removes the storage bucket.
+      operationId: storage_pool_bucket_delete
+      parameters:
+      - description: Resource name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the storage bucket
+      tags:
+      - storage
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the storage bucket configuration.
+      operationId: storage_pool_bucket_patch
+      parameters:
+      - description: Resource name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage bucket configuration
+        in: body
+        name: storage bucket
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the storage bucket.
+      tags:
+      - storage
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire storage bucket configuration.
+      operationId: storage_pool_bucket_put
+      parameters:
+      - description: Resource name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage bucket configuration
+        in: body
+        name: storage bucket
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the storage bucket
+      tags:
+      - storage
+  /1.0/storage-pools/{name}/buckets/{bucketName}/keys/{keyName}:
+    delete:
+      description: Removes the storage bucket key.
+      operationId: storage_pool_bucket_key_delete
+      parameters:
+      - description: Resource name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Storage bucket key name
+        in: path
+        name: keyName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the storage bucket key
+      tags:
+      - storage
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire storage bucket key configuration.
+      operationId: storage_pool_bucket_key_put
+      parameters:
+      - description: Resource name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Storage bucket key name
+        in: path
+        name: keyName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage bucket key configuration
+        in: body
+        name: storage bucket
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketKeyPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the storage bucket key
+      tags:
+      - storage
+  /1.0/storage-pools/{name}/resources:
+    get:
+      description: Gets the usage information for the storage pool.
+      operationId: storage_pool_resources
+      parameters:
+      - description: Resource name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Hardware resources
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/ResourcesStoragePool'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get storage pool resources information
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}:
+    delete:
+      description: Removes the storage pool.
+      operationId: storage_pools_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the storage pool
+      tags:
+      - storage
+    get:
+      description: Gets a specific storage pool.
+      operationId: storage_pool_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage pool
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StoragePool'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool
+      tags:
+      - storage
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the storage pool configuration.
+      operationId: storage_pool_patch
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage pool configuration
+        in: body
+        name: storage pool
+        required: true
+        schema:
+          $ref: '#/definitions/StoragePoolPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the storage pool
+      tags:
+      - storage
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire storage pool configuration.
+      operationId: storage_pool_put
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage pool configuration
+        in: body
+        name: storage pool
+        required: true
+        schema:
+          $ref: '#/definitions/StoragePoolPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the storage pool
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets:
+    get:
+      description: Returns a list of storage pool buckets (URLs).
+      operationId: storage_pool_buckets_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve storage pool buckets from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/default/buckets/foo\",\n  \"/1.0/storage-pools/default/buckets/bar\",\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool buckets
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Creates a new storage pool bucket.
+      operationId: storage_pool_bucket_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Bucket
+        in: body
+        name: bucket
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketsPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/definitions/StorageBucketKey'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a storage pool bucket.
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}:
+    get:
+      description: Gets a specific storage pool bucket.
+      operationId: storage_pool_bucket_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage pool bucket
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageBucket'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool bucket
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups:
+    get:
+      description: Returns a list of storage bucket backups (URLs).
+      operationId: storage_pool_buckets_backups_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/local/buckets/foo/backups/backup0\",\n  \"/1.0/storage-pools/local/buckets/foo/backups/backup1\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage bucket backups
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: 'Creates a new storage bucket backup.
+
+
+        If the `Accept` header is set to `application/octet-stream`, this directly streams the backup
+
+        tarball to the client without any intermediate operation.'
+      operationId: storage_pool_buckets_backups_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage bucket backup
+        in: body
+        name: bucket
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketBackupsPost'
+      produces:
+      - application/json
+      - application/octet-stream
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Create a storage bucket backup
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups/{backupName}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a new storage bucket backup.
+      operationId: storage_pool_buckets_backup_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete a storage bucket backup
+      tags:
+      - storage
+    get:
+      description: Gets a specific storage bucket backup.
+      operationId: storage_pool_buckets_backup_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage bucket backup
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageBucketBackup'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage bucket backup
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Renames a storage bucket backup.
+      operationId: storage_pool_buckets_backup_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage bucket backup
+        in: body
+        name: bucket rename
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketBackupPost'
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Rename a storage bucket backup
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups/{backupName}/export:
+    get:
+      description: Download the raw backup file from the server.
+      operationId: storage_pool_buckets_backup_export_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: Raw backup data
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the raw backup file
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/backups?recursion=1:
+    get:
+      description: Returns a list of storage bucket backups (structs).
+      operationId: storage_pool_buckets_backups_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage bucket backups
+                items:
+                  $ref: '#/definitions/StorageBucketBackup'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage bucket backups
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/keys:
+    get:
+      description: Returns a list of storage pool bucket keys (URLs).
+      operationId: storage_pool_bucket_keys_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/default/buckets/foo/keys/my-read-only-key\",\n  \"/1.0/storage-pools/default/buckets/bar/keys/admin\",\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool bucket keys
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Creates a new storage pool bucket key.
+      operationId: storage_pool_bucket_key_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Bucket
+        in: body
+        name: bucket
+        required: true
+        schema:
+          $ref: '#/definitions/StorageBucketKeysPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/definitions/StorageBucketKey'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a storage pool bucket key.
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/keys/{keyName}:
+    get:
+      description: Gets a specific storage pool bucket key.
+      operationId: storage_pool_bucket_key_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Storage bucket key name
+        in: path
+        name: keyName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage pool bucket key
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageBucketKey'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool bucket key
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}/keys?recursion=1:
+    get:
+      description: Returns a list of storage pool bucket keys (structs).
+      operationId: storage_pool_bucket_keys_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage pool bucket keys
+                items:
+                  $ref: '#/definitions/StorageBucketKey'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool bucket keys
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets/{bucketName}?recursion=1:
+    get:
+      description: Gets a specific storage pool bucket with all details (backups and keys).
+      operationId: storage_pool_bucket_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage bucket name
+        in: path
+        name: bucketName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage pool bucket
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageBucketFull'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the full storage pool bucket details
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets?recursion=1:
+    get:
+      description: Returns a list of storage pool buckets (structs).
+      operationId: storage_pool_buckets_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve storage pool buckets from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage pool buckets
+                items:
+                  $ref: '#/definitions/StorageBucket'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool buckets
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/buckets?recursion=2:
+    get:
+      description: Returns a list of storage pool buckets with all details (structs).
+      operationId: storage_pool_buckets_get_recursion2
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve storage pool buckets from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage pool buckets
+                items:
+                  $ref: '#/definitions/StorageBucketFull'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pool bucket details
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes:
+    get:
+      description: Returns a list of storage volumes (URLs).
+      operationId: storage_pool_volumes_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/local/volumes/container/a1\",\n  \"/1.0/storage-pools/local/volumes/container/a2\",\n  \"/1.0/storage-pools/local/volumes/custom/backups\",\n  \"/1.0/storage-pools/local/volumes/custom/images\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volumes
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: 'Creates a new storage volume.
+
+        Will return an empty sync response on simple volume creation but an operation on copy or migration.'
+      operationId: storage_pool_volumes_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume
+        in: body
+        name: volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumesPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a storage volume
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}:
+    get:
+      description: Returns a list of storage volumes (URLs) (type specific endpoint).
+      operationId: storage_pool_volumes_type_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/local/volumes/custom/backups\",\n  \"/1.0/storage-pools/local/volumes/custom/images\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volumes
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: 'Creates a new storage volume (type specific endpoint).
+
+        Will return an empty sync response on simple volume creation but an operation on copy or migration.'
+      operationId: storage_pool_volumes_type_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume
+        in: body
+        name: volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumesPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a storage volume
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}:
+    delete:
+      description: Removes the storage volume.
+      operationId: storage_pool_volume_type_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the storage volume
+      tags:
+      - storage
+    get:
+      description: Gets a specific storage volume.
+      operationId: storage_pool_volume_type_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageVolume'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume
+      tags:
+      - storage
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the storage volume configuration.
+      operationId: storage_pool_volume_type_patch
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume configuration
+        in: body
+        name: storage volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumePut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the storage volume
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: 'Renames, moves a storage volume between pools or migrates an instance to another server.
+
+
+        The returned operation metadata will vary based on what''s requested.
+
+        For rename or move within the same server, this is a simple background operation with progress data.
+
+        For migration, in the push case, this will similarly be a background
+
+        operation with progress data, for the pull case, it will be a websocket
+
+        operation with a number of secrets to be passed to the target server.'
+      operationId: storage_pool_volume_type_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Migration request
+        in: body
+        name: migration
+        schema:
+          $ref: '#/definitions/StorageVolumePost'
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Rename or move/migrate a storage volume
+      tags:
+      - storage
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire storage volume configuration.
+      operationId: storage_pool_volume_type_put
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume configuration
+        in: body
+        name: storage volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumePut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the storage volume
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups:
+    get:
+      description: Returns a list of storage volume backups (URLs).
+      operationId: storage_pool_volumes_type_backups_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/local/volumes/custom/foo/backups/backup0\",\n  \"/1.0/storage-pools/local/volumes/custom/foo/backups/backup1\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume backups
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: 'Creates a new storage volume backup.
+
+
+        If the `Accept` header is set to `application/octet-stream`, this directly streams the backup
+
+        tarball to the client without any intermediate operation.'
+      operationId: storage_pool_volumes_type_backups_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume backup
+        in: body
+        name: volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeBackupsPost'
+      produces:
+      - application/json
+      - application/octet-stream
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Create a storage volume backup
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups/{backupName}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a new storage volume backup.
+      operationId: storage_pool_volumes_type_backup_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete a storage volume backup
+      tags:
+      - storage
+    get:
+      description: Gets a specific storage volume backup.
+      operationId: storage_pool_volumes_type_backup_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume backup
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageVolumeBackup'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume backup
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Renames a storage volume backup.
+      operationId: storage_pool_volumes_type_backup_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume backup
+        in: body
+        name: volume rename
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeSnapshotPost'
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Rename a storage volume backup
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups/{backupName}/export:
+    get:
+      description: Download the raw backup file from the server.
+      operationId: storage_pool_volumes_type_backup_export_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Backup name
+        in: path
+        name: backupName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: Raw backup data
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the raw backup file
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/backups?recursion=1:
+    get:
+      description: Returns a list of storage volume backups (structs).
+      operationId: storage_pool_volumes_type_backups_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage volume backups
+                items:
+                  $ref: '#/definitions/StorageVolumeBackup'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume backups
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/bitmaps:
+    get:
+      description: Gets a specific storage volume bitmaps
+      operationId: storage_pool_volume_type_bitmaps_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume bitmaps
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/shared/volumes/custom/foo/bitmaps/bitmap0\",\n  \"/1.0/storage-pools/shared/volumes/custom/foo/bitmaps/bitmap1\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume dirty bitmaps
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Creates a new storage volume bitmap.
+      operationId: storage_pool_volumes_type_bitmaps_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume bitmap
+        in: body
+        name: volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeBitmapsPost'
+      produces:
+      - application/json
+      - application/octet-stream
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Create a storage volume bitmap
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/bitmaps/{bitmapName}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a storage volume bitmap.
+      operationId: storage_pool_volumes_type_bitmap_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Bitmap name
+        in: path
+        name: bitmapName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete a storage volume bitmap
+      tags:
+      - storage
+    get:
+      description: Gets a specific storage volume bitmap
+      operationId: storage_pool_volume_type_bitmap_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Bitmap name
+        in: path
+        name: bitmapName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume bitmap
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageVolumeBitmap'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume dirty bitmap
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/bitmaps?recursion=1:
+    get:
+      description: Gets a specific storage volume bitmaps
+      operationId: storage_pool_volume_type_bitmaps_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume bitmaps
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage volume bitmaps
+                items:
+                  $ref: '#/definitions/StorageVolumeBitmap'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume dirty bitmaps
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/files:
+    delete:
+      description: Removes the file.
+      operationId: storage_pool_volume_type_files_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Path to the file
+        example: default
+        in: query
+        name: path
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Perform recursive deletion
+        example: true
+        in: header
+        name: X-Incus-force
+        schema:
+          type: boolean
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete a file
+      tags:
+      - storage
+    get:
+      description: Gets the file content. If it's a directory, a json list of files will be returned instead.
+      operationId: storage_pool_volume_type_files_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Path to the file
+        example: default
+        in: query
+        name: path
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      - application/octet-stream
+      responses:
+        '200':
+          description: Raw file or directory listing
+          headers:
+            X-Incus-gid:
+              description: File owner GID
+            X-Incus-mode:
+              description: Mode mask
+            X-Incus-modified:
+              description: Last modified date
+            X-Incus-type:
+              description: Type of file (file, symlink or directory)
+            X-Incus-uid:
+              description: File owner UID
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get a file
+      tags:
+      - storage
+    head:
+      description: Gets the file or directory metadata.
+      operationId: storage_pool_volume_type_files_head
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Path to the file
+        example: default
+        in: query
+        name: path
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      responses:
+        '200':
+          description: Raw file or directory listing
+          headers:
+            X-Incus-gid:
+              description: File owner GID
+            X-Incus-mode:
+              description: Mode mask
+            X-Incus-modified:
+              description: Last modified date
+            X-Incus-type:
+              description: Type of file (file, symlink or directory)
+            X-Incus-uid:
+              description: File owner UID
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get metadata for a file
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/octet-stream
+      description: Creates a new file in the storage volume.
+      operationId: storage_pool_volume_type_files_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Path to the file
+        example: default
+        in: query
+        name: path
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Raw file content
+        in: body
+        name: raw_file
+      - description: File owner UID
+        example: 1000
+        in: header
+        name: X-Incus-uid
+        schema:
+          type: integer
+      - description: File owner GID
+        example: 1000
+        in: header
+        name: X-Incus-gid
+        schema:
+          type: integer
+      - description: File mode
+        example: 420
+        in: header
+        name: X-Incus-mode
+        schema:
+          type: integer
+      - description: Type of file (file, symlink or directory)
+        example: file
+        in: header
+        name: X-Incus-type
+        schema:
+          type: string
+      - description: Write mode (overwrite or append)
+        example: overwrite
+        in: header
+        name: X-Incus-write
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Create or replace a file
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/nbd:
+    get:
+      description: Upgrades the request to an NBD connection of the storage volume's block device.
+      operationId: storage_pool_volume_type_nbd_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      produces:
+      - application/json
+      - application/octet-stream
+      responses:
+        '101':
+          description: Switching protocols to NBD
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume NBD connection
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/sftp:
+    get:
+      description: Upgrades the request to an SFTP connection of the storage volume's filesystem.
+      operationId: storage_pool_volume_type_sftp_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      produces:
+      - application/json
+      - application/octet-stream
+      responses:
+        '101':
+          description: Switching protocols to SFTP
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume SFTP connection
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/snapshots:
+    get:
+      description: Returns a list of storage volume snapshots (URLs).
+      operationId: storage_pool_volumes_type_snapshots_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/storage-pools/local/volumes/custom/foo/snapshots/snap0\",\n  \"/1.0/storage-pools/local/volumes/custom/foo/snapshots/snap1\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume snapshots
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Creates a new storage volume snapshot.
+      operationId: storage_pool_volumes_type_snapshots_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume snapshot
+        in: body
+        name: volume
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeSnapshotsPost'
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Create a storage volume snapshot
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/snapshots/{snapshotName}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a new storage volume snapshot.
+      operationId: storage_pool_volumes_type_snapshot_delete
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Snapshot name
+        in: path
+        name: snapshotName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete a storage volume snapshot
+      tags:
+      - storage
+    get:
+      description: Gets a specific storage volume snapshot.
+      operationId: storage_pool_volumes_type_snapshot_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Snapshot name
+        in: path
+        name: snapshotName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume snapshot
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageVolumeSnapshot'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume snapshot
+      tags:
+      - storage
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the storage volume snapshot configuration.
+      operationId: storage_pool_volumes_type_snapshot_patch
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Snapshot name
+        in: path
+        name: snapshotName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume snapshot configuration
+        in: body
+        name: storage volume snapshot
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeSnapshotPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the storage volume snapshot
+      tags:
+      - storage
+    post:
+      consumes:
+      - application/json
+      description: Renames a storage volume snapshot.
+      operationId: storage_pool_volumes_type_snapshot_post
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Snapshot name
+        in: path
+        name: snapshotName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume snapshot
+        in: body
+        name: volume rename
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeSnapshotPost'
+      produces:
+      - application/json
+      responses:
+        '202':
+          $ref: '#/responses/Operation'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Rename a storage volume snapshot
+      tags:
+      - storage
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire storage volume snapshot configuration.
+      operationId: storage_pool_volumes_type_snapshot_put
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Snapshot name
+        in: path
+        name: snapshotName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Storage volume snapshot configuration
+        in: body
+        name: storage volume snapshot
+        required: true
+        schema:
+          $ref: '#/definitions/StorageVolumeSnapshotPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the storage volume snapshot
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/snapshots?recursion=1:
+    get:
+      description: Returns a list of storage volume snapshots (structs).
+      operationId: storage_pool_volumes_type_snapshots_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage volume snapshots
+                items:
+                  $ref: '#/definitions/StorageVolumeSnapshot'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume snapshots
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}/state:
+    get:
+      description: Gets a specific storage volume state (usage data).
+      operationId: storage_pool_volume_type_state_get
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage pool
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageVolumeState'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volume state
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}/{volumeName}?recursion=1:
+    get:
+      description: Gets a specific storage volume with all details (backups, snapshots and state0..
+      operationId: storage_pool_volume_type_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Storage volume name
+        in: path
+        name: volumeName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Storage volume
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/StorageVolumeFull'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the full storage volume details
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}?recursion=1:
+    get:
+      description: Returns a list of storage volumes (structs) (type specific endpoint).
+      operationId: storage_pool_volumes_type_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage volumes
+                items:
+                  $ref: '#/definitions/StorageVolume'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volumes
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes/{type}?recursion=2:
+    get:
+      description: Returns a list of storage volumes (structs) including all details (type specific endpoint).
+      operationId: storage_pool_volumes_type_get_recursion2
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Storage volume type
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage volumes
+                items:
+                  $ref: '#/definitions/StorageVolumeFull'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volumes with all details
+      tags:
+      - storage
+  /1.0/storage-pools/{poolName}/volumes?recursion=1:
+    get:
+      description: Returns a list of storage volumes (structs).
+      operationId: storage_pool_volumes_get_recursion1
+      parameters:
+      - description: Storage pool name
+        in: path
+        name: poolName
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage volumes
+                items:
+                  $ref: '#/definitions/StorageVolume'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage volumes
+      tags:
+      - storage
+  /1.0/storage-pools?recursion=1:
+    get:
+      description: Returns a list of storage pools (structs).
+      operationId: storage_pools_get_recursion1
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of storage pools
+                items:
+                  $ref: '#/definitions/StoragePool'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the storage pools
+      tags:
+      - storage
+definitions:
+  StorageBucketsPost:
+    description: StorageBucketsPost represents the fields of a new storage pool bucket
+    properties:
+      config:
+        description: Storage bucket configuration map
+        example:
+          size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage bucket
+        example: My custom bucket
+        type: string
+        x-go-name: Description
+      name:
+        description: Bucket name
+        example: foo
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StatusCode:
+    format: int64
+    title: StatusCode represents a valid operation and container status.
+    type: integer
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeStateUsage:
+    description: StorageVolumeStateUsage represents the disk usage of a volume
+    properties:
+      total:
+        description: Storage volume size in bytes
+        example: 5189222192
+        format: int64
+        type: integer
+        x-go-name: Total
+      used:
+        description: Used space in bytes
+        example: 1693552640
+        format: uint64
+        type: integer
+        x-go-name: Used
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucket:
+    description: StorageBucket represents the fields of a storage pool bucket
+    properties:
+      config:
+        description: Storage bucket configuration map
+        example:
+          size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage bucket
+        example: My custom bucket
+        type: string
+        x-go-name: Description
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      name:
+        description: Bucket name
+        example: foo
+        type: string
+        x-go-name: Name
+      project:
+        description: Project name
+        example: project1
+        type: string
+        x-go-name: Project
+      s3_url:
+        description: Bucket S3 URL
+        example: https://127.0.0.1:8080/foo
+        type: string
+        x-go-name: S3URL
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeSnapshotPut:
+    description: StorageVolumeSnapshotPut represents the modifiable fields of a storage volume
+    properties:
+      description:
+        description: Description of the storage volume
+        example: My custom volume
+        type: string
+        x-go-name: Description
+      expires_at:
+        description: When the snapshot expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketBackupsPost:
+    description: StorageBucketBackupsPost represents the fields available for a new storage bucket backup
+    properties:
+      compression_algorithm:
+        description: What compression algorithm to use
+        example: gzip
+        type: string
+        x-go-name: CompressionAlgorithm
+      expires_at:
+        description: When the backup expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+      name:
+        description: Backup name
+        example: backup0
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  BackupTarget:
+    properties:
+      access_key:
+        description: AccessKey is the S3 API access key
+        example: GOOG1234
+        type: string
+        x-go-name: AccessKey
+      bucket_name:
+        description: BucketName is the name of the S3 bucket.
+        example: my_bucket
+        type: string
+        x-go-name: BucketName
+      path:
+        description: Path is the target path.
+        example: foo/test.tar
+        type: string
+        x-go-name: Path
+      protocol:
+        description: Protocol is the upload protocol.
+        example: S3
+        type: string
+        x-go-name: Protocol
+      secret_key:
+        description: SecretKey is the S3 API access key
+        example: secret123
+        type: string
+        x-go-name: SecretKey
+      url:
+        description: URL is the HTTPS URL for the backup
+        example: https://storage.googleapis.com
+        type: string
+        x-go-name: URL
+    title: BackupTarget represents the target storage server for an instance or volume backup.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumePostTarget:
+    description: StorageVolumePostTarget represents the migration target host and operation
+    properties:
+      certificate:
+        description: The certificate of the migration target
+        example: X509 PEM certificate
+        type: string
+        x-go-name: Certificate
+      operation:
+        description: Remote operation URL (for migration)
+        example: https://1.2.3.4:8443/1.0/operations/1721ae08-b6a8-416a-9614-3f89302466e1
+        type: string
+        x-go-name: Operation
+      secrets:
+        additionalProperties:
+          type: string
+        description: Migration websockets credentials
+        example:
+          migration: random-string
+        type: object
+        x-go-name: Websockets
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeBitmapsPost:
+    description: StorageVolumeBitmapsPost represents the fields available for a new volume bitmap
+    properties:
+      disabled:
+        description: The bitmap is created in the disabled state
+        example: false
+        type: boolean
+        x-go-name: Disabled
+      granularity:
+        description: Granularity of the dirty bitmap in bytes
+        example: 32768
+        format: int64
+        type: integer
+        x-go-name: Granularity
+      name:
+        description: Bitmap name
+        example: bitmap0
+        type: string
+        x-go-name: Name
+      persistent:
+        description: true if the bitmap was stored on disk, is scheduled to be stored on disk, or both
+        example: false
+        type: boolean
+        x-go-name: Persistent
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeSource:
+    description: StorageVolumeSource represents the creation source for a new storage volume
+    properties:
+      certificate:
+        description: Certificate (for migration)
+        example: X509 PEM certificate
+        type: string
+        x-go-name: Certificate
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      mode:
+        description: Whether to use pull or push mode (for migration)
+        example: pull
+        type: string
+        x-go-name: Mode
+      name:
+        description: Source volume name (for copy)
+        example: foo
+        type: string
+        x-go-name: Name
+      operation:
+        description: Remote operation URL (for migration)
+        example: https://1.2.3.4:8443/1.0/operations/1721ae08-b6a8-416a-9614-3f89302466e1
+        type: string
+        x-go-name: Operation
+      pool:
+        description: Source storage pool (for copy)
+        example: local
+        type: string
+        x-go-name: Pool
+      project:
+        description: Source project name
+        example: foo
+        type: string
+        x-go-name: Project
+      refresh:
+        description: Whether existing destination volume should be refreshed
+        example: false
+        type: boolean
+        x-go-name: Refresh
+      refresh_exclude_older:
+        description: Whether to exclude source snapshots earlier than latest target snapshot
+        example: false
+        type: boolean
+        x-go-name: RefreshExcludeOlder
+      secrets:
+        additionalProperties:
+          type: string
+        description: Map of migration websockets (for migration)
+        example:
+          rsync: RANDOM-STRING
+        type: object
+        x-go-name: Websockets
+      type:
+        description: Source type (copy or migration)
+        example: copy
+        type: string
+        x-go-name: Type
+      volume_only:
+        description: Whether snapshots should be discarded (for migration)
+        example: false
+        type: boolean
+        x-go-name: VolumeOnly
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  ResourcesStoragePoolSpace:
+    description: ResourcesStoragePoolSpace represents the space available to a given storage pool
+    properties:
+      total:
+        description: Total disk space (bytes)
+        example: 420100937728
+        format: uint64
+        type: integer
+        x-go-name: Total
+      used:
+        description: Used disk space (bytes)
+        example: 343537419776
+        format: uint64
+        type: integer
+        x-go-name: Used
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketKeysPost:
+    description: StorageBucketKeysPost represents the fields of a new storage pool bucket key
+    properties:
+      access-key:
+        description: Access key
+        example: 33UgkaIBLBIxb7O1
+        type: string
+        x-go-name: AccessKey
+      description:
+        description: Description of the storage bucket key
+        example: My read-only bucket key
+        type: string
+        x-go-name: Description
+      name:
+        description: Key name
+        example: my-read-only-key
+        type: string
+        x-go-name: Name
+      role:
+        description: Whether the key can perform write actions or not.
+        example: read-only
+        type: string
+        x-go-name: Role
+      secret-key:
+        description: Secret key
+        example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
+        type: string
+        x-go-name: SecretKey
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketKey:
+    description: StorageBucketKey represents the fields of a storage pool bucket key
+    properties:
+      access-key:
+        description: Access key
+        example: 33UgkaIBLBIxb7O1
+        type: string
+        x-go-name: AccessKey
+      description:
+        description: Description of the storage bucket key
+        example: My read-only bucket key
+        type: string
+        x-go-name: Description
+      name:
+        description: Key name
+        example: my-read-only-key
+        type: string
+        x-go-name: Name
+      role:
+        description: Whether the key can perform write actions or not.
+        example: read-only
+        type: string
+        x-go-name: Role
+      secret-key:
+        description: Secret key
+        example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
+        type: string
+        x-go-name: SecretKey
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketKeyPut:
+    description: StorageBucketKeyPut represents the modifiable fields of a storage pool bucket key
+    properties:
+      access-key:
+        description: Access key
+        example: 33UgkaIBLBIxb7O1
+        type: string
+        x-go-name: AccessKey
+      description:
+        description: Description of the storage bucket key
+        example: My read-only bucket key
+        type: string
+        x-go-name: Description
+      role:
+        description: Whether the key can perform write actions or not.
+        example: read-only
+        type: string
+        x-go-name: Role
+      secret-key:
+        description: Secret key
+        example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
+        type: string
+        x-go-name: SecretKey
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumesPost:
+    description: StorageVolumesPost represents the fields of a new storage pool volume
+    properties:
+      config:
+        description: Storage volume configuration map (refer to doc/storage.md)
+        example:
+          size: 50GiB
+          zfs.remove_snapshots: 'true'
+        type: object
+        x-go-name: Config
+      content_type:
+        description: Volume content type (filesystem or block)
+        example: filesystem
+        type: string
+        x-go-name: ContentType
+      description:
+        description: Description of the storage volume
+        example: My custom volume
+        type: string
+        x-go-name: Description
+      name:
+        description: Volume name
+        example: foo
+        type: string
+        x-go-name: Name
+      restore:
+        description: Name of a snapshot to restore
+        example: snap0
+        type: string
+        x-go-name: Restore
+      source:
+        $ref: '#/definitions/StorageVolumeSource'
+      type:
+        description: Volume type (container, custom, image or virtual-machine)
+        example: custom
+        type: string
+        x-go-name: Type
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumePost:
+    description: StorageVolumePost represents the fields required to rename a storage pool volume
+    properties:
+      migration:
+        description: Initiate volume migration
+        example: false
+        type: boolean
+        x-go-name: Migration
+      name:
+        description: New volume name
+        example: foo
+        type: string
+        x-go-name: Name
+      pool:
+        description: New storage pool
+        example: remote
+        type: string
+        x-go-name: Pool
+      project:
+        description: New project name
+        example: foo
+        type: string
+        x-go-name: Project
+      source:
+        $ref: '#/definitions/StorageVolumeSource'
+      target:
+        $ref: '#/definitions/StorageVolumePostTarget'
+      volume_only:
+        description: Whether snapshots should be discarded (migration only)
+        example: false
+        type: boolean
+        x-go-name: VolumeOnly
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeBackup:
+    description: StorageVolumeBackup represents a volume backup
+    properties:
+      created_at:
+        description: When the backup was created
+        example: '2021-03-23T16:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      expires_at:
+        description: When the backup expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+      name:
+        description: Backup name
+        example: backup0
+        type: string
+        x-go-name: Name
+      optimized_storage:
+        description: Whether to use a pool-optimized binary format (instead of plain tarball)
+        example: true
+        type: boolean
+        x-go-name: OptimizedStorage
+      volume_only:
+        description: Whether to ignore snapshots
+        example: false
+        type: boolean
+        x-go-name: VolumeOnly
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketBackup:
+    description: StorageBucketBackup represents the fields available for a new storage bucket backup
+    properties:
+      created_at:
+        description: When the backup was created
+        example: '2021-03-23T16:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      expires_at:
+        description: When the backup expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+      name:
+        description: Backup name
+        example: backup0
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  ResourcesStoragePoolInodes:
+    description: ResourcesStoragePoolInodes represents the inodes available to a given storage pool
+    properties:
+      total:
+        description: Total inodes
+        example: 30709993797
+        format: uint64
+        type: integer
+        x-go-name: Total
+      used:
+        description: Used inodes
+        example: 23937695
+        format: uint64
+        type: integer
+        x-go-name: Used
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeState:
+    description: StorageVolumeState represents the live state of the volume
+    properties:
+      usage:
+        $ref: '#/definitions/StorageVolumeStateUsage'
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeSnapshotPost:
+    description: StorageVolumeSnapshotPost represents the fields required to rename/move a storage volume snapshot
+    properties:
+      migration:
+        description: Initiate volume snapshot migration
+        example: false
+        type: boolean
+        x-go-name: Migration
+      name:
+        description: New snapshot name
+        example: snap1
+        type: string
+        x-go-name: Name
+      target:
+        $ref: '#/definitions/StorageVolumePostTarget'
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumePut:
+    description: StorageVolumePut represents the modifiable fields of a storage volume
+    properties:
+      config:
+        description: Storage volume configuration map (refer to doc/storage.md)
+        example:
+          size: 50GiB
+          zfs.remove_snapshots: 'true'
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage volume
+        example: My custom volume
+        type: string
+        x-go-name: Description
+      restore:
+        description: Name of a snapshot to restore
+        example: snap0
+        type: string
+        x-go-name: Restore
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeBackupsPost:
+    description: StorageVolumeBackupsPost represents the fields available for a new volume backup
+    properties:
+      compression_algorithm:
+        description: What compression algorithm to use
+        example: gzip
+        type: string
+        x-go-name: CompressionAlgorithm
+      expires_at:
+        description: When the backup expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+      name:
+        description: Backup name
+        example: backup0
+        type: string
+        x-go-name: Name
+      optimized_storage:
+        description: Whether to use a pool-optimized binary format (instead of plain tarball)
+        example: true
+        type: boolean
+        x-go-name: OptimizedStorage
+      target:
+        $ref: '#/definitions/BackupTarget'
+      volume_only:
+        description: Whether to ignore snapshots
+        example: false
+        type: boolean
+        x-go-name: VolumeOnly
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  ResourcesStoragePool:
+    description: ResourcesStoragePool represents the resources available to a given storage pool
+    properties:
+      inodes:
+        $ref: '#/definitions/ResourcesStoragePoolInodes'
+      space:
+        $ref: '#/definitions/ResourcesStoragePoolSpace'
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StoragePool:
+    properties:
+      config:
+        description: Storage pool configuration map (refer to doc/storage.md)
+        example:
+          volume.block.filesystem: ext4
+          volume.size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage pool
+        example: Local SSD pool
+        type: string
+        x-go-name: Description
+      driver:
+        description: Storage pool driver (btrfs, ceph, cephfs, cephobject, dir, lvm, lvmcluster or zfs)
+        example: zfs
+        type: string
+        x-go-name: Driver
+      locations:
+        description: Cluster members on which the storage pool has been defined
+        example:
+        - server01
+        - server02
+        - server03
+        items:
+          type: string
+        readOnly: true
+        type: array
+        x-go-name: Locations
+      name:
+        description: Storage pool name
+        example: local
+        type: string
+        x-go-name: Name
+      status:
+        description: Pool status (Pending, Created, Errored or Unknown)
+        example: Created
+        readOnly: true
+        type: string
+        x-go-name: Status
+      used_by:
+        description: List of URLs of objects using this storage pool
+        example:
+        - /1.0/profiles/default
+        - /1.0/instances/c1
+        items:
+          type: string
+        type: array
+        x-go-name: UsedBy
+    title: StoragePool represents the fields of a storage pool.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketBackupPost:
+    description: StorageBucketBackupPost represents the fields available for the renaming of a bucket backup
+    properties:
+      name:
+        description: New backup name
+        example: backup1
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeBitmap:
+    description: StorageVolumeBitmap represents a volume bitmap
+    properties:
+      busy:
+        description: true if the bitmap is in-use by some operation
+        example: true
+        type: boolean
+        x-go-name: Busy
+      count:
+        description: Number of dirty bytes
+        example: 300
+        format: int64
+        type: integer
+        x-go-name: Count
+      granularity:
+        description: Granularity of the dirty bitmap in bytes
+        example: 32768
+        format: int64
+        type: integer
+        x-go-name: Granularity
+      inconsistent:
+        description: true if this is a persistent bitmap that was improperly stored
+        example: true
+        type: boolean
+        x-go-name: Inconsistent
+      name:
+        description: Bitmap name
+        example: bitmap0
+        type: string
+        x-go-name: Name
+      persistent:
+        description: true if the bitmap was stored on disk, is scheduled to be stored on disk, or both
+        example: false
+        type: boolean
+        x-go-name: Persistent
+      recording:
+        description: true if the bitmap is recording new writes from the guest
+        example: false
+        type: boolean
+        x-go-name: Recording
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolume:
+    properties:
+      config:
+        description: Storage volume configuration map (refer to doc/storage.md)
+        example:
+          size: 50GiB
+          zfs.remove_snapshots: 'true'
+        type: object
+        x-go-name: Config
+      content_type:
+        description: Volume content type (filesystem or block)
+        example: filesystem
+        type: string
+        x-go-name: ContentType
+      created_at:
+        description: Volume creation timestamp
+        example: '2021-03-23T20:00:00-04:00'
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      description:
+        description: Description of the storage volume
+        example: My custom volume
+        type: string
+        x-go-name: Description
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      name:
+        description: Volume name
+        example: foo
+        type: string
+        x-go-name: Name
+      project:
+        description: Project containing the volume.
+        example: default
+        type: string
+        x-go-name: Project
+      restore:
+        description: Name of a snapshot to restore
+        example: snap0
+        type: string
+        x-go-name: Restore
+      type:
+        description: Volume type
+        example: custom
+        type: string
+        x-go-name: Type
+      used_by:
+        description: List of URLs of objects using this storage volume
+        example:
+        - /1.0/instances/blah
+        items:
+          type: string
+        type: array
+        x-go-name: UsedBy
+    title: StorageVolume represents the fields of a storage volume.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketFull:
+    properties:
+      backups:
+        description: List of backups.
+        items:
+          $ref: '#/definitions/StorageBucketBackup'
+        type: array
+        x-go-name: Backups
+      config:
+        description: Storage bucket configuration map
+        example:
+          size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage bucket
+        example: My custom bucket
+        type: string
+        x-go-name: Description
+      keys:
+        description: List of keys.
+        items:
+          $ref: '#/definitions/StorageBucketKey'
+        type: array
+        x-go-name: Keys
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      name:
+        description: Bucket name
+        example: foo
+        type: string
+        x-go-name: Name
+      project:
+        description: Project name
+        example: project1
+        type: string
+        x-go-name: Project
+      s3_url:
+        description: Bucket S3 URL
+        example: https://127.0.0.1:8080/foo
+        type: string
+        x-go-name: S3URL
+    title: StorageBucketFull is a combination of StorageBucket, StorageBucketBackup and StorageBucketKey.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeSnapshotsPost:
+    description: StorageVolumeSnapshotsPost represents the fields available for a new storage volume snapshot
+    properties:
+      expires_at:
+        description: When the snapshot expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+      name:
+        description: Snapshot name
+        example: snap0
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StoragePoolPut:
+    properties:
+      config:
+        description: Storage pool configuration map (refer to doc/storage.md)
+        example:
+          volume.block.filesystem: ext4
+          volume.size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage pool
+        example: Local SSD pool
+        type: string
+        x-go-name: Description
+    title: StoragePoolPut represents the modifiable fields of a storage pool.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  Operation:
+    description: Operation represents a background operation
+    properties:
+      class:
+        description: Type of operation (task, token or websocket)
+        example: websocket
+        type: string
+        x-go-name: Class
+      created_at:
+        description: Operation creation time
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      description:
+        description: Description of the operation
+        example: Executing command
+        type: string
+        x-go-name: Description
+      err:
+        description: Operation error message
+        example: Some error message
+        type: string
+        x-go-name: Err
+      id:
+        description: UUID of the operation
+        example: 6916c8a6-9b7d-4abd-90b3-aedfec7ec7da
+        type: string
+        x-go-name: ID
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      may_cancel:
+        description: Whether the operation can be canceled
+        example: false
+        type: boolean
+        x-go-name: MayCancel
+      metadata:
+        additionalProperties: {}
+        description: Operation specific metadata
+        example:
+          command:
+          - bash
+          environment:
+            HOME: /root
+            LANG: C.UTF-8
+            PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            TERM: xterm
+            USER: root
+          fds:
+            '0': da3046cf02c0116febf4ef3fe4eaecdf308e720c05e5a9c730ce1a6f15417f66
+            '1': 05896879d8692607bd6e4a09475667da3b5f6714418ab0ee0e5720b4c57f754b
+          interactive: true
+        type: object
+        x-go-name: Metadata
+      resources:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        description: Affected resources
+        example:
+          instances:
+          - /1.0/instances/foo
+        type: object
+        x-go-name: Resources
+      status:
+        description: Status name
+        example: Running
+        type: string
+        x-go-name: Status
+      status_code:
+        $ref: '#/definitions/StatusCode'
+      updated_at:
+        description: Operation last change
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: UpdatedAt
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeSnapshot:
+    description: StorageVolumeSnapshot represents a storage volume snapshot
+    properties:
+      config:
+        description: Storage volume configuration map (refer to doc/storage.md)
+        example:
+          size: 50GiB
+          zfs.remove_snapshots: 'true'
+        type: object
+        x-go-name: Config
+      content_type:
+        description: The content type (filesystem or block)
+        example: filesystem
+        type: string
+        x-go-name: ContentType
+      created_at:
+        description: Volume snapshot creation timestamp
+        example: '2021-03-23T20:00:00-04:00'
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      description:
+        description: Description of the storage volume
+        example: My custom volume
+        type: string
+        x-go-name: Description
+      expires_at:
+        description: When the snapshot expires (gets auto-deleted)
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: ExpiresAt
+      name:
+        description: Snapshot name
+        example: snap0
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StoragePoolsPost:
+    description: StoragePoolsPost represents the fields of a new storage pool
+    properties:
+      config:
+        description: Storage pool configuration map (refer to doc/storage.md)
+        example:
+          volume.block.filesystem: ext4
+          volume.size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage pool
+        example: Local SSD pool
+        type: string
+        x-go-name: Description
+      driver:
+        description: Storage pool driver (btrfs, ceph, cephfs, cephobject, dir, lvm, lvmcluster or zfs)
+        example: zfs
+        type: string
+        x-go-name: Driver
+      name:
+        description: Storage pool name
+        example: local
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageVolumeFull:
+    properties:
+      backups:
+        description: List of backups.
+        items:
+          $ref: '#/definitions/StorageVolumeBackup'
+        type: array
+        x-go-name: Backups
+      config:
+        description: Storage volume configuration map (refer to doc/storage.md)
+        example:
+          size: 50GiB
+          zfs.remove_snapshots: 'true'
+        type: object
+        x-go-name: Config
+      content_type:
+        description: Volume content type (filesystem or block)
+        example: filesystem
+        type: string
+        x-go-name: ContentType
+      created_at:
+        description: Volume creation timestamp
+        example: '2021-03-23T20:00:00-04:00'
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      description:
+        description: Description of the storage volume
+        example: My custom volume
+        type: string
+        x-go-name: Description
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      name:
+        description: Volume name
+        example: foo
+        type: string
+        x-go-name: Name
+      project:
+        description: Project containing the volume.
+        example: default
+        type: string
+        x-go-name: Project
+      restore:
+        description: Name of a snapshot to restore
+        example: snap0
+        type: string
+        x-go-name: Restore
+      snapshots:
+        description: List of snapshots.
+        items:
+          $ref: '#/definitions/StorageVolumeSnapshot'
+        type: array
+        x-go-name: Snapshots
+      state:
+        $ref: '#/definitions/StorageVolumeState'
+      type:
+        description: Volume type
+        example: custom
+        type: string
+        x-go-name: Type
+      used_by:
+        description: List of URLs of objects using this storage volume
+        example:
+        - /1.0/instances/blah
+        items:
+          type: string
+        type: array
+        x-go-name: UsedBy
+    title: StorageVolumeFull is a combination of StorageVolume, StorageVolumeBackup, StorageVolumeSnapshot and StorageVolumeState.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  StorageBucketPut:
+    description: StorageBucketPut represents the modifiable fields of a storage pool bucket
+    properties:
+      config:
+        description: Storage bucket configuration map
+        example:
+          size: 50GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the storage bucket
+        example: My custom bucket
+        type: string
+        x-go-name: Description
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+responses:
+  Forbidden:
+    description: Forbidden
+    schema:
+      properties:
+        error:
+          example: not authorized
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 403
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  InternalServerError:
+    description: Internal Server Error
+    schema:
+      properties:
+        error:
+          example: internal server error
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 500
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  BadRequest:
+    description: Bad Request
+    schema:
+      properties:
+        error:
+          example: bad request
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 400
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  EmptySyncResponse:
+    description: Empty sync response
+    schema:
+      properties:
+        status:
+          example: Success
+          type: string
+          x-go-name: Status
+        status_code:
+          example: 200
+          format: int64
+          type: integer
+          x-go-name: StatusCode
+        type:
+          example: sync
+          type: string
+          x-go-name: Type
+      type: object
+  PreconditionFailed:
+    description: Precondition Failed
+    schema:
+      properties:
+        error:
+          example: precondition failed
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 412
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  NotFound:
+    description: Not found
+    schema:
+      properties:
+        error:
+          example: not found
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 404
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  Operation:
+    description: Operation
+    schema:
+      properties:
+        metadata:
+          $ref: '#/definitions/Operation'
+        operation:
+          example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
+          type: string
+          x-go-name: Operation
+        status:
+          example: Operation created
+          type: string
+          x-go-name: Status
+        status_code:
+          example: 100
+          format: int64
+          type: integer
+          x-go-name: StatusCode
+        type:
+          example: async
+          type: string
+          x-go-name: Type
+      type: object

@@ -1,0 +1,539 @@
+swagger: '2.0'
+info:
+  contact:
+    email: lxc-devel@lists.linuxcontainers.org
+    name: Incus upstream
+    url: https://github.com/lxc/incus
+  description: 'This is the REST API used by all Incus clients.
+
+    Internal endpoints aren''t included in this documentation.
+
+
+    The Incus API is available over both a local unix+http and remote https API.
+
+    Authentication for local users relies on group membership and access to the unix socket.
+
+    For remote users, the default authentication method is TLS client
+
+    certificates.'
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Incus external REST certificates API
+  version: '1.0'
+tags:
+- name: certificates
+paths:
+  /1.0/certificates:
+    get:
+      description: Returns a list of trusted certificates (URLs).
+      operationId: certificates_get
+      parameters:
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/certificates/390fdd27ed5dc2408edc11fe602eafceb6c025ddbad9341dfdcb1056a8dd98b1\",\n  \"/1.0/certificates/22aee3f051f96abe6d7756892eecabf4b4b22e2ba877840a4ca981e9ea54030a\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the trusted certificates
+      tags:
+      - certificates
+    post:
+      consumes:
+      - application/json
+      description: 'Adds a certificate to the trust store.
+
+        In this mode, the `token` property is always ignored.'
+      operationId: certificates_post
+      parameters:
+      - description: Certificate
+        in: body
+        name: certificate
+        required: true
+        schema:
+          $ref: '#/definitions/CertificatesPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a trusted certificate
+      tags:
+      - certificates
+  /1.0/certificates/{fingerprint}:
+    delete:
+      description: Removes the certificate from the trust store.
+      operationId: certificate_delete
+      parameters:
+      - description: Fingerprint
+        in: path
+        name: fingerprint
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the trusted certificate
+      tags:
+      - certificates
+    get:
+      description: Gets a specific certificate entry from the trust store.
+      operationId: certificate_get
+      parameters:
+      - description: Fingerprint
+        in: path
+        name: fingerprint
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Certificate
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/Certificate'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the trusted certificate
+      tags:
+      - certificates
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the certificate configuration.
+      operationId: certificate_patch
+      parameters:
+      - description: Fingerprint
+        in: path
+        name: fingerprint
+        required: true
+        type: string
+      - description: Certificate configuration
+        in: body
+        name: certificate
+        required: true
+        schema:
+          $ref: '#/definitions/CertificatePut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the trusted certificate
+      tags:
+      - certificates
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire certificate configuration.
+      operationId: certificate_put
+      parameters:
+      - description: Fingerprint
+        in: path
+        name: fingerprint
+        required: true
+        type: string
+      - description: Certificate configuration
+        in: body
+        name: certificate
+        required: true
+        schema:
+          $ref: '#/definitions/CertificatePut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the trusted certificate
+      tags:
+      - certificates
+  /1.0/certificates?public:
+    post:
+      consumes:
+      - application/json
+      description: 'Adds a certificate to the trust store as an untrusted user.
+
+        In this mode, the `token` property must be set to the correct value.
+
+
+        The `certificate` field can be omitted in which case the TLS client
+
+        certificate in use for the connection will be retrieved and added to the
+
+        trust store.
+
+
+        The `?public` part of the URL isn''t required, it''s simply used to
+
+        separate the two behaviors of this endpoint.'
+      operationId: certificates_post_untrusted
+      parameters:
+      - description: Certificate
+        in: body
+        name: certificate
+        required: true
+        schema:
+          $ref: '#/definitions/CertificatesPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a trusted certificate
+      tags:
+      - certificates
+  /1.0/certificates?recursion=1:
+    get:
+      description: Returns a list of trusted certificates (structs).
+      operationId: certificates_get_recursion1
+      parameters:
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of certificates
+                items:
+                  $ref: '#/definitions/Certificate'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the trusted certificates
+      tags:
+      - certificates
+definitions:
+  Certificate:
+    description: Certificate represents a certificate
+    properties:
+      certificate:
+        description: The certificate itself, as PEM encoded X509 (or as base64 encoded X509 on POST)
+        example: X509 PEM certificate
+        type: string
+        x-go-name: Certificate
+      description:
+        description: Certificate description
+        example: X509 certificate
+        type: string
+        x-go-name: Description
+      fingerprint:
+        description: SHA256 fingerprint of the certificate
+        example: fd200419b271f1dc2a5591b693cc5774b7f234e1ff8c6b78ad703b6888fe2b69
+        readOnly: true
+        type: string
+        x-go-name: Fingerprint
+      name:
+        description: Name associated with the certificate
+        example: castiana
+        type: string
+        x-go-name: Name
+      projects:
+        description: List of allowed projects (applies when restricted)
+        example:
+        - default
+        - foo
+        - bar
+        items:
+          type: string
+        type: array
+        x-go-name: Projects
+      restricted:
+        description: Whether to limit the certificate to listed projects
+        example: true
+        type: boolean
+        x-go-name: Restricted
+      type:
+        description: Usage type for the certificate
+        example: client
+        type: string
+        x-go-name: Type
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  CertificatePut:
+    description: CertificatePut represents the modifiable fields of a certificate
+    properties:
+      certificate:
+        description: The certificate itself, as PEM encoded X509 (or as base64 encoded X509 on POST)
+        example: X509 PEM certificate
+        type: string
+        x-go-name: Certificate
+      description:
+        description: Certificate description
+        example: X509 certificate
+        type: string
+        x-go-name: Description
+      name:
+        description: Name associated with the certificate
+        example: castiana
+        type: string
+        x-go-name: Name
+      projects:
+        description: List of allowed projects (applies when restricted)
+        example:
+        - default
+        - foo
+        - bar
+        items:
+          type: string
+        type: array
+        x-go-name: Projects
+      restricted:
+        description: Whether to limit the certificate to listed projects
+        example: true
+        type: boolean
+        x-go-name: Restricted
+      type:
+        description: Usage type for the certificate
+        example: client
+        type: string
+        x-go-name: Type
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  CertificatesPost:
+    description: CertificatesPost represents the fields of a new certificate
+    properties:
+      certificate:
+        description: The certificate itself, as PEM encoded X509 (or as base64 encoded X509 on POST)
+        example: X509 PEM certificate
+        type: string
+        x-go-name: Certificate
+      description:
+        description: Certificate description
+        example: X509 certificate
+        type: string
+        x-go-name: Description
+      name:
+        description: Name associated with the certificate
+        example: castiana
+        type: string
+        x-go-name: Name
+      projects:
+        description: List of allowed projects (applies when restricted)
+        example:
+        - default
+        - foo
+        - bar
+        items:
+          type: string
+        type: array
+        x-go-name: Projects
+      restricted:
+        description: Whether to limit the certificate to listed projects
+        example: true
+        type: boolean
+        x-go-name: Restricted
+      token:
+        description: Whether to create a certificate add token
+        example: true
+        type: boolean
+        x-go-name: Token
+      trust_token:
+        description: Trust token (used to add an untrusted client)
+        example: blah
+        type: string
+        x-go-name: TrustToken
+      type:
+        description: Usage type for the certificate
+        example: client
+        type: string
+        x-go-name: Type
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+responses:
+  Forbidden:
+    description: Forbidden
+    schema:
+      properties:
+        error:
+          example: not authorized
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 403
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  BadRequest:
+    description: Bad Request
+    schema:
+      properties:
+        error:
+          example: bad request
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 400
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  EmptySyncResponse:
+    description: Empty sync response
+    schema:
+      properties:
+        status:
+          example: Success
+          type: string
+          x-go-name: Status
+        status_code:
+          example: 200
+          format: int64
+          type: integer
+          x-go-name: StatusCode
+        type:
+          example: sync
+          type: string
+          x-go-name: Type
+      type: object
+  PreconditionFailed:
+    description: Precondition Failed
+    schema:
+      properties:
+        error:
+          example: precondition failed
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 412
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  InternalServerError:
+    description: Internal Server Error
+    schema:
+      properties:
+        error:
+          example: internal server error
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 500
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object

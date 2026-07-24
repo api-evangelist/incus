@@ -1,0 +1,950 @@
+swagger: '2.0'
+info:
+  contact:
+    email: lxc-devel@lists.linuxcontainers.org
+    name: Incus upstream
+    url: https://github.com/lxc/incus
+  description: 'This is the REST API used by all Incus clients.
+
+    Internal endpoints aren''t included in this documentation.
+
+
+    The Incus API is available over both a local unix+http and remote https API.
+
+    Authentication for local users relies on group membership and access to the unix socket.
+
+    For remote users, the default authentication method is TLS client
+
+    certificates.'
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Incus external REST certificates networks API
+  version: '1.0'
+tags:
+- name: networks
+paths:
+  /1.0/networks:
+    get:
+      description: Returns a list of networks (URLs).
+      operationId: networks_get
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve networks from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/networks/mybr0\",\n  \"/1.0/networks/mybr1\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the networks
+      tags:
+      - networks
+    post:
+      consumes:
+      - application/json
+      description: 'Creates a new network.
+
+        When clustered, most network types require individual POST for each cluster member prior to a global POST.'
+      operationId: networks_post
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Network
+        in: body
+        name: network
+        required: true
+        schema:
+          $ref: '#/definitions/NetworksPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a network
+      tags:
+      - networks
+  /1.0/networks/{name}:
+    delete:
+      description: Removes the network.
+      operationId: network_delete
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the network
+      tags:
+      - networks
+    get:
+      description: Gets a specific network.
+      operationId: network_get
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Network
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/Network'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the network
+      tags:
+      - networks
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the network configuration.
+      operationId: network_patch
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Network configuration
+        in: body
+        name: network
+        required: true
+        schema:
+          $ref: '#/definitions/NetworkPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the network
+      tags:
+      - networks
+    post:
+      consumes:
+      - application/json
+      description: Renames an existing network.
+      operationId: network_post
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Network rename request
+        in: body
+        name: network
+        required: true
+        schema:
+          $ref: '#/definitions/NetworkPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Rename the network
+      tags:
+      - networks
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire network configuration.
+      operationId: network_put
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      - description: Network configuration
+        in: body
+        name: network
+        required: true
+        schema:
+          $ref: '#/definitions/NetworkPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the network
+      tags:
+      - networks
+  /1.0/networks/{name}/leases:
+    get:
+      description: Returns a list of DHCP leases for the network.
+      operationId: networks_leases_get
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of DHCP leases
+                items:
+                  $ref: '#/definitions/NetworkLease'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the DHCP leases
+      tags:
+      - networks
+  /1.0/networks/{name}/state:
+    get:
+      description: Returns the current network state information.
+      operationId: networks_state_get
+      parameters:
+      - description: Network name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/NetworkState'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the network state
+      tags:
+      - networks
+  /1.0/networks?recursion=1:
+    get:
+      description: Returns a list of networks (structs).
+      operationId: networks_get_recursion1
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve networks from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of networks
+                items:
+                  $ref: '#/definitions/Network'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the networks
+      tags:
+      - networks
+definitions:
+  NetworkPost:
+    description: NetworkPost represents the fields required to rename a network
+    properties:
+      name:
+        description: The new name for the network
+        example: mybr1
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkStateBond:
+    description: NetworkStateBond represents bond specific state
+    properties:
+      down_delay:
+        description: Delay on link down (ms)
+        example: 0
+        format: uint64
+        type: integer
+        x-go-name: DownDelay
+      lower_devices:
+        description: List of devices that are part of the bond
+        example:
+        - eth0
+        - eth1
+        items:
+          type: string
+        type: array
+        x-go-name: LowerDevices
+      mii_frequency:
+        description: How often to check for link state (ms)
+        example: 100
+        format: uint64
+        type: integer
+        x-go-name: MIIFrequency
+      mii_state:
+        description: Bond link state
+        example: up
+        type: string
+        x-go-name: MIIState
+      mode:
+        description: Bonding mode
+        example: 802.3ad
+        type: string
+        x-go-name: Mode
+      transmit_policy:
+        description: Transmit balancing policy
+        example: layer3+4
+        type: string
+        x-go-name: TransmitPolicy
+      up_delay:
+        description: Delay on link up (ms)
+        example: 0
+        format: uint64
+        type: integer
+        x-go-name: UpDelay
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkStateVLAN:
+    description: NetworkStateVLAN represents VLAN specific state
+    properties:
+      lower_device:
+        description: Parent device
+        example: eth0
+        type: string
+        x-go-name: LowerDevice
+      vid:
+        description: VLAN ID
+        example: 100
+        format: uint64
+        type: integer
+        x-go-name: VID
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkState:
+    description: NetworkState represents the network state
+    properties:
+      addresses:
+        description: List of addresses
+        items:
+          $ref: '#/definitions/NetworkStateAddress'
+        type: array
+        x-go-name: Addresses
+      bond:
+        $ref: '#/definitions/NetworkStateBond'
+      bridge:
+        $ref: '#/definitions/NetworkStateBridge'
+      counters:
+        $ref: '#/definitions/NetworkStateCounters'
+      hwaddr:
+        description: MAC address
+        example: 10:66:6a:5a:83:57
+        type: string
+        x-go-name: Hwaddr
+      mtu:
+        description: MTU
+        example: 1500
+        format: int64
+        type: integer
+        x-go-name: Mtu
+      ovn:
+        $ref: '#/definitions/NetworkStateOVN'
+      state:
+        description: Link state
+        example: up
+        type: string
+        x-go-name: State
+      type:
+        description: Interface type
+        example: broadcast
+        type: string
+        x-go-name: Type
+      vlan:
+        $ref: '#/definitions/NetworkStateVLAN'
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkPut:
+    description: NetworkPut represents the modifiable fields of a network
+    properties:
+      config:
+        description: Network configuration map (refer to doc/networks.md)
+        example:
+          ipv4.address: 10.0.0.1/24
+          ipv4.nat: 'true'
+          ipv6.address: none
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the profile
+        example: My new bridge
+        type: string
+        x-go-name: Description
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkStateBridge:
+    description: NetworkStateBridge represents bridge specific state
+    properties:
+      forward_delay:
+        description: Delay on port join (ms)
+        example: 1500
+        format: uint64
+        type: integer
+        x-go-name: ForwardDelay
+      id:
+        description: Bridge ID
+        example: 8000.0a0f7c6edbd9
+        type: string
+        x-go-name: ID
+      stp:
+        description: Whether STP is enabled
+        example: false
+        type: boolean
+        x-go-name: STP
+      upper_devices:
+        description: List of devices that are in the bridge
+        example:
+        - eth0
+        - eth1
+        items:
+          type: string
+        type: array
+        x-go-name: UpperDevices
+      vlan_default:
+        description: Default VLAN ID
+        example: 1
+        format: uint64
+        type: integer
+        x-go-name: VLANDefault
+      vlan_filtering:
+        description: Whether VLAN filtering is enabled
+        example: false
+        type: boolean
+        x-go-name: VLANFiltering
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkStateOVN:
+    description: NetworkStateOVN represents OVN specific state
+    properties:
+      chassis:
+        description: OVN network chassis name
+        example: server01
+        type: string
+        x-go-name: Chassis
+      logical_router:
+        description: OVN logical router name
+        example: incus-net1-lr
+        type: string
+        x-go-name: LogicalRouter
+      logical_switch:
+        description: OVN logical switch name
+        example: incus-net1-ls-int
+        type: string
+        x-go-name: LogicalSwitch
+      uplink_ipv4:
+        description: OVN network uplink ipv4 address
+        example: 10.0.0.1
+        type: string
+        x-go-name: UplinkIPv4
+      uplink_ipv6:
+        description: OVN network uplink ipv6 address
+        example: 2001:0000:130F:0000:0000:09C0:876A:130B.
+        type: string
+        x-go-name: UplinkIPv6
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkStateCounters:
+    description: NetworkStateCounters represents packet counters
+    properties:
+      bytes_received:
+        description: Number of bytes received
+        example: 250542118
+        format: int64
+        type: integer
+        x-go-name: BytesReceived
+      bytes_sent:
+        description: Number of bytes sent
+        example: 17524040140
+        format: int64
+        type: integer
+        x-go-name: BytesSent
+      packets_received:
+        description: Number of packets received
+        example: 1182515
+        format: int64
+        type: integer
+        x-go-name: PacketsReceived
+      packets_sent:
+        description: Number of packets sent
+        example: 1567934
+        format: int64
+        type: integer
+        x-go-name: PacketsSent
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  Network:
+    description: Network represents a network
+    properties:
+      config:
+        description: Network configuration map (refer to doc/networks.md)
+        example:
+          ipv4.address: 10.0.0.1/24
+          ipv4.nat: 'true'
+          ipv6.address: none
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the profile
+        example: My new bridge
+        type: string
+        x-go-name: Description
+      locations:
+        description: Cluster members on which the network has been defined
+        example:
+        - server01
+        - server02
+        - server03
+        items:
+          type: string
+        readOnly: true
+        type: array
+        x-go-name: Locations
+      managed:
+        description: Whether this is a managed network
+        example: true
+        readOnly: true
+        type: boolean
+        x-go-name: Managed
+      name:
+        description: The network name
+        example: mybr0
+        readOnly: true
+        type: string
+        x-go-name: Name
+      project:
+        description: Project name
+        example: project1
+        type: string
+        x-go-name: Project
+      status:
+        description: The state of the network (for managed network in clusters)
+        example: Created
+        readOnly: true
+        type: string
+        x-go-name: Status
+      type:
+        description: The network type
+        example: bridge
+        readOnly: true
+        type: string
+        x-go-name: Type
+      used_by:
+        description: List of URLs of objects using this profile
+        example:
+        - /1.0/profiles/default
+        - /1.0/instances/c1
+        items:
+          type: string
+        readOnly: true
+        type: array
+        x-go-name: UsedBy
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkStateAddress:
+    description: NetworkStateAddress represents a network address
+    properties:
+      address:
+        description: IP address
+        example: 10.0.0.1
+        type: string
+        x-go-name: Address
+      family:
+        description: Address family
+        example: inet
+        type: string
+        x-go-name: Family
+      netmask:
+        description: IP netmask (CIDR)
+        example: '24'
+        type: string
+        x-go-name: Netmask
+      scope:
+        description: Address scope
+        example: global
+        type: string
+        x-go-name: Scope
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworksPost:
+    description: NetworksPost represents the fields of a new network
+    properties:
+      config:
+        description: Network configuration map (refer to doc/networks.md)
+        example:
+          ipv4.address: 10.0.0.1/24
+          ipv4.nat: 'true'
+          ipv6.address: none
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the profile
+        example: My new bridge
+        type: string
+        x-go-name: Description
+      name:
+        description: The name of the new network
+        example: mybr1
+        type: string
+        x-go-name: Name
+      type:
+        description: The network type (refer to doc/networks.md)
+        example: bridge
+        type: string
+        x-go-name: Type
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  NetworkLease:
+    description: NetworkLease represents a DHCP lease
+    properties:
+      address:
+        description: The IP address
+        example: 10.0.0.98
+        type: string
+        x-go-name: Address
+      hostname:
+        description: The hostname associated with the record
+        example: c1
+        type: string
+        x-go-name: Hostname
+      hwaddr:
+        description: The MAC address
+        example: 10:66:6a:2c:89:d9
+        type: string
+        x-go-name: Hwaddr
+      location:
+        description: What cluster member this record was found on
+        example: server01
+        type: string
+        x-go-name: Location
+      type:
+        description: The type of record (static or dynamic)
+        example: dynamic
+        type: string
+        x-go-name: Type
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+responses:
+  Forbidden:
+    description: Forbidden
+    schema:
+      properties:
+        error:
+          example: not authorized
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 403
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  BadRequest:
+    description: Bad Request
+    schema:
+      properties:
+        error:
+          example: bad request
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 400
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  PreconditionFailed:
+    description: Precondition Failed
+    schema:
+      properties:
+        error:
+          example: precondition failed
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 412
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  EmptySyncResponse:
+    description: Empty sync response
+    schema:
+      properties:
+        status:
+          example: Success
+          type: string
+          x-go-name: Status
+        status_code:
+          example: 200
+          format: int64
+          type: integer
+          x-go-name: StatusCode
+        type:
+          example: sync
+          type: string
+          x-go-name: Type
+      type: object
+  InternalServerError:
+    description: Internal Server Error
+    schema:
+      properties:
+        error:
+          example: internal server error
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 500
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object

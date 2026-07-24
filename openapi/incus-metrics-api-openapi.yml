@@ -1,0 +1,93 @@
+swagger: '2.0'
+info:
+  contact:
+    email: lxc-devel@lists.linuxcontainers.org
+    name: Incus upstream
+    url: https://github.com/lxc/incus
+  description: 'This is the REST API used by all Incus clients.
+
+    Internal endpoints aren''t included in this documentation.
+
+
+    The Incus API is available over both a local unix+http and remote https API.
+
+    Authentication for local users relies on group membership and access to the unix socket.
+
+    For remote users, the default authentication method is TLS client
+
+    certificates.'
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Incus external REST certificates metrics API
+  version: '1.0'
+tags:
+- name: metrics
+paths:
+  /1.0/metrics:
+    get:
+      description: Gets metrics of instances.
+      operationId: metrics_get
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Cluster member name
+        example: server01
+        in: query
+        name: target
+        type: string
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: Metrics
+          schema:
+            description: Instance metrics
+            type: string
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get metrics
+      tags:
+      - metrics
+responses:
+  Forbidden:
+    description: Forbidden
+    schema:
+      properties:
+        error:
+          example: not authorized
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 403
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  InternalServerError:
+    description: Internal Server Error
+    schema:
+      properties:
+        error:
+          example: internal server error
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 500
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object

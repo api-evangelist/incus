@@ -1,0 +1,567 @@
+swagger: '2.0'
+info:
+  contact:
+    email: lxc-devel@lists.linuxcontainers.org
+    name: Incus upstream
+    url: https://github.com/lxc/incus
+  description: 'This is the REST API used by all Incus clients.
+
+    Internal endpoints aren''t included in this documentation.
+
+
+    The Incus API is available over both a local unix+http and remote https API.
+
+    Authentication for local users relies on group membership and access to the unix socket.
+
+    For remote users, the default authentication method is TLS client
+
+    certificates.'
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Incus external REST certificates profiles API
+  version: '1.0'
+tags:
+- name: profiles
+paths:
+  /1.0/profiles:
+    get:
+      description: Returns a list of profiles (URLs).
+      operationId: profiles_get
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve profiles from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/profiles/default\",\n  \"/1.0/profiles/foo\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the profiles
+      tags:
+      - profiles
+    post:
+      consumes:
+      - application/json
+      description: Creates a new profile.
+      operationId: profiles_post
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Profile
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/ProfilesPost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Add a profile
+      tags:
+      - profiles
+  /1.0/profiles/{name}:
+    delete:
+      description: Removes the profile.
+      operationId: profile_delete
+      parameters:
+      - description: Profile name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the profile
+      tags:
+      - profiles
+    get:
+      description: Gets a specific profile.
+      operationId: profile_get
+      parameters:
+      - description: Profile name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Profile
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/Profile'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the profile
+      tags:
+      - profiles
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the profile configuration.
+      operationId: profile_patch
+      parameters:
+      - description: Profile name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Profile configuration
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/ProfilePut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the profile
+      tags:
+      - profiles
+    post:
+      consumes:
+      - application/json
+      description: Renames an existing profile.
+      operationId: profile_post
+      parameters:
+      - description: Profile name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Profile rename request
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/ProfilePost'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Rename the profile
+      tags:
+      - profiles
+    put:
+      consumes:
+      - application/json
+      description: Updates the entire profile configuration.
+      operationId: profile_put
+      parameters:
+      - description: Profile name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Profile configuration
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/ProfilePut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '412':
+          $ref: '#/responses/PreconditionFailed'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the profile
+      tags:
+      - profiles
+  /1.0/profiles?recursion=1:
+    get:
+      description: Returns a list of profiles (structs).
+      operationId: profiles_get_recursion1
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      - description: Retrieve profiles from all projects
+        example: true
+        in: query
+        name: all-projects
+        type: boolean
+      - description: Collection filter
+        example: default
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of profiles
+                items:
+                  $ref: '#/definitions/Profile'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the profiles
+      tags:
+      - profiles
+definitions:
+  ProfilesPost:
+    description: ProfilesPost represents the fields of a new profile
+    properties:
+      config:
+        description: Instance configuration map (refer to doc/instances.md)
+        example:
+          limits.cpu: '4'
+          limits.memory: 4GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the profile
+        example: Medium size instances
+        type: string
+        x-go-name: Description
+      devices:
+        description: List of devices
+        example:
+          eth0:
+            name: eth0
+            network: mybr0
+            type: nic
+          root:
+            path: /
+            pool: default
+            type: disk
+        type: object
+        x-go-name: Devices
+      name:
+        description: The name of the new profile
+        example: foo
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  ProfilePost:
+    description: ProfilePost represents the fields required to rename a profile
+    properties:
+      name:
+        description: The new name for the profile
+        example: bar
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  ProfilePut:
+    description: ProfilePut represents the modifiable fields of a profile
+    properties:
+      config:
+        description: Instance configuration map (refer to doc/instances.md)
+        example:
+          limits.cpu: '4'
+          limits.memory: 4GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the profile
+        example: Medium size instances
+        type: string
+        x-go-name: Description
+      devices:
+        description: List of devices
+        example:
+          eth0:
+            name: eth0
+            network: mybr0
+            type: nic
+          root:
+            path: /
+            pool: default
+            type: disk
+        type: object
+        x-go-name: Devices
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  Profile:
+    description: Profile represents a profile
+    properties:
+      config:
+        description: Instance configuration map (refer to doc/instances.md)
+        example:
+          limits.cpu: '4'
+          limits.memory: 4GiB
+        type: object
+        x-go-name: Config
+      description:
+        description: Description of the profile
+        example: Medium size instances
+        type: string
+        x-go-name: Description
+      devices:
+        description: List of devices
+        example:
+          eth0:
+            name: eth0
+            network: mybr0
+            type: nic
+          root:
+            path: /
+            pool: default
+            type: disk
+        type: object
+        x-go-name: Devices
+      name:
+        description: The profile name
+        example: foo
+        readOnly: true
+        type: string
+        x-go-name: Name
+      project:
+        description: Project name
+        example: project1
+        type: string
+        x-go-name: Project
+      used_by:
+        description: List of URLs of objects using this profile
+        example:
+        - /1.0/instances/c1
+        - /1.0/instances/v1
+        items:
+          type: string
+        readOnly: true
+        type: array
+        x-go-name: UsedBy
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+responses:
+  Forbidden:
+    description: Forbidden
+    schema:
+      properties:
+        error:
+          example: not authorized
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 403
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  BadRequest:
+    description: Bad Request
+    schema:
+      properties:
+        error:
+          example: bad request
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 400
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  EmptySyncResponse:
+    description: Empty sync response
+    schema:
+      properties:
+        status:
+          example: Success
+          type: string
+          x-go-name: Status
+        status_code:
+          example: 200
+          format: int64
+          type: integer
+          x-go-name: StatusCode
+        type:
+          example: sync
+          type: string
+          x-go-name: Type
+      type: object
+  PreconditionFailed:
+    description: Precondition Failed
+    schema:
+      properties:
+        error:
+          example: precondition failed
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 412
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  InternalServerError:
+    description: Internal Server Error
+    schema:
+      properties:
+        error:
+          example: internal server error
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 500
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object

@@ -1,0 +1,395 @@
+swagger: '2.0'
+info:
+  contact:
+    email: lxc-devel@lists.linuxcontainers.org
+    name: Incus upstream
+    url: https://github.com/lxc/incus
+  description: 'This is the REST API used by all Incus clients.
+
+    Internal endpoints aren''t included in this documentation.
+
+
+    The Incus API is available over both a local unix+http and remote https API.
+
+    Authentication for local users relies on group membership and access to the unix socket.
+
+    For remote users, the default authentication method is TLS client
+
+    certificates.'
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Incus external REST certificates warnings API
+  version: '1.0'
+tags:
+- name: warnings
+paths:
+  /1.0/warnings:
+    get:
+      description: Returns a list of warnings.
+      operationId: warnings_get
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Sync response
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of endpoints
+                example: "[\n  \"/1.0/warnings/39c61a48-cc17-40ae-8248-4f7b4cadedf4\",\n  \"/1.0/warnings/951779a5-2820-4d96-b01e-88fe820e5310\"\n]"
+                items:
+                  type: string
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: List the warnings
+      tags:
+      - warnings
+  /1.0/warnings/{uuid}:
+    delete:
+      description: Removes the warning.
+      operationId: warning_delete
+      parameters:
+      - description: UUID
+        in: path
+        name: uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Delete the warning
+      tags:
+      - warnings
+    get:
+      description: Gets a specific warning.
+      operationId: warning_get
+      parameters:
+      - description: UUID
+        in: path
+        name: uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Warning
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                $ref: '#/definitions/Warning'
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the warning
+      tags:
+      - warnings
+    patch:
+      consumes:
+      - application/json
+      description: Updates a subset of the warning status.
+      operationId: warning_patch
+      parameters:
+      - description: UUID
+        in: path
+        name: uuid
+        required: true
+        type: string
+      - description: Warning status
+        in: body
+        name: warning
+        required: true
+        schema:
+          $ref: '#/definitions/WarningPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Partially update the warning
+      tags:
+      - warnings
+    put:
+      consumes:
+      - application/json
+      description: Updates the warning status.
+      operationId: warning_put
+      parameters:
+      - description: UUID
+        in: path
+        name: uuid
+        required: true
+        type: string
+      - description: Warning status
+        in: body
+        name: warning
+        required: true
+        schema:
+          $ref: '#/definitions/WarningPut'
+      produces:
+      - application/json
+      responses:
+        '200':
+          $ref: '#/responses/EmptySyncResponse'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Update the warning
+      tags:
+      - warnings
+  /1.0/warnings?recursion=1:
+    get:
+      description: Returns a list of warnings (structs).
+      operationId: warnings_get_recursion1
+      parameters:
+      - description: Project name
+        example: default
+        in: query
+        name: project
+        type: string
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: API endpoints
+          schema:
+            description: Sync response
+            properties:
+              metadata:
+                description: List of warnings
+                items:
+                  $ref: '#/definitions/Warning'
+                type: array
+              status:
+                description: Status description
+                example: Success
+                type: string
+              status_code:
+                description: Status code
+                example: 200
+                type: integer
+              type:
+                description: Response type
+                example: sync
+                type: string
+            type: object
+        '500':
+          $ref: '#/responses/InternalServerError'
+      summary: Get the warnings
+      tags:
+      - warnings
+definitions:
+  Warning:
+    properties:
+      count:
+        description: The number of times this warning occurred
+        example: 1
+        format: int64
+        type: integer
+        x-go-name: Count
+      entity_url:
+        description: The entity affected by this warning
+        example: /1.0/instances/c1?project=default
+        type: string
+        x-go-name: EntityURL
+      first_seen_at:
+        description: The first time this warning occurred
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: FirstSeenAt
+      last_message:
+        description: The warning message
+        example: Couldn't find the CGroup blkio.weight, disk priority will be ignored
+        type: string
+        x-go-name: LastMessage
+      last_seen_at:
+        description: The last time this warning occurred
+        example: '2021-03-23T17:38:37.753398689-04:00'
+        format: date-time
+        type: string
+        x-go-name: LastSeenAt
+      location:
+        description: What cluster member this warning occurred on
+        example: server01
+        type: string
+        x-go-name: Location
+      project:
+        description: The project the warning occurred in
+        example: default
+        type: string
+        x-go-name: Project
+      severity:
+        description: The severity of this warning
+        example: low
+        type: string
+        x-go-name: Severity
+      status:
+        description: Status of the warning (new, acknowledged, or resolved)
+        example: new
+        type: string
+        x-go-name: Status
+      type:
+        description: Type type of warning
+        example: Couldn't find CGroup
+        type: string
+        x-go-name: Type
+      uuid:
+        description: UUID of the warning
+        example: e9e9da0d-2538-4351-8047-46d4a8ae4dbb
+        type: string
+        x-go-name: UUID
+    title: Warning represents a warning entry.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+  WarningPut:
+    properties:
+      status:
+        description: Status of the warning (new, acknowledged, or resolved)
+        example: new
+        type: string
+        x-go-name: Status
+    title: WarningPut represents the modifiable fields of a warning.
+    type: object
+    x-go-package: github.com/lxc/incus/v7/shared/api
+responses:
+  Forbidden:
+    description: Forbidden
+    schema:
+      properties:
+        error:
+          example: not authorized
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 403
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  BadRequest:
+    description: Bad Request
+    schema:
+      properties:
+        error:
+          example: bad request
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 400
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  EmptySyncResponse:
+    description: Empty sync response
+    schema:
+      properties:
+        status:
+          example: Success
+          type: string
+          x-go-name: Status
+        status_code:
+          example: 200
+          format: int64
+          type: integer
+          x-go-name: StatusCode
+        type:
+          example: sync
+          type: string
+          x-go-name: Type
+      type: object
+  NotFound:
+    description: Not found
+    schema:
+      properties:
+        error:
+          example: not found
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 404
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
+  InternalServerError:
+    description: Internal Server Error
+    schema:
+      properties:
+        error:
+          example: internal server error
+          type: string
+          x-go-name: Error
+        error_code:
+          example: 500
+          format: int64
+          type: integer
+          x-go-name: ErrorCode
+        type:
+          example: error
+          type: string
+          x-go-name: Type
+      type: object
