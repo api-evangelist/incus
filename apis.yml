@@ -6,7 +6,19 @@ description: >-
   VMs across single hosts and clusters, with image-based deployment, live migration, snapshots, projects, and a
   comprehensive RESTful API for automation and tooling integration.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/incus.png
 tags:
   - Containers
   - Virtual Machines
@@ -18,32 +30,380 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: incus:incus-rest-api
-    name: Incus REST API
-    description: >-
-      The Incus REST API is the canonical interface to the Incus container and virtual machine manager. All
-      communication between Incus and its clients happens over HTTP, using TLS for remote access or a Unix socket for
-      local access. The API covers the complete lifecycle of instances, images, networks, storage pools, projects,
-      profiles, certificates, and cluster members, with support for asynchronous operations and WebSocket-based event
-      streams.
-    humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    tags:
-      - Containers
-      - Virtual Machines
-      - Cluster Management
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://linuxcontainers.org/incus/docs/main/rest-api/
-      - type: Authentication
-        url: https://linuxcontainers.org/incus/docs/main/authentication/
-      - type: GitHubRepository
-        url: https://github.com/lxc/incus
-      - type: OpenAPI
-        url: openapi/incus-openapi.yml
-      - type: Rules
-        url: rules/incus-rules.yml
+- aid: incus:incus-certificates-api
+  name: Incus certificates API
+  description: The certificates API from Incus — 4 operation(s) for certificates.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - certificates
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-certificates-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-cluster-api
+  name: Incus cluster API
+  description: The cluster API from Incus — 7 operation(s) for cluster.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-cluster-groups-api
+  name: Incus cluster-groups API
+  description: The cluster-groups API from Incus — 3 operation(s) for cluster-groups.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - cluster-groups
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-cluster-groups-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-images-api
+  name: Incus images API
+  description: The images API from Incus — 14 operation(s) for images.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - images
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-images-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-instances-api
+  name: Incus instances API
+  description: The instances API from Incus — 28 operation(s) for instances.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - instances
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-instances-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-metadata-api
+  name: Incus Metadata API
+  description: The Metadata API from Incus — 1 operation(s) for metadata.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-metrics-api
+  name: Incus metrics API
+  description: The metrics API from Incus — 1 operation(s) for metrics.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-acls-api
+  name: Incus network-acls API
+  description: The network-acls API from Incus — 4 operation(s) for network-acls.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-acls
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-acls-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-address-sets-api
+  name: Incus network-address-sets API
+  description: The network-address-sets API from Incus — 3 operation(s) for network-address-sets.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-address-sets
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-address-sets-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-allocations-api
+  name: Incus network-allocations API
+  description: The network-allocations API from Incus — 1 operation(s) for network-allocations.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-allocations
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-allocations-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-forwards-api
+  name: Incus network-forwards API
+  description: The network-forwards API from Incus — 3 operation(s) for network-forwards.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-forwards
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-forwards-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-integrations-api
+  name: Incus network-integrations API
+  description: The network-integrations API from Incus — 3 operation(s) for network-integrations.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-load-balancers-api
+  name: Incus network-load-balancers API
+  description: The network-load-balancers API from Incus — 4 operation(s) for network-load-balancers.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-load-balancers
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-load-balancers-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-peers-api
+  name: Incus network-peers API
+  description: The network-peers API from Incus — 3 operation(s) for network-peers.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-peers
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-peers-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-network-zones-api
+  name: Incus network-zones API
+  description: The network-zones API from Incus — 6 operation(s) for network-zones.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - network-zones
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-network-zones-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-networks-api
+  name: Incus networks API
+  description: The networks API from Incus — 5 operation(s) for networks.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - networks
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-networks-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-operations-api
+  name: Incus operations API
+  description: The operations API from Incus — 7 operation(s) for operations.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - operations
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-operations-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-profiles-api
+  name: Incus profiles API
+  description: The profiles API from Incus — 3 operation(s) for profiles.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-projects-api
+  name: Incus projects API
+  description: The projects API from Incus — 5 operation(s) for projects.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-projects-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-server-api
+  name: Incus server API
+  description: The server API from Incus — 5 operation(s) for server.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - server
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-server-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-storage-api
+  name: Incus storage API
+  description: The storage API from Incus — 39 operation(s) for storage.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - storage
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-storage-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
+- aid: incus:incus-warnings-api
+  name: Incus warnings API
+  description: The warnings API from Incus — 3 operation(s) for warnings.
+  humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
+  tags:
+  - warnings
+  properties:
+  - type: OpenAPI
+    url: openapi/incus-warnings-api-openapi.yml
+  - type: Documentation
+    url: https://linuxcontainers.org/incus/docs/main/rest-api/
+  - type: Authentication
+    url: https://linuxcontainers.org/incus/docs/main/authentication/
+  - type: GitHubRepository
+    url: https://github.com/lxc/incus
+  - type: Rules
+    url: rules/incus-rules.yml
 common:
   - type: AgenticAccess
     url: agentic-access/incus-agentic-access.yml
