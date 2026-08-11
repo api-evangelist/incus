@@ -405,6 +405,17 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 common:
+  - type: Releases
+    url: https://github.com/lxc/incus/releases
+  - type: SecurityPolicy
+    url: https://github.com/lxc/incus/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/lxc/incus/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/lxc/incus/blob/main/CONTRIBUTING.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/lxc/incus/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/incus-agentic-access.yml
   - type: DomainSecurity
