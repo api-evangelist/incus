@@ -1,0 +1,1534 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates instances API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve instances from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of instances (URLs)."
+        },
+        {
+          "info": {
+            "name": "Create a new instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "default",
+                "type": "query",
+                "description": "Cluster member"
+              }
+            ]
+          },
+          "docs": "Creates a new instance.\nDepending on the source, this can create an instance from an existing\nlocal image, remote image, existing local instance or snapshot, remote\nmigration stream or backup file."
+        },
+        {
+          "info": {
+            "name": "Bulk instance state update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/instances",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Changes the running state of all instances."
+        },
+        {
+          "info": {
+            "name": "Get the instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific instance (basic struct)."
+        },
+        {
+          "info": {
+            "name": "Rename or move/migrate an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames, moves an instance between pools or migrates an instance to another server.\n\nThe returned operation metadata will vary based on what's requested.\nFor rename or move within the same server, this is a simple background operation with progress data.\nFor migration, in the push case, this will similarly be a background\noperation with progress data, for the pull case, it will be a websocket\noperation with a number of secrets to be passed to the target server."
+        },
+        {
+          "info": {
+            "name": "Update the instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/instances/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the instance configuration or trigger a snapshot restore."
+        },
+        {
+          "info": {
+            "name": "Partially update the instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/instances/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the instance configuration"
+        },
+        {
+          "info": {
+            "name": "Delete an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Deletes a specific instance.\n\nThis also deletes anything owned by the instance such as snapshots and backups."
+        },
+        {
+          "info": {
+            "name": "Get who has access to an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/access",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the access information for the instance."
+        },
+        {
+          "info": {
+            "name": "Get the backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of instance backups (URLs)."
+        },
+        {
+          "info": {
+            "name": "Create a backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new backup.\n\nIf the `Accept` header is set to `application/octet-stream`, this directly streams the backup\ntarball to the client without any intermediate operation."
+        },
+        {
+          "info": {
+            "name": "Get the backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups/:backup",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "backup",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific instance backup."
+        },
+        {
+          "info": {
+            "name": "Rename a backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups/:backup",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "backup",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames an instance backup."
+        },
+        {
+          "info": {
+            "name": "Delete a backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups/:backup",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "backup",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Deletes the instance backup."
+        },
+        {
+          "info": {
+            "name": "Get the raw backup file(s)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups/:backup/export",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "backup",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Download the raw backup file(s) from the server."
+        },
+        {
+          "info": {
+            "name": "Get the backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/backups?recursion=1",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of instance backups (structs)."
+        },
+        {
+          "info": {
+            "name": "Create a bitmap",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/bitmaps",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new bitmap."
+        },
+        {
+          "info": {
+            "name": "Get console output",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/console",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "type",
+                "value": "vga",
+                "type": "query",
+                "description": "Console type"
+              }
+            ]
+          },
+          "docs": "Gets the console output for the instance either as text log or as vga\nscreendump."
+        },
+        {
+          "info": {
+            "name": "Connect to console",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/console",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Connects to the console of an instance.\n\nThe returned operation metadata will contain two websockets, one for data and one for control."
+        },
+        {
+          "info": {
+            "name": "Clear the console log",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/console",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Clears the console log buffer."
+        },
+        {
+          "info": {
+            "name": "Get memory debug information of an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/debug/memory",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "format",
+                "value": "elf",
+                "type": "query",
+                "description": "Memory dump format"
+              }
+            ]
+          },
+          "docs": "Returns memory debug information of a running instance.\nOnly supported for VMs."
+        },
+        {
+          "info": {
+            "name": "Trigger a repair action on the instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/debug/repair",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Runs an internal repair action on the instance."
+        },
+        {
+          "info": {
+            "name": "Run a command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/exec",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Executes a command inside an instance.\n\nThe returned operation metadata will contain either 2 or 4 websockets.\nIn non-interactive mode, you'll get one websocket for each of stdin, stdout and stderr.\nIn interactive mode, a single bi-directional websocket is used for stdin and stdout/stderr.\n\nAn additional \"control\" socket is always added on top which can be used for out of band communications.\nThis allows sending signals and window sizing information through."
+        },
+        {
+          "info": {
+            "name": "Get a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/files",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the file content. If it's a directory, a json list of files will be returned instead."
+        },
+        {
+          "info": {
+            "name": "Create or replace a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/files",
+            "headers": [
+              {
+                "name": "X-Incus-uid",
+                "value": "1000"
+              },
+              {
+                "name": "X-Incus-gid",
+                "value": "1000"
+              },
+              {
+                "name": "X-Incus-mode",
+                "value": "420"
+              },
+              {
+                "name": "X-Incus-type",
+                "value": "file"
+              },
+              {
+                "name": "X-Incus-write",
+                "value": "overwrite"
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new file in the instance."
+        },
+        {
+          "info": {
+            "name": "Delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/files",
+            "headers": [
+              {
+                "name": "X-Incus-force",
+                "value": "true"
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the file."
+        },
+        {
+          "info": {
+            "name": "Get metadata for a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/1.0/instances/:name/files",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the file or directory metadata."
+        },
+        {
+          "info": {
+            "name": "Get the log files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/logs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of log files (URLs)."
+        },
+        {
+          "info": {
+            "name": "Get the log file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/logs/:filename",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "Log file name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the log file."
+        },
+        {
+          "info": {
+            "name": "Delete the log file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/logs/:filename",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "Log file name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the log file."
+        },
+        {
+          "info": {
+            "name": "Get the exec record-output files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/logs/exec-output",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of exec record-output files (URLs)."
+        },
+        {
+          "info": {
+            "name": "Get the exec-output log file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/logs/exec-output/:filename",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "Log file name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the exec-output file."
+        },
+        {
+          "info": {
+            "name": "Delete the exec record-output file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/logs/exec-output/:filename",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "Log file name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the exec record-output file."
+        },
+        {
+          "info": {
+            "name": "Get the instance image metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the image metadata for the instance."
+        },
+        {
+          "info": {
+            "name": "Update the image metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/instances/:name/metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the instance image metadata."
+        },
+        {
+          "info": {
+            "name": "Partially update the image metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/instances/:name/metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the instance image metadata."
+        },
+        {
+          "info": {
+            "name": "Get the template file names or a specific",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/metadata/templates",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "path",
+                "value": "hostname.tpl",
+                "type": "query",
+                "description": "Template name"
+              }
+            ]
+          },
+          "docs": "If no path specified, returns a list of template file names.\nIf a path is specified, returns the file content."
+        },
+        {
+          "info": {
+            "name": "Create or replace a template file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/metadata/templates",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Template name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new image template file for the instance."
+        },
+        {
+          "info": {
+            "name": "Delete a template file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/metadata/templates",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Template name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the template file."
+        },
+        {
+          "info": {
+            "name": "Rebuild an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/rebuild",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Rebuild an instance using an alternate image or as empty."
+        },
+        {
+          "info": {
+            "name": "Get the instance SFTP connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/sftp",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              }
+            ]
+          },
+          "docs": "Upgrades the request to an SFTP connection of the instance's filesystem."
+        },
+        {
+          "info": {
+            "name": "Get the snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of instance snapshots (URLs)."
+        },
+        {
+          "info": {
+            "name": "Create a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new snapshot."
+        },
+        {
+          "info": {
+            "name": "Get the snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific instance snapshot."
+        },
+        {
+          "info": {
+            "name": "Rename or move/migrate a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames or migrates an instance snapshot to another server.\n\nThe returned operation metadata will vary based on what's requested.\nFor rename or move within the same server, this is a simple background operation with progress data.\nFor migration, in the push case, this will similarly be a background\noperation with progress data, for the pull case, it will be a websocket\noperation with a number of secrets to be passed to the target server."
+        },
+        {
+          "info": {
+            "name": "Update snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the snapshot config."
+        },
+        {
+          "info": {
+            "name": "Partially update snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the snapshot config."
+        },
+        {
+          "info": {
+            "name": "Delete a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Deletes the instance snapshot."
+        },
+        {
+          "info": {
+            "name": "Get the snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/snapshots?recursion=1",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of instance snapshots (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the runtime state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name/state",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the runtime state of the instance.\n\nThis is a reasonably expensive call as it causes code to be run\ninside of the instance to retrieve the resource usage and network\ninformation."
+        },
+        {
+          "info": {
+            "name": "Change the state",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/instances/:name/state",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Changes the running state of the instance."
+        },
+        {
+          "info": {
+            "name": "Get the instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances/:name?recursion=1",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Instance name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific instance (full struct).\n\nrecursion=1 also includes information about state, snapshots and backups."
+        },
+        {
+          "info": {
+            "name": "Get the instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve instances from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of instances (basic structs)."
+        },
+        {
+          "info": {
+            "name": "Get the instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/instances?recursion=2",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve instances from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of instances (full structs).\n\nThe main difference between recursion=1 and recursion=2 is that the\nlatter also includes state and snapshot information allowing for a\nsingle API call to return everything needed by most clients."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "certificates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the trusted certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/certificates",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of trusted certificates (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a trusted certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/certificates"
+          },
+          "docs": "Adds a certificate to the trust store.\nIn this mode, the `token` property is always ignored."
+        },
+        {
+          "info": {
+            "name": "Get the trusted certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/certificates/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              }
+            ]
+          },
+          "docs": "Gets a specific certificate entry from the trust store."
+        },
+        {
+          "info": {
+            "name": "Update the trusted certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/certificates/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              }
+            ]
+          },
+          "docs": "Updates the entire certificate configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the trusted certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/certificates/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the certificate configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the trusted certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/certificates/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              }
+            ]
+          },
+          "docs": "Removes the certificate from the trust store."
+        },
+        {
+          "info": {
+            "name": "Add a trusted certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/certificates?public"
+          },
+          "docs": "Adds a certificate to the trust store as an untrusted user.\nIn this mode, the `token` property must be set to the correct value.\n\nThe `certificate` field can be omitted in which case the TLS client\ncertificate in use for the connection will be retrieved and added to the\ntrust store.\n\nThe `?public` part of the URL isn't required, it's simply used to\nseparate the two behaviors of this endpoint."
+        },
+        {
+          "info": {
+            "name": "Get the trusted certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/certificates?recursion=1",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of trusted certificates (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

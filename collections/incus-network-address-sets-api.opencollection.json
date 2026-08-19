@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates network-address-sets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network-address-sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network address sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-address-sets",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve network address sets from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network address sets (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a network address set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/network-address-sets",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new network address set."
+        },
+        {
+          "info": {
+            "name": "Get the network address set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-address-sets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Address set name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific network address set."
+        },
+        {
+          "info": {
+            "name": "Rename the network address set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/network-address-sets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Address set name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames an existing network address set."
+        },
+        {
+          "info": {
+            "name": "Update the network address set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/network-address-sets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Address set name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire network address set configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the network address set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/network-address-sets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Address set name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the network address set configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the network address set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/network-address-sets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Address set name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the network address set."
+        },
+        {
+          "info": {
+            "name": "Get the network address sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-address-sets?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve network address sets from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network address sets (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

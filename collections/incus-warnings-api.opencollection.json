@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates warnings API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "warnings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the warnings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/warnings",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of warnings."
+        },
+        {
+          "info": {
+            "name": "Get the warning",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/warnings/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID"
+              }
+            ]
+          },
+          "docs": "Gets a specific warning."
+        },
+        {
+          "info": {
+            "name": "Update the warning",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/warnings/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID"
+              }
+            ]
+          },
+          "docs": "Updates the warning status."
+        },
+        {
+          "info": {
+            "name": "Partially update the warning",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/warnings/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the warning status."
+        },
+        {
+          "info": {
+            "name": "Delete the warning",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/warnings/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID"
+              }
+            ]
+          },
+          "docs": "Removes the warning."
+        },
+        {
+          "info": {
+            "name": "Get the warnings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/warnings?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of warnings (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

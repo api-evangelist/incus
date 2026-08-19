@@ -1,0 +1,2273 @@
+{
+  "item": [
+    {
+      "id": "6ece0285-53e6-48f3-a1c1-67be51ad57b9",
+      "name": "network-acls",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "08503978-2247-4525-8b9b-f30e02a0b16b",
+          "name": "Get the network ACLs",
+          "request": {
+            "name": "Get the network ACLs",
+            "description": {
+              "content": "Returns a list of network ACLs (URLs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                },
+                {
+                  "disabled": false,
+                  "key": "all-projects",
+                  "value": "<boolean>",
+                  "description": "Retrieve network ACLs from all projects"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Collection filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6443b0b5-823a-400b-8220-91ee60a77268",
+              "name": "API endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": [\n    \"string\",\n    \"string\"\n  ],\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1121c16-00b5-42a7-bf0f-a1858eb820e9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15862048-ca88-4f82-afca-e49a5f4589a3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c2a3e17-163d-47e6-92dc-d88471172832",
+          "name": "Add a network ACL",
+          "request": {
+            "name": "Add a network ACL",
+            "description": {
+              "content": "Creates a new network ACL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"egress\": [\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0dbb61f3-1bb0-473d-b6a3-63268df4e11a",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"Web servers\",\n  \"egress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26ba7352-d98f-4280-85e0-7c8f80e12005",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"Web servers\",\n  \"egress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6520729c-4580-44de-bfd5-b32c9ef9c42d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"Web servers\",\n  \"egress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01b2e895-9be9-40bc-a94d-dec1c62cdc4e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"Web servers\",\n  \"egress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    },\n    {\n      \"action\": \"allow\",\n      \"description\": \"Allow DNS queries to Google DNS\",\n      \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n      \"destination_port\": \"53\",\n      \"icmp_code\": \"0\",\n      \"icmp_type\": \"8\",\n      \"protocol\": \"udp\",\n      \"source\": \"@internal\",\n      \"source_port\": \"1234\",\n      \"state\": \"enabled\"\n    }\n  ],\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49cfb36d-1d7c-4ed2-b857-756ae31396eb",
+          "name": "Delete the network ACL",
+          "request": {
+            "name": "Delete the network ACL",
+            "description": {
+              "content": "Removes the network ACL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) ACL name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "579fb4ab-c7fc-4a8a-96eb-24f16cda6cef",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c95d1fbb-867d-493e-a4cd-8a3fae73c9f5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "770a86d3-8dcd-413d-9623-00be883da0d4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "844be7f5-4a8c-429e-afbc-5687e900a8fe",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbf3d14b-7828-407e-9dae-c45f78a642cc",
+          "name": "Get the network ACL",
+          "request": {
+            "name": "Get the network ACL",
+            "description": {
+              "content": "Gets a specific network ACL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) ACL name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e391d6a5-0b96-4471-866a-fdd560ad70c7",
+              "name": "ACL",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"config\": {\n      \"user.mykey\": \"foo\"\n    },\n    \"description\": \"Web servers\",\n    \"egress\": [\n      {\n        \"action\": \"allow\",\n        \"description\": \"Allow DNS queries to Google DNS\",\n        \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n        \"destination_port\": \"53\",\n        \"icmp_code\": \"0\",\n        \"icmp_type\": \"8\",\n        \"protocol\": \"udp\",\n        \"source\": \"@internal\",\n        \"source_port\": \"1234\",\n        \"state\": \"enabled\"\n      },\n      {\n        \"action\": \"allow\",\n        \"description\": \"Allow DNS queries to Google DNS\",\n        \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n        \"destination_port\": \"53\",\n        \"icmp_code\": \"0\",\n        \"icmp_type\": \"8\",\n        \"protocol\": \"udp\",\n        \"source\": \"@internal\",\n        \"source_port\": \"1234\",\n        \"state\": \"enabled\"\n      }\n    ],\n    \"ingress\": [\n      {\n        \"action\": \"allow\",\n        \"description\": \"Allow DNS queries to Google DNS\",\n        \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n        \"destination_port\": \"53\",\n        \"icmp_code\": \"0\",\n        \"icmp_type\": \"8\",\n        \"protocol\": \"udp\",\n        \"source\": \"@internal\",\n        \"source_port\": \"1234\",\n        \"state\": \"enabled\"\n      },\n      {\n        \"action\": \"allow\",\n        \"description\": \"Allow DNS queries to Google DNS\",\n        \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n        \"destination_port\": \"53\",\n        \"icmp_code\": \"0\",\n        \"icmp_type\": \"8\",\n        \"protocol\": \"udp\",\n        \"source\": \"@internal\",\n        \"source_port\": \"1234\",\n        \"state\": \"enabled\"\n      }\n    ],\n    \"name\": \"bar\",\n    \"project\": \"project1\",\n    \"used_by\": [\n      \"/1.0/instances/c1\",\n      \"/1.0/instances/v1\",\n      \"/1.0/networks/mybr0\"\n    ]\n  },\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0f9edb6-4f7f-4b90-829b-8c23d18c75bb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7d30248-c423-4712-b795-e106b767d747",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eeda446a-15ae-4a25-a98f-4b5b6f44f49a",
+          "name": "Partially update the network ACL",
+          "request": {
+            "name": "Partially update the network ACL",
+            "description": {
+              "content": "Updates a subset of the network ACL configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) ACL name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"egress\": [\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "490aaf3e-f699-418b-926e-2cb327780195",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84a0a952-b875-4452-b254-a15096f740cd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "648171bd-5401-4e2f-a136-fcb8c0b8f121",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1b6ccc1-bf8e-4503-b53b-56798a2642b4",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"precondition failed\",\n  \"error_code\": 412,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66f4ddbb-a34c-4f43-b2f0-ea1a7dae93d6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c63b744-2186-4afb-b3ed-fa2bcaffa906",
+          "name": "Rename the network ACL",
+          "request": {
+            "name": "Rename the network ACL",
+            "description": {
+              "content": "Renames an existing network ACL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) ACL name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddfb247b-2321-44f9-a7a8-b471064ac4d6",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdf5ed93-b1fc-49f7-90fc-2e3cfe38a9ee",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "528adf56-220d-496b-a1ac-7565decb423a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4904b4b8-fe66-4159-accd-78556bc1a104",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"bar\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "509925d3-4da2-46c5-b658-b929dccfdb64",
+          "name": "Update the network ACL",
+          "request": {
+            "name": "Update the network ACL",
+            "description": {
+              "content": "Updates the entire network ACL configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) ACL name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"egress\": [\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  ],\n  \"ingress\": [\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"destination_port\": \"<string>\",\n      \"icmp_code\": \"<string>\",\n      \"icmp_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"source\": \"<string>\",\n      \"source_port\": \"<string>\",\n      \"state\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5de50204-8821-4172-9c91-683d8764f6bb",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b8c1aea-b97b-410a-944f-375989c2c6bb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffce31fe-f94b-4693-95d7-11dc304e8ef3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfd2e454-5819-4917-87c9-d9e8a1f206c5",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"precondition failed\",\n  \"error_code\": 412,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9963e8e8-be4d-4423-a6ba-712e4b084af4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2d80543-7455-4471-9af9-8f6d63c606dd",
+          "name": "Get the network ACL log",
+          "request": {
+            "name": "Get the network ACL log",
+            "description": {
+              "content": "Gets a specific network ACL log entries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls",
+                ":name",
+                "log"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) ACL name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85adb037-adac-403b-b14c-4c8de604d107",
+              "name": "Raw log file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name",
+                    "log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ce13c20-9f6e-427b-b432-22d44ddcf7e8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name",
+                    "log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af300c14-1f84-4b24-a504-4b9419519939",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls",
+                    ":name",
+                    "log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) ACL name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0b61519-4c6f-41ff-9582-c4297e12a030",
+          "name": "Get the network ACLs",
+          "request": {
+            "name": "Get the network ACLs",
+            "description": {
+              "content": "Returns a list of network ACLs (structs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "network-acls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "recursion",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                },
+                {
+                  "disabled": false,
+                  "key": "all-projects",
+                  "value": "<boolean>",
+                  "description": "Retrieve network ACLs from all projects"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Collection filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7205be49-af82-43d4-969f-c9f7e5209457",
+              "name": "API endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": [\n    {\n      \"config\": {\n        \"user.mykey\": \"foo\"\n      },\n      \"description\": \"Web servers\",\n      \"egress\": [\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        },\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        }\n      ],\n      \"ingress\": [\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        },\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        }\n      ],\n      \"name\": \"bar\",\n      \"project\": \"project1\",\n      \"used_by\": [\n        \"/1.0/instances/c1\",\n        \"/1.0/instances/v1\",\n        \"/1.0/networks/mybr0\"\n      ]\n    },\n    {\n      \"config\": {\n        \"user.mykey\": \"foo\"\n      },\n      \"description\": \"Web servers\",\n      \"egress\": [\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        },\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        }\n      ],\n      \"ingress\": [\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        },\n        {\n          \"action\": \"allow\",\n          \"description\": \"Allow DNS queries to Google DNS\",\n          \"destination\": \"8.8.8.8/32,8.8.4.4/32\",\n          \"destination_port\": \"53\",\n          \"icmp_code\": \"0\",\n          \"icmp_type\": \"8\",\n          \"protocol\": \"udp\",\n          \"source\": \"@internal\",\n          \"source_port\": \"1234\",\n          \"state\": \"enabled\"\n        }\n      ],\n      \"name\": \"bar\",\n      \"project\": \"project1\",\n      \"used_by\": [\n        \"/1.0/instances/c1\",\n        \"/1.0/instances/v1\",\n        \"/1.0/networks/mybr0\"\n      ]\n    }\n  ],\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7062e4d3-3be5-49d8-89c7-3e8acd209c3d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a469429-be3b-4c0e-8c4f-f00042734770",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "network-acls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "true"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "151a8331-46da-4c4b-a5b2-e434802b068a",
+    "name": "Incus external REST certificates network-acls API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the REST API used by all Incus clients.\nInternal endpoints aren't included in this documentation.\n\nThe Incus API is available over both a local unix+http and remote https API.\nAuthentication for local users relies on group membership and access to the unix socket.\nFor remote users, the default authentication method is TLS client\ncertificates.\n\nContact Support:\n Name: Incus upstream\n Email: lxc-devel@lists.linuxcontainers.org",
+      "type": "text/plain"
+    }
+  }
+}

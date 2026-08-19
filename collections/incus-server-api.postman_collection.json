@@ -1,0 +1,1226 @@
+{
+  "item": [
+    {
+      "id": "795f674d-0c67-4bad-a442-56f98faf456c",
+      "name": "server",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4bb7ee37-9a4c-4e29-a119-4a27d21c557e",
+          "name": "Get the supported API endpoints",
+          "request": {
+            "name": "Get the supported API endpoints",
+            "description": {
+              "content": "Returns a list of supported API versions (URLs).\n\nInternal API endpoints are not reported as those aren't versioned\nand should only be used by the daemon itself.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44e79ae9-24b0-485b-8f40-633e61e8ab25",
+              "name": "API endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": [\n    \"/1.0\"\n  ],\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dd2e791-2a06-4545-b4c5-57091b9cf62e",
+          "name": "Get the server environment and configuration",
+          "request": {
+            "name": "Get the server environment and configuration",
+            "description": {
+              "content": "Shows the full server environment and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "Cluster member name"
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c7890b0-3c90-45ab-aaa3-bc04294ac23d",
+              "name": "Server environment and configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    },
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"api_extensions\": [\n      \"etag\",\n      \"patch\",\n      \"network\",\n      \"storage\"\n    ],\n    \"api_status\": \"stable\",\n    \"api_version\": \"1.0\",\n    \"auth\": \"untrusted\",\n    \"auth_methods\": [\n      \"tls\"\n    ],\n    \"auth_user_method\": \"unix\",\n    \"auth_user_name\": \"uid=201105\",\n    \"config\": {\n      \"core.https_address\": \":8443\"\n    },\n    \"environment\": {\n      \"addresses\": [\n        \":8443\"\n      ],\n      \"architectures\": [\n        \"x86_64\",\n        \"i686\"\n      ],\n      \"certificate\": \"X509 PEM certificate\",\n      \"certificate_fingerprint\": \"fd200419b271f1dc2a5591b693cc5774b7f234e1ff8c6b78ad703b6888fe2b69\",\n      \"driver\": \"lxc | qemu\",\n      \"driver_version\": \"4.0.7 | 5.2.0\",\n      \"firewall\": \"nftables\",\n      \"kernel\": \"Linux\",\n      \"kernel_architecture\": \"x86_64\",\n      \"kernel_features\": {\n        \"netnsid_getifaddrs\": \"true\",\n        \"seccomp_listener\": \"true\"\n      },\n      \"kernel_version\": \"5.4.0-36-generic\",\n      \"lxc_features\": {\n        \"cgroup2\": \"true\",\n        \"devpts_fd\": \"true\",\n        \"pidfd\": \"true\"\n      },\n      \"os_name\": \"Ubuntu\",\n      \"os_version\": \"22.04\",\n      \"project\": \"default\",\n      \"server\": \"incus\",\n      \"server_clustered\": false,\n      \"server_event_mode\": \"full-mesh\",\n      \"server_name\": \"castiana\",\n      \"server_pid\": 1453969,\n      \"server_version\": \"4.11\",\n      \"storage\": \"dir | zfs\",\n      \"storage_supported_drivers\": [\n        {\n          \"Name\": \"zfs\",\n          \"Remote\": false,\n          \"Version\": \"0.8.4-1ubuntu11\"\n        },\n        {\n          \"Name\": \"zfs\",\n          \"Remote\": false,\n          \"Version\": \"0.8.4-1ubuntu11\"\n        }\n      ],\n      \"storage_version\": \"1 | 0.8.4-1ubuntu11\"\n    },\n    \"public\": false\n  },\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f96d215-053c-461b-ac78-b341d900a903",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    },
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbbb5056-8d95-4e20-b460-6badde572c69",
+          "name": "Partially update the server configuration",
+          "request": {
+            "name": "Partially update the server configuration",
+            "description": {
+              "content": "Updates a subset of the server configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "Cluster member name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d4f9ac5-9681-461b-ae01-738e7e8c352e",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02e25395-bbd6-4ec7-a30c-ada36303471e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9adf45a2-d260-4995-99c4-9dfcccf6ef5e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "205f11c0-cecb-4733-8d83-949c81515ed6",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"precondition failed\",\n  \"error_code\": 412,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "128dbcc3-bd6e-4d5f-a297-f781eda95973",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae02ab00-708b-4910-a0b4-3e6acdede45e",
+          "name": "Update the server configuration",
+          "request": {
+            "name": "Update the server configuration",
+            "description": {
+              "content": "Updates the entire server configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "Cluster member name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e35cf41d-cefe-4a98-9deb-09ae3dd9fe07",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa512d5e-8264-42cc-86ba-13735129d0f6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b33c7195-9373-4fba-a683-1942595f85e6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "033fc3e7-3b9c-4b0e-b024-42518ff8f42d",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"precondition failed\",\n  \"error_code\": 412,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a0b2351-8bad-4b94-8fd7-d47202abd79b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a348430f-126f-448f-8fa5-0f2959b859af",
+          "name": "Get the event stream",
+          "request": {
+            "name": "Get the event stream",
+            "description": {
+              "content": "Connects to the event API using websocket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Event type(s), comma separated (valid types are logging, operation or lifecycle)"
+                },
+                {
+                  "disabled": false,
+                  "key": "all-projects",
+                  "value": "<boolean>",
+                  "description": "Retrieve instances from all projects"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66884f33-c316-4d6d-bd44-145ec14f9c90",
+              "name": "Websocket message (JSON)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "type",
+                      "value": "logging,lifecycle"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": \"server01\",\n  \"metadata\": {\n    \"action\": \"instance-started\",\n    \"context\": {},\n    \"source\": \"/1.0/instances/c1\"\n  },\n  \"project\": \"default\",\n  \"timestamp\": \"2021-02-24T19:00:45.452649098-05:00\",\n  \"type\": \"lifecycle\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e717c3fc-0f82-4d67-bd3f-2b84768fee80",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "type",
+                      "value": "logging,lifecycle"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12404875-81bf-4c60-8fb8-66afb933aae1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "type",
+                      "value": "logging,lifecycle"
+                    },
+                    {
+                      "key": "all-projects",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5804a871-0e9d-4bba-8542-d7b47ae3b95c",
+          "name": "Get system resources information",
+          "request": {
+            "name": "Get system resources information",
+            "description": {
+              "content": "Gets the hardware information profile of the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "Cluster member name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b926b342-54d7-4a69-85fe-f7395913c492",
+              "name": "Hardware resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"cpu\": {\n      \"architecture\": \"x86_64\",\n      \"sockets\": [\n        {\n          \"address_sizes\": {\n            \"physical_bits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"virtual_bits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cache\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"cores\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"frequency\": 3499,\n          \"frequency_minimum\": 400,\n          \"frequency_turbo\": 3500,\n          \"name\": \"Intel(R) Core(TM) i5-7300U CPU @ 2.60GHz\",\n          \"socket\": 0,\n          \"vendor\": \"GenuineIntel\"\n        },\n        {\n          \"address_sizes\": {\n            \"physical_bits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"virtual_bits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cache\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"cores\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"frequency\": 3499,\n          \"frequency_minimum\": 400,\n          \"frequency_turbo\": 3500,\n          \"name\": \"Intel(R) Core(TM) i5-7300U CPU @ 2.60GHz\",\n          \"socket\": 0,\n          \"vendor\": \"GenuineIntel\"\n        }\n      ],\n      \"total\": 1\n    },\n    \"gpu\": {\n      \"cards\": [\n        {\n          \"driver\": \"i915\",\n          \"driver_version\": \"5.8.0-36-generic\",\n          \"drm\": {\n            \"card_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"render_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"render_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"mdev\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"numa_node\": 0,\n          \"nvidia\": {\n            \"architecture\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"brand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cuda_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nvrm_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"pci_address\": \"0000:00:02.0\",\n          \"product\": \"HD Graphics 620\",\n          \"product_id\": \"5916\",\n          \"sriov\": {\n            \"current_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maximum_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"usb_address\": \"2:7\",\n          \"vendor\": \"Intel Corporation\",\n          \"vendor_id\": \"8086\"\n        },\n        {\n          \"driver\": \"i915\",\n          \"driver_version\": \"5.8.0-36-generic\",\n          \"drm\": {\n            \"card_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"render_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"render_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"mdev\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"numa_node\": 0,\n          \"nvidia\": {\n            \"architecture\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"brand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cuda_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"model\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nvrm_version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"pci_address\": \"0000:00:02.0\",\n          \"product\": \"HD Graphics 620\",\n          \"product_id\": \"5916\",\n          \"sriov\": {\n            \"current_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maximum_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"usb_address\": \"2:7\",\n          \"vendor\": \"Intel Corporation\",\n          \"vendor_id\": \"8086\"\n        }\n      ],\n      \"total\": 1\n    },\n    \"load\": {\n      \"Average1Min\": 0.69,\n      \"Average5Min\": 1.1,\n      \"Average10Min\": 1.29,\n      \"Processes\": 1234\n    },\n    \"memory\": {\n      \"hugepages_size\": 2097152,\n      \"hugepages_total\": 429284917248,\n      \"hugepages_used\": 429284917248,\n      \"nodes\": [\n        {\n          \"hugepages_total\": 214536552448,\n          \"hugepages_used\": 214536552448,\n          \"numa_node\": 0,\n          \"total\": 343597383680,\n          \"used\": 264880439296\n        },\n        {\n          \"hugepages_total\": 214536552448,\n          \"hugepages_used\": 214536552448,\n          \"numa_node\": 0,\n          \"total\": 343597383680,\n          \"used\": 264880439296\n        }\n      ],\n      \"total\": 687194767360,\n      \"used\": 557450502144\n    },\n    \"network\": {\n      \"cards\": [\n        {\n          \"driver\": \"atlantic\",\n          \"driver_version\": \"5.8.0-36-generic\",\n          \"firmware_version\": \"3.1.100\",\n          \"numa_node\": 0,\n          \"pci_address\": \"0000:0d:00.0\",\n          \"ports\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"product\": \"AQC107 NBase-T/IEEE\",\n          \"product_id\": \"87b1\",\n          \"sriov\": {\n            \"current_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maximum_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"usb_address\": \"2:7\",\n          \"vdpa\": {\n            \"device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"vendor\": \"Aquantia Corp.\",\n          \"vendor_id\": \"1d6a\"\n        },\n        {\n          \"driver\": \"atlantic\",\n          \"driver_version\": \"5.8.0-36-generic\",\n          \"firmware_version\": \"3.1.100\",\n          \"numa_node\": 0,\n          \"pci_address\": \"0000:0d:00.0\",\n          \"ports\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"product\": \"AQC107 NBase-T/IEEE\",\n          \"product_id\": \"87b1\",\n          \"sriov\": {\n            \"current_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maximum_vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vfs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"usb_address\": \"2:7\",\n          \"vdpa\": {\n            \"device\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"vendor\": \"Aquantia Corp.\",\n          \"vendor_id\": \"1d6a\"\n        }\n      ],\n      \"total\": 1\n    },\n    \"pci\": {\n      \"devices\": [\n        {\n          \"driver\": \"mgag200\",\n          \"driver_version\": \"5.8.0-36-generic\",\n          \"iommu_group\": 20,\n          \"numa_node\": 0,\n          \"pci_address\": \"0000:07:03.0\",\n          \"product\": \"MGA G200eW WPCM450\",\n          \"product_id\": \"0532\",\n          \"vendor\": \"Matrox Electronics Systems Ltd.\",\n          \"vendor_id\": \"102b\",\n          \"vpd\": {\n            \"entries\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"product_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"driver\": \"mgag200\",\n          \"driver_version\": \"5.8.0-36-generic\",\n          \"iommu_group\": 20,\n          \"numa_node\": 0,\n          \"pci_address\": \"0000:07:03.0\",\n          \"product\": \"MGA G200eW WPCM450\",\n          \"product_id\": \"0532\",\n          \"vendor\": \"Matrox Electronics Systems Ltd.\",\n          \"vendor_id\": \"102b\",\n          \"vpd\": {\n            \"entries\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"product_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"total\": 1\n    },\n    \"serial\": {\n      \"devices\": [\n        {\n          \"device\": \"188:0\",\n          \"device_id\": \"/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AB0J1234-if00-port0\",\n          \"device_path\": \"/dev/serial/by-path/pci-0000:00:14.0-usb-0:2:1.0-port0\",\n          \"driver\": \"cdc_acm\",\n          \"id\": \"ttyUSB0\",\n          \"product\": \"Arduino Uno\",\n          \"product_id\": \"0043\",\n          \"vendor\": \"Arduino LLC\",\n          \"vendor_id\": \"2341\"\n        },\n        {\n          \"device\": \"188:0\",\n          \"device_id\": \"/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AB0J1234-if00-port0\",\n          \"device_path\": \"/dev/serial/by-path/pci-0000:00:14.0-usb-0:2:1.0-port0\",\n          \"driver\": \"cdc_acm\",\n          \"id\": \"ttyUSB0\",\n          \"product\": \"Arduino Uno\",\n          \"product_id\": \"0043\",\n          \"vendor\": \"Arduino LLC\",\n          \"vendor_id\": \"2341\"\n        }\n      ],\n      \"total\": 1\n    },\n    \"storage\": {\n      \"disks\": [\n        {\n          \"block_size\": 512,\n          \"device\": \"259:0\",\n          \"device_id\": \"nvme-eui.0000000001000000e4d25cafae2e4c00\",\n          \"device_path\": \"pci-0000:05:00.0-nvme-1\",\n          \"firmware_version\": \"PSF121C\",\n          \"id\": \"nvme0n1\",\n          \"model\": \"INTEL SSDPEKKW256G7\",\n          \"numa_node\": 0,\n          \"partitions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"pci_address\": \"0000:05:00.0\",\n          \"read_only\": false,\n          \"removable\": false,\n          \"rpm\": 0,\n          \"serial\": \"BTPY63440ARH256D\",\n          \"size\": 256060514304,\n          \"type\": \"nvme\",\n          \"usb_address\": \"3:5\",\n          \"wwn\": \"eui.0000000001000000e4d25cafae2e4c00\"\n        },\n        {\n          \"block_size\": 512,\n          \"device\": \"259:0\",\n          \"device_id\": \"nvme-eui.0000000001000000e4d25cafae2e4c00\",\n          \"device_path\": \"pci-0000:05:00.0-nvme-1\",\n          \"firmware_version\": \"PSF121C\",\n          \"id\": \"nvme0n1\",\n          \"model\": \"INTEL SSDPEKKW256G7\",\n          \"numa_node\": 0,\n          \"partitions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"pci_address\": \"0000:05:00.0\",\n          \"read_only\": false,\n          \"removable\": false,\n          \"rpm\": 0,\n          \"serial\": \"BTPY63440ARH256D\",\n          \"size\": 256060514304,\n          \"type\": \"nvme\",\n          \"usb_address\": \"3:5\",\n          \"wwn\": \"eui.0000000001000000e4d25cafae2e4c00\"\n        }\n      ],\n      \"total\": 1\n    },\n    \"system\": {\n      \"chassis\": {\n        \"serial\": \"PY3DD4X9\",\n        \"type\": \"Notebook\",\n        \"vendor\": \"Lenovo\",\n        \"version\": \"None\"\n      },\n      \"family\": \"ThinkPad X1 Carbon 5th\",\n      \"firmware\": {\n        \"date\": \"10/14/2020\",\n        \"vendor\": \"Lenovo\",\n        \"version\": \"N1MET64W (1.49)\"\n      },\n      \"motherboard\": {\n        \"product\": \"20HRCTO1WW\",\n        \"serial\": \"L3CF4FX003A\",\n        \"vendor\": \"Lenovo\",\n        \"version\": \"None\"\n      },\n      \"product\": \"20HRCTO1WW\",\n      \"serial\": \"PY3DD4X9\",\n      \"sku\": \"string\",\n      \"type\": \"physical\",\n      \"uuid\": \"7fa1c0cc-2271-11b2-a85c-aab32a05d71a\",\n      \"vendor\": \"LENOVO\",\n      \"version\": \"ThinkPad X1 Carbon 5th\"\n    },\n    \"usb\": {\n      \"devices\": [\n        {\n          \"bus_address\": 1,\n          \"device_address\": 3,\n          \"interfaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"product\": \"Hermon USB hidmouse Device\",\n          \"product_id\": \"2221\",\n          \"serial\": \"DAE005fp\",\n          \"speed\": 12,\n          \"vendor\": \"ATEN International Co., Ltd\",\n          \"vendor_id\": \"0557\"\n        },\n        {\n          \"bus_address\": 1,\n          \"device_address\": 3,\n          \"interfaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"product\": \"Hermon USB hidmouse Device\",\n          \"product_id\": \"2221\",\n          \"serial\": \"DAE005fp\",\n          \"speed\": 12,\n          \"vendor\": \"ATEN International Co., Ltd\",\n          \"vendor_id\": \"0557\"\n        }\n      ],\n      \"total\": 1\n    }\n  },\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b92d3fa-5280-4210-9460-2b1734da3667",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f46aca3e-1c72-4ccb-953e-f6c10d74026a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "target",
+                      "value": "server01"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f92033f-57ab-4cf0-ac99-37a7f99cba1d",
+          "name": "Get the server environment",
+          "request": {
+            "name": "Get the server environment",
+            "description": {
+              "content": "Shows a small subset of the server environment and configuration\nwhich is required by untrusted clients to reach a server.\n\nThe `?public` part of the URL isn't required, it's simply used to\nseparate the two behaviors of this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "public",
+                  "value": "null"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba159710-7af1-4433-bf82-8689db90f335",
+              "name": "Server environment and configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"api_extensions\": [\n      \"etag\",\n      \"patch\",\n      \"network\",\n      \"storage\"\n    ],\n    \"api_status\": \"stable\",\n    \"api_version\": \"1.0\",\n    \"auth\": \"untrusted\",\n    \"auth_methods\": [\n      \"tls\"\n    ],\n    \"config\": {\n      \"core.https_address\": \":8443\"\n    },\n    \"public\": false\n  },\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f549232-0c15-4a59-a8b4-0358ed3b1a4c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d9798f1-bb1d-4a93-b4d0-26e0f61cc272",
+    "name": "Incus external REST certificates server API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the REST API used by all Incus clients.\nInternal endpoints aren't included in this documentation.\n\nThe Incus API is available over both a local unix+http and remote https API.\nAuthentication for local users relies on group membership and access to the unix socket.\nFor remote users, the default authentication method is TLS client\ncertificates.\n\nContact Support:\n Name: Incus upstream\n Email: lxc-devel@lists.linuxcontainers.org",
+      "type": "text/plain"
+    }
+  }
+}

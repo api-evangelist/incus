@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates Metadata API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the metadata configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/metadata/configuration"
+          },
+          "docs": "Returns the generated metadata configuration in YAML format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

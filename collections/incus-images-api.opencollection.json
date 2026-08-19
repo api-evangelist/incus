@@ -1,0 +1,679 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates images API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve images from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of images (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images",
+            "headers": [
+              {
+                "name": "X-Incus-secret",
+                "value": "RANDOM-STRING"
+              },
+              {
+                "name": "X-Incus-fingerprint",
+                "value": ""
+              },
+              {
+                "name": "X-Incus-aliases",
+                "value": ""
+              },
+              {
+                "name": "X-Incus-properties",
+                "value": ""
+              },
+              {
+                "name": "X-Incus-public",
+                "value": ""
+              },
+              {
+                "name": "X-Incus-filename",
+                "value": ""
+              },
+              {
+                "name": "X-Incus-profiles",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Adds a new image to the image store."
+        },
+        {
+          "info": {
+            "name": "Get the image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific image."
+        },
+        {
+          "info": {
+            "name": "Update the image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire image definition."
+        },
+        {
+          "info": {
+            "name": "Partially update the image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the image definition."
+        },
+        {
+          "info": {
+            "name": "Delete the image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the image from the image store."
+        },
+        {
+          "info": {
+            "name": "Get the raw image file(s)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint/export",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Download the raw image file(s) from the server.\nIf the image is in split format, a multipart http transfer occurs."
+        },
+        {
+          "info": {
+            "name": "Make the server push the image to a remote server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint/export",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the server to connect to a remote server and push the image to it."
+        },
+        {
+          "info": {
+            "name": "Get the raw image file(s)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint/export?public",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "secret",
+                "value": "RANDOM-STRING",
+                "type": "query",
+                "description": "Secret token to retrieve a private image"
+              }
+            ]
+          },
+          "docs": "Download the raw image file(s) of a public image from the server.\nIf the image is in split format, a multipart http transfer occurs."
+        },
+        {
+          "info": {
+            "name": "Refresh an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint/refresh",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "This causes the server to check the image source server for an updated\nversion of the image and if available to refresh the local copy with the\nnew version."
+        },
+        {
+          "info": {
+            "name": "Generate secret for retrieval of the image by an untrusted client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint/secret",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "This generates a background operation including a secret one time key\nin its metadata which can be used to fetch this image from an untrusted\nclient."
+        },
+        {
+          "info": {
+            "name": "Get the public image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/:fingerprint?public",
+            "params": [
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "path",
+                "description": "Fingerprint"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "secret",
+                "value": "RANDOM-STRING",
+                "type": "query",
+                "description": "Secret token to retrieve a private image"
+              }
+            ]
+          },
+          "docs": "Gets a specific public image."
+        },
+        {
+          "info": {
+            "name": "Get the image aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/aliases",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of image aliases (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add an image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images/aliases",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new image alias."
+        },
+        {
+          "info": {
+            "name": "Get the image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/aliases/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Alias name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific image alias."
+        },
+        {
+          "info": {
+            "name": "Rename the image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images/aliases/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Alias name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames an existing image alias."
+        },
+        {
+          "info": {
+            "name": "Update the image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/images/aliases/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Alias name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire image alias configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/images/aliases/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Alias name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the image alias configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/images/aliases/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Alias name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Deletes a specific image alias."
+        },
+        {
+          "info": {
+            "name": "Get the public image alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/aliases/:name?public",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Alias name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific public image alias.\nThis untrusted endpoint only works for aliases pointing to public images."
+        },
+        {
+          "info": {
+            "name": "Get the image aliases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images/aliases?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of image aliases (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the public images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images?public",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve images from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of publicly available images (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/images?public",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Pushes the data to the target image server.\nThis is meant for server to server communication where a new image entry is\nprepared on the target server and the source server is provided that URL\nand a secret token to push the image content over."
+        },
+        {
+          "info": {
+            "name": "Get the public images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images?public&recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve images from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of publicly available images (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/images?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              },
+              {
+                "name": "all-projects",
+                "value": "default",
+                "type": "query",
+                "description": "Retrieve images from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of images (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

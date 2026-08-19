@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates network-integrations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network-integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-integrations",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network integrations (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a network integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/network-integrations"
+          },
+          "docs": "Creates a new network integration."
+        },
+        {
+          "info": {
+            "name": "Get the network integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-integrations/:integration",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "path",
+                "description": "Integration name"
+              }
+            ]
+          },
+          "docs": "Gets a specific network integration."
+        },
+        {
+          "info": {
+            "name": "Rename the network integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/network-integrations/:integration",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "path",
+                "description": "Integration name"
+              }
+            ]
+          },
+          "docs": "Renames the network integration."
+        },
+        {
+          "info": {
+            "name": "Update the network integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/network-integrations/:integration",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "path",
+                "description": "Integration name"
+              }
+            ]
+          },
+          "docs": "Updates the entire network integration configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the network integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/network-integrations/:integration",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "path",
+                "description": "Integration name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the network integration configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the network integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/network-integrations/:integration",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "path",
+                "description": "Integration name"
+              }
+            ]
+          },
+          "docs": "Removes the network integration."
+        },
+        {
+          "info": {
+            "name": "Get the network integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-integrations?recursion=1",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network integrations (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

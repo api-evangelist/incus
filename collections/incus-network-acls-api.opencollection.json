@@ -1,0 +1,249 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates network-acls API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network-acls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-acls",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve network ACLs from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network ACLs (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a network ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/network-acls",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new network ACL."
+        },
+        {
+          "info": {
+            "name": "Get the network ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-acls/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "ACL name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific network ACL."
+        },
+        {
+          "info": {
+            "name": "Rename the network ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/network-acls/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "ACL name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames an existing network ACL."
+        },
+        {
+          "info": {
+            "name": "Update the network ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/network-acls/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "ACL name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire network ACL configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the network ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/network-acls/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "ACL name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the network ACL configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the network ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/network-acls/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "ACL name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the network ACL."
+        },
+        {
+          "info": {
+            "name": "Get the network ACL log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-acls/:name/log",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "ACL name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific network ACL log entries."
+        },
+        {
+          "info": {
+            "name": "Get the network ACLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-acls?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve network ACLs from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network ACLs (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

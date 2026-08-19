@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates operations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve operations from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a JSON object of operation type to operation list (URLs)."
+        },
+        {
+          "info": {
+            "name": "Get the operation state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              }
+            ]
+          },
+          "docs": "Gets the operation state."
+        },
+        {
+          "info": {
+            "name": "Cancel the operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/operations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              }
+            ]
+          },
+          "docs": "Cancels the operation if supported."
+        },
+        {
+          "info": {
+            "name": "Wait for the operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations/:id/wait",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              },
+              {
+                "name": "timeout",
+                "value": "-1",
+                "type": "query",
+                "description": "Timeout in seconds (-1 means never)"
+              }
+            ]
+          },
+          "docs": "Waits for the operation to reach a final state (or timeout) and retrieve its final state."
+        },
+        {
+          "info": {
+            "name": "Wait for the operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations/:id/wait?public",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              },
+              {
+                "name": "secret",
+                "value": "random-string",
+                "type": "query",
+                "description": "Authentication token"
+              },
+              {
+                "name": "timeout",
+                "value": "-1",
+                "type": "query",
+                "description": "Timeout in seconds (-1 means never)"
+              }
+            ]
+          },
+          "docs": "Waits for the operation to reach a final state (or timeout) and retrieve its final state.\n\nWhen accessed by an untrusted user, the secret token must be provided."
+        },
+        {
+          "info": {
+            "name": "Get the websocket stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations/:id/websocket",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              },
+              {
+                "name": "secret",
+                "value": "random-string",
+                "type": "query",
+                "description": "Authentication token"
+              }
+            ]
+          },
+          "docs": "Connects to an associated websocket stream for the operation.\nThis should almost never be done directly by a client, instead it's\nmeant for server to server communication with the client only relaying the\nconnection information to the servers."
+        },
+        {
+          "info": {
+            "name": "Get the websocket stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations/:id/websocket?public",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              },
+              {
+                "name": "secret",
+                "value": "random-string",
+                "type": "query",
+                "description": "Authentication token"
+              }
+            ]
+          },
+          "docs": "Connects to an associated websocket stream for the operation.\nThis should almost never be done directly by a client, instead it's\nmeant for server to server communication with the client only relaying the\nconnection information to the servers.\n\nThe untrusted endpoint is used by the target server to connect to the source server.\nAuthentication is performed through the secret token."
+        },
+        {
+          "info": {
+            "name": "Get the operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/operations?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve operations from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of operations (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

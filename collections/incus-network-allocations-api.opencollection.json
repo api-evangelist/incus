@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates network-allocations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network-allocations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network allocations in use (`network`, `network-forward` and `load-balancer` and `instance`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/network-allocations",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve entities from all projects"
+              }
+            ]
+          },
+          "docs": "Returns a list of network allocations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

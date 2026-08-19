@@ -1,0 +1,229 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates network-peers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network-peers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network peers (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a network peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Initiates/creates a new network peering."
+        },
+        {
+          "info": {
+            "name": "Get the network peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers/:peerName",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "peerName",
+                "value": "",
+                "type": "path",
+                "description": "Peer name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific network peering."
+        },
+        {
+          "info": {
+            "name": "Update the network peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers/:peerName",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "peerName",
+                "value": "",
+                "type": "path",
+                "description": "Peer name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire network peering configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the network peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers/:peerName",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "peerName",
+                "value": "",
+                "type": "path",
+                "description": "Peer name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the network peering configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the network peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers/:peerName",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "peerName",
+                "value": "",
+                "type": "path",
+                "description": "Peer name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the network peering."
+        },
+        {
+          "info": {
+            "name": "Get the network peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/peers?recursion=1",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network peers (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

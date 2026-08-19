@@ -1,0 +1,2786 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates storage API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the storage pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pools (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a storage pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage pool.\nWhen clustered, storage pools require individual POST for each cluster member prior to a global POST."
+        },
+        {
+          "info": {
+            "name": "Update the storage bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/storage-pools/:name/buckets/:bucketName",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Resource name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire storage bucket configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the storage bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/storage-pools/:name/buckets/:bucketName",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Resource name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the storage bucket configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the storage bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:name/buckets/:bucketName",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Resource name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Removes the storage bucket."
+        },
+        {
+          "info": {
+            "name": "Update the storage bucket key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/storage-pools/:name/buckets/:bucketName/keys/:keyName",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Resource name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "keyName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket key name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire storage bucket key configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the storage bucket key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:name/buckets/:bucketName/keys/:keyName",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Resource name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "keyName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket key name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Removes the storage bucket key."
+        },
+        {
+          "info": {
+            "name": "Get storage pool resources information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:name/resources",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Resource name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets the usage information for the storage pool."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage pool."
+        },
+        {
+          "info": {
+            "name": "Update the storage pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire storage pool configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the storage pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the storage pool configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the storage pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the storage pool."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve storage pool buckets from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pool buckets (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a storage pool bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage pool bucket."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage pool bucket."
+        },
+        {
+          "info": {
+            "name": "Get the storage bucket backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage bucket backups (URLs)."
+        },
+        {
+          "info": {
+            "name": "Create a storage bucket backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage bucket backup.\n\nIf the `Accept` header is set to `application/octet-stream`, this directly streams the backup\ntarball to the client without any intermediate operation."
+        },
+        {
+          "info": {
+            "name": "Get the storage bucket backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups/:backupName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage bucket backup."
+        },
+        {
+          "info": {
+            "name": "Rename a storage bucket backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups/:backupName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Renames a storage bucket backup."
+        },
+        {
+          "info": {
+            "name": "Delete a storage bucket backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups/:backupName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Deletes a new storage bucket backup."
+        },
+        {
+          "info": {
+            "name": "Get the raw backup file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups/:backupName/export",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Download the raw backup file from the server."
+        },
+        {
+          "info": {
+            "name": "Get the storage bucket backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/backups?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage bucket backups (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool bucket keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/keys",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pool bucket keys (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a storage pool bucket key.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/keys",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage pool bucket key."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool bucket key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/keys/:keyName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "keyName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket key name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage pool bucket key."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool bucket keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName/keys?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pool bucket keys (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the full storage pool bucket details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets/:bucketName?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "bucketName",
+                "value": "",
+                "type": "path",
+                "description": "Storage bucket name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage pool bucket with all details (backups and keys)."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve storage pool buckets from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pool buckets (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the storage pool bucket details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/buckets?recursion=2",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "all-projects",
+                "value": "true",
+                "type": "query",
+                "description": "Retrieve storage pool buckets from all projects"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pool buckets with all details (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the storage volumes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volumes (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage volume.\nWill return an empty sync response on simple volume creation but an operation on copy or migration."
+        },
+        {
+          "info": {
+            "name": "Get the storage volumes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volumes (URLs) (type specific endpoint)."
+        },
+        {
+          "info": {
+            "name": "Add a storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage volume (type specific endpoint).\nWill return an empty sync response on simple volume creation but an operation on copy or migration."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume."
+        },
+        {
+          "info": {
+            "name": "Rename or move/migrate a storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Renames, moves a storage volume between pools or migrates an instance to another server.\n\nThe returned operation metadata will vary based on what's requested.\nFor rename or move within the same server, this is a simple background operation with progress data.\nFor migration, in the push case, this will similarly be a background\noperation with progress data, for the pull case, it will be a websocket\noperation with a number of secrets to be passed to the target server."
+        },
+        {
+          "info": {
+            "name": "Update the storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire storage volume configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the storage volume configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the storage volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Removes the storage volume."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volume backups (URLs)."
+        },
+        {
+          "info": {
+            "name": "Create a storage volume backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage volume backup.\n\nIf the `Accept` header is set to `application/octet-stream`, this directly streams the backup\ntarball to the client without any intermediate operation."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups/:backupName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume backup."
+        },
+        {
+          "info": {
+            "name": "Rename a storage volume backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups/:backupName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Renames a storage volume backup."
+        },
+        {
+          "info": {
+            "name": "Delete a storage volume backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups/:backupName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Deletes a new storage volume backup."
+        },
+        {
+          "info": {
+            "name": "Get the raw backup file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups/:backupName/export",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path",
+                "description": "Backup name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Download the raw backup file from the server."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/backups?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volume backups (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume dirty bitmaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/bitmaps",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume bitmaps"
+        },
+        {
+          "info": {
+            "name": "Create a storage volume bitmap",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/bitmaps",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage volume bitmap."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume dirty bitmap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/bitmaps/:bitmapName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "bitmapName",
+                "value": "",
+                "type": "path",
+                "description": "Bitmap name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume bitmap"
+        },
+        {
+          "info": {
+            "name": "Delete a storage volume bitmap",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/bitmaps/:bitmapName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "bitmapName",
+                "value": "",
+                "type": "path",
+                "description": "Bitmap name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Deletes a storage volume bitmap."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume dirty bitmaps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/bitmaps?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume bitmaps"
+        },
+        {
+          "info": {
+            "name": "Get a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/files",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the file content. If it's a directory, a json list of files will be returned instead."
+        },
+        {
+          "info": {
+            "name": "Create or replace a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/files",
+            "headers": [
+              {
+                "name": "X-Incus-uid",
+                "value": "1000"
+              },
+              {
+                "name": "X-Incus-gid",
+                "value": "1000"
+              },
+              {
+                "name": "X-Incus-mode",
+                "value": "420"
+              },
+              {
+                "name": "X-Incus-type",
+                "value": "file"
+              },
+              {
+                "name": "X-Incus-write",
+                "value": "overwrite"
+              }
+            ],
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new file in the storage volume."
+        },
+        {
+          "info": {
+            "name": "Delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/files",
+            "headers": [
+              {
+                "name": "X-Incus-force",
+                "value": "true"
+              }
+            ],
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the file."
+        },
+        {
+          "info": {
+            "name": "Get metadata for a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/files",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "path",
+                "value": "default",
+                "type": "query",
+                "description": "Path to the file"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the file or directory metadata."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume NBD connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/nbd",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              }
+            ]
+          },
+          "docs": "Upgrades the request to an NBD connection of the storage volume's block device."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume SFTP connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/sftp",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              }
+            ]
+          },
+          "docs": "Upgrades the request to an SFTP connection of the storage volume's filesystem."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volume snapshots (URLs)."
+        },
+        {
+          "info": {
+            "name": "Create a storage volume snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Creates a new storage volume snapshot."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots/:snapshotName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume snapshot."
+        },
+        {
+          "info": {
+            "name": "Rename a storage volume snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots/:snapshotName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Renames a storage volume snapshot."
+        },
+        {
+          "info": {
+            "name": "Update the storage volume snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots/:snapshotName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire storage volume snapshot configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the storage volume snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots/:snapshotName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the storage volume snapshot configuration."
+        },
+        {
+          "info": {
+            "name": "Delete a storage volume snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots/:snapshotName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Deletes a new storage volume snapshot."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/snapshots?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volume snapshots (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the storage volume state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName/state",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume state (usage data)."
+        },
+        {
+          "info": {
+            "name": "Get the full storage volume details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type/:volumeName?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "volumeName",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific storage volume with all details (backups, snapshots and state0.."
+        },
+        {
+          "info": {
+            "name": "Get the storage volumes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volumes (structs) (type specific endpoint)."
+        },
+        {
+          "info": {
+            "name": "Get the storage volumes with all details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes/:type?recursion=2",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Storage volume type"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volumes (structs) including all details (type specific endpoint)."
+        },
+        {
+          "info": {
+            "name": "Get the storage volumes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools/:poolName/volumes?recursion=1",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Storage pool name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage volumes (structs)."
+        },
+        {
+          "info": {
+            "name": "Get the storage pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/storage-pools?recursion=1",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of storage pools (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

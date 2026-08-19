@@ -1,0 +1,2301 @@
+{
+  "item": [
+    {
+      "id": "90058419-401b-4a48-866a-5d9ff7639052",
+      "name": "network-load-balancers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8edc500c-9f4d-466b-84f8-e6fca4f7219f",
+          "name": "Get the network address of load balancers",
+          "request": {
+            "name": "Get the network address of load balancers",
+            "description": {
+              "content": "Returns a list of network address load balancers (URLs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Collection filter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffc4fa70-058f-45f1-af5f-15e75d46681c",
+              "name": "API endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": [\n    \"string\",\n    \"string\"\n  ],\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ec2998c-64dc-4183-8881-5be626b97e48",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60eef0fe-d889-41f3-9b36-1565e528057a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40bd093a-dfe6-48ee-b77d-df86ed2443cc",
+          "name": "Add a network load balancer",
+          "request": {
+            "name": "Add a network load balancer",
+            "description": {
+              "content": "Creates a new network load balancer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"target_address\": \"<string>\",\n      \"target_port\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"target_address\": \"<string>\",\n      \"target_port\": \"<string>\"\n    }\n  ],\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"listen_address\": \"<string>\",\n  \"ports\": [\n    {\n      \"description\": \"<string>\",\n      \"listen_port\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"target_backend\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"description\": \"<string>\",\n      \"listen_port\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"target_backend\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52707c64-2091-45fc-8acd-c9ee6d9da653",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    },\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    }\n  ],\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"My public IP load balancer\",\n  \"listen_address\": \"192.0.2.1\",\n  \"ports\": [\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    },\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f3c7660-4e16-4e38-b310-f504ef8461f8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    },\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    }\n  ],\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"My public IP load balancer\",\n  \"listen_address\": \"192.0.2.1\",\n  \"ports\": [\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    },\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc9527af-568e-42ca-b287-36a7793a8998",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    },\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    }\n  ],\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"My public IP load balancer\",\n  \"listen_address\": \"192.0.2.1\",\n  \"ports\": [\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    },\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "431661cd-2241-4452-bf64-62f27cc018e4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    },\n    {\n      \"description\": \"C1 webserver\",\n      \"name\": \"c1-http\",\n      \"target_address\": \"198.51.100.2\",\n      \"target_port\": \"80,81,8080-8090\"\n    }\n  ],\n  \"config\": {\n    \"user.mykey\": \"foo\"\n  },\n  \"description\": \"My public IP load balancer\",\n  \"listen_address\": \"192.0.2.1\",\n  \"ports\": [\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    },\n    {\n      \"description\": \"My web server load balancer\",\n      \"listen_port\": \"80,81,8080-8090\",\n      \"protocol\": \"tcp\",\n      \"target_backend\": [\n        \"c1-http\",\n        \"c2-http\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29b4dea7-8653-4ee2-9a21-3a1cefa4609d",
+          "name": "Delete the network address load balancer",
+          "request": {
+            "name": "Delete the network address load balancer",
+            "description": {
+              "content": "Removes the network address load balancer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers",
+                ":listenAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listenAddress",
+                  "description": "(Required) Listen address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "424c4994-d2fe-4268-a6a8-079e2782b10f",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c5f0e06-8b27-4f1c-af84-1eb66295067a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "804373d6-9e20-4735-bc16-5d2e931f65c2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ce24f15-dea3-4ada-9400-c1da5b98c8b0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7700c1ad-9d79-4dce-8bcc-8b1c18251fa2",
+          "name": "Get the network address load balancer",
+          "request": {
+            "name": "Get the network address load balancer",
+            "description": {
+              "content": "Gets a specific network address load balancer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers",
+                ":listenAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listenAddress",
+                  "description": "(Required) Listen address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e98fd9ec-640c-4c8d-ba5a-f5309d02dd5a",
+              "name": "Load Balancer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"backends\": [\n      {\n        \"description\": \"C1 webserver\",\n        \"name\": \"c1-http\",\n        \"target_address\": \"198.51.100.2\",\n        \"target_port\": \"80,81,8080-8090\"\n      },\n      {\n        \"description\": \"C1 webserver\",\n        \"name\": \"c1-http\",\n        \"target_address\": \"198.51.100.2\",\n        \"target_port\": \"80,81,8080-8090\"\n      }\n    ],\n    \"config\": {\n      \"user.mykey\": \"foo\"\n    },\n    \"description\": \"My public IP load balancer\",\n    \"listen_address\": \"192.0.2.1\",\n    \"location\": \"server01\",\n    \"ports\": [\n      {\n        \"description\": \"My web server load balancer\",\n        \"listen_port\": \"80,81,8080-8090\",\n        \"protocol\": \"tcp\",\n        \"target_backend\": [\n          \"c1-http\",\n          \"c2-http\"\n        ]\n      },\n      {\n        \"description\": \"My web server load balancer\",\n        \"listen_port\": \"80,81,8080-8090\",\n        \"protocol\": \"tcp\",\n        \"target_backend\": [\n          \"c1-http\",\n          \"c2-http\"\n        ]\n      }\n    ]\n  },\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07c163e0-35d3-4ebb-890c-c787101ba17a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26af9e8e-808d-4abc-b353-976586ab3401",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "407f5741-0726-4900-b12e-02c4bc46cca7",
+          "name": "Partially update the network address load balancer",
+          "request": {
+            "name": "Partially update the network address load balancer",
+            "description": {
+              "content": "Updates a subset of the network address load balancer configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers",
+                ":listenAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listenAddress",
+                  "description": "(Required) Listen address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"target_address\": \"<string>\",\n      \"target_port\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"target_address\": \"<string>\",\n      \"target_port\": \"<string>\"\n    }\n  ],\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"ports\": [\n    {\n      \"description\": \"<string>\",\n      \"listen_port\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"target_backend\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"description\": \"<string>\",\n      \"listen_port\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"target_backend\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95c89cfc-3a9f-49be-bb5c-2b88090604ed",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26d7735a-909c-4634-abfb-6e1e29b23060",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad750e8c-e49f-4220-8a6a-609bbd7e85c8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cb09a98-7ae2-4260-9906-7e7153a9f357",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"precondition failed\",\n  \"error_code\": 412,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7589be40-86c1-468c-ad3f-aab98ec060ad",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "300c0854-d748-4429-a454-69aaa86569df",
+          "name": "Update the network address load balancer",
+          "request": {
+            "name": "Update the network address load balancer",
+            "description": {
+              "content": "Updates the entire network address load balancer configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers",
+                ":listenAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listenAddress",
+                  "description": "(Required) Listen address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backends\": [\n    {\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"target_address\": \"<string>\",\n      \"target_port\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"target_address\": \"<string>\",\n      \"target_port\": \"<string>\"\n    }\n  ],\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"ports\": [\n    {\n      \"description\": \"<string>\",\n      \"listen_port\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"target_backend\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"description\": \"<string>\",\n      \"listen_port\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"target_backend\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d05d3d7e-f7fc-4114-aa74-03cc1e232984",
+              "name": "Empty sync response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b52d3d1e-e877-4452-a1f5-f26f0d0858b7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad request\",\n  \"error_code\": 400,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77d48581-c513-4b7b-8fe6-a535ae57cd81",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a029eeb-ff15-457c-a720-7c13f2d6bfe8",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"precondition failed\",\n  \"error_code\": 412,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b05d95c-0535-4031-b7ea-11261d7073cc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13c66f05-4fe1-4599-92fd-0d7a204890cf",
+          "name": "Get the network address load balancer state",
+          "request": {
+            "name": "Get the network address load balancer state",
+            "description": {
+              "content": "Get the current state of a specific network address load balancer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers",
+                ":listenAddress",
+                "state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listenAddress",
+                  "description": "(Required) Listen address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c22d3bc0-2574-4a4c-a5c5-55b907d7bbc9",
+              "name": "Load Balancer state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress",
+                    "state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"backend_health\": {\n      \"key_0\": {\n        \"address\": \"string\",\n        \"ports\": [\n          {\n            \"port\": 2721,\n            \"protocol\": \"string\",\n            \"status\": \"string\"\n          },\n          {\n            \"port\": 2841,\n            \"protocol\": \"string\",\n            \"status\": \"string\"\n          }\n        ]\n      },\n      \"key_1\": {\n        \"address\": \"string\",\n        \"ports\": [\n          {\n            \"port\": 4113,\n            \"protocol\": \"string\",\n            \"status\": \"string\"\n          },\n          {\n            \"port\": 6094,\n            \"protocol\": \"string\",\n            \"status\": \"string\"\n          }\n        ]\n      }\n    }\n  },\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59649f4f-1fb1-4619-b631-0b840d842184",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress",
+                    "state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "427b8121-c5ea-4b4b-baf6-8ca8ad7c57fe",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers",
+                    ":listenAddress",
+                    "state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listenAddress",
+                      "description": "(Required) Listen address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1abe0118-b71b-4129-8e76-ee401d56ed8c",
+          "name": "Get the network address load balancers",
+          "request": {
+            "name": "Get the network address load balancers",
+            "description": {
+              "content": "Returns a list of network address load balancers (structs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "1.0",
+                "networks",
+                ":networkName",
+                "load-balancers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "recursion",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Project name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Collection filter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "networkName",
+                  "description": "(Required) Network name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54613020-84b3-49f9-a452-4356e7cfaf78",
+              "name": "API endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": [\n    {\n      \"backends\": [\n        {\n          \"description\": \"C1 webserver\",\n          \"name\": \"c1-http\",\n          \"target_address\": \"198.51.100.2\",\n          \"target_port\": \"80,81,8080-8090\"\n        },\n        {\n          \"description\": \"C1 webserver\",\n          \"name\": \"c1-http\",\n          \"target_address\": \"198.51.100.2\",\n          \"target_port\": \"80,81,8080-8090\"\n        }\n      ],\n      \"config\": {\n        \"user.mykey\": \"foo\"\n      },\n      \"description\": \"My public IP load balancer\",\n      \"listen_address\": \"192.0.2.1\",\n      \"location\": \"server01\",\n      \"ports\": [\n        {\n          \"description\": \"My web server load balancer\",\n          \"listen_port\": \"80,81,8080-8090\",\n          \"protocol\": \"tcp\",\n          \"target_backend\": [\n            \"c1-http\",\n            \"c2-http\"\n          ]\n        },\n        {\n          \"description\": \"My web server load balancer\",\n          \"listen_port\": \"80,81,8080-8090\",\n          \"protocol\": \"tcp\",\n          \"target_backend\": [\n            \"c1-http\",\n            \"c2-http\"\n          ]\n        }\n      ]\n    },\n    {\n      \"backends\": [\n        {\n          \"description\": \"C1 webserver\",\n          \"name\": \"c1-http\",\n          \"target_address\": \"198.51.100.2\",\n          \"target_port\": \"80,81,8080-8090\"\n        },\n        {\n          \"description\": \"C1 webserver\",\n          \"name\": \"c1-http\",\n          \"target_address\": \"198.51.100.2\",\n          \"target_port\": \"80,81,8080-8090\"\n        }\n      ],\n      \"config\": {\n        \"user.mykey\": \"foo\"\n      },\n      \"description\": \"My public IP load balancer\",\n      \"listen_address\": \"192.0.2.1\",\n      \"location\": \"server01\",\n      \"ports\": [\n        {\n          \"description\": \"My web server load balancer\",\n          \"listen_port\": \"80,81,8080-8090\",\n          \"protocol\": \"tcp\",\n          \"target_backend\": [\n            \"c1-http\",\n            \"c2-http\"\n          ]\n        },\n        {\n          \"description\": \"My web server load balancer\",\n          \"listen_port\": \"80,81,8080-8090\",\n          \"protocol\": \"tcp\",\n          \"target_backend\": [\n            \"c1-http\",\n            \"c2-http\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"status\": \"Success\",\n  \"status_code\": 200,\n  \"type\": \"sync\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b679222a-4a44-42f4-93e6-ed7e11dd1e95",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"not authorized\",\n  \"error_code\": 403,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89b0ce20-817c-4258-a9d2-7b4d96e8a385",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "1.0",
+                    "networks",
+                    ":networkName",
+                    "load-balancers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project",
+                      "value": "default"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "default"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "networkName",
+                      "description": "(Required) Network name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal server error\",\n  \"error_code\": 500,\n  \"type\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7e9ebf4f-e4c5-4728-a36f-22bb953075e0",
+    "name": "Incus external REST certificates network-load-balancers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is the REST API used by all Incus clients.\nInternal endpoints aren't included in this documentation.\n\nThe Incus API is available over both a local unix+http and remote https API.\nAuthentication for local users relies on group membership and access to the unix socket.\nFor remote users, the default authentication method is TLS client\ncertificates.\n\nContact Support:\n Name: Incus upstream\n Email: lxc-devel@lists.linuxcontainers.org",
+      "type": "text/plain"
+    }
+  }
+}

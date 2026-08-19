@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates cluster API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster"
+          },
+          "docs": "Gets the current cluster configuration."
+        },
+        {
+          "info": {
+            "name": "Update the cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/cluster"
+          },
+          "docs": "Updates the entire cluster configuration."
+        },
+        {
+          "info": {
+            "name": "Update the certificate for the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/cluster/certificate"
+          },
+          "docs": "Replaces existing cluster certificate and reloads each cluster member."
+        },
+        {
+          "info": {
+            "name": "Create a cluster group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/cluster/groups"
+          },
+          "docs": "Creates a new cluster group."
+        },
+        {
+          "info": {
+            "name": "Get the cluster members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/members",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of cluster members (URLs)."
+        },
+        {
+          "info": {
+            "name": "Request a join token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/cluster/members"
+          },
+          "docs": "Requests a join token to add a cluster member."
+        },
+        {
+          "info": {
+            "name": "Get the cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets a specific cluster member."
+        },
+        {
+          "info": {
+            "name": "Rename the cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Renames an existing cluster member."
+        },
+        {
+          "info": {
+            "name": "Update the cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire cluster member configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the cluster member configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Removes the member from the cluster."
+        },
+        {
+          "info": {
+            "name": "Get state of the cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name/state",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets state of a specific cluster member."
+        },
+        {
+          "info": {
+            "name": "Evacuate or restore a cluster member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/cluster/members/:name/state",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Evacuates or restores a cluster member."
+        },
+        {
+          "info": {
+            "name": "Get the cluster members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/members?recursion=1",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of cluster members (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

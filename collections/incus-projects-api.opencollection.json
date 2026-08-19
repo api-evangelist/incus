@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates projects API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/projects",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of projects (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/projects"
+          },
+          "docs": "Creates a new project."
+        },
+        {
+          "info": {
+            "name": "Get the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific project."
+        },
+        {
+          "info": {
+            "name": "Rename the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Renames an existing project."
+        },
+        {
+          "info": {
+            "name": "Update the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire project configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the project configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Delete project and related artifacts"
+              }
+            ]
+          },
+          "docs": "Removes the project."
+        },
+        {
+          "info": {
+            "name": "Get who has access to a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/projects/:name/access",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets the access information for the project."
+        },
+        {
+          "info": {
+            "name": "Get the project state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/projects/:name/state",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific project resource consumption information."
+        },
+        {
+          "info": {
+            "name": "Get the projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/projects?recursion=1",
+            "params": [
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of projects (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

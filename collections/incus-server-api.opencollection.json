@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates server API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "server",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the supported API endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/"
+          },
+          "docs": "Returns a list of supported API versions (URLs).\n\nInternal API endpoints are not reported as those aren't versioned\nand should only be used by the daemon itself."
+        },
+        {
+          "info": {
+            "name": "Get the server environment and configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0",
+            "params": [
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Shows the full server environment and configuration."
+        },
+        {
+          "info": {
+            "name": "Update the server configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0",
+            "params": [
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates the entire server configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the server configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0",
+            "params": [
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the server configuration."
+        },
+        {
+          "info": {
+            "name": "Get the event stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/events",
+            "params": [
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "type",
+                "value": "logging,lifecycle",
+                "type": "query",
+                "description": "Event type(s), comma separated (valid types are logging, operation or lifecycle)"
+              },
+              {
+                "name": "all-projects",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve instances from all projects"
+              }
+            ]
+          },
+          "docs": "Connects to the event API using websocket."
+        },
+        {
+          "info": {
+            "name": "Get system resources information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/resources",
+            "params": [
+              {
+                "name": "target",
+                "value": "server01",
+                "type": "query",
+                "description": "Cluster member name"
+              }
+            ]
+          },
+          "docs": "Gets the hardware information profile of the server."
+        },
+        {
+          "info": {
+            "name": "Get the server environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0?public"
+          },
+          "docs": "Shows a small subset of the server environment and configuration\nwhich is required by untrusted clients to reach a server.\n\nThe `?public` part of the URL isn't required, it's simply used to\nseparate the two behaviors of this endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,260 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates network-load-balancers API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "network-load-balancers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the network address of load balancers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network address load balancers (URLs)."
+        },
+        {
+          "info": {
+            "name": "Add a network load balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Creates a new network load balancer."
+        },
+        {
+          "info": {
+            "name": "Get the network address load balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers/:listenAddress",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "listenAddress",
+                "value": "",
+                "type": "path",
+                "description": "Listen address"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Gets a specific network address load balancer."
+        },
+        {
+          "info": {
+            "name": "Update the network address load balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers/:listenAddress",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "listenAddress",
+                "value": "",
+                "type": "path",
+                "description": "Listen address"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates the entire network address load balancer configuration."
+        },
+        {
+          "info": {
+            "name": "Partially update the network address load balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers/:listenAddress",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "listenAddress",
+                "value": "",
+                "type": "path",
+                "description": "Listen address"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Updates a subset of the network address load balancer configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the network address load balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers/:listenAddress",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "listenAddress",
+                "value": "",
+                "type": "path",
+                "description": "Listen address"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Removes the network address load balancer."
+        },
+        {
+          "info": {
+            "name": "Get the network address load balancer state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers/:listenAddress/state",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "listenAddress",
+                "value": "",
+                "type": "path",
+                "description": "Listen address"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              }
+            ]
+          },
+          "docs": "Get the current state of a specific network address load balancer."
+        },
+        {
+          "info": {
+            "name": "Get the network address load balancers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/networks/:networkName/load-balancers?recursion=1",
+            "params": [
+              {
+                "name": "networkName",
+                "value": "",
+                "type": "path",
+                "description": "Network name"
+              },
+              {
+                "name": "project",
+                "value": "default",
+                "type": "query",
+                "description": "Project name"
+              },
+              {
+                "name": "filter",
+                "value": "default",
+                "type": "query",
+                "description": "Collection filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of network address load balancers (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

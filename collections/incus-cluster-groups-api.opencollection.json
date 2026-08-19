@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Incus external REST certificates cluster-groups API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cluster-groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the cluster groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/groups"
+          },
+          "docs": "Returns a list of cluster groups (URLs)."
+        },
+        {
+          "info": {
+            "name": "Get the cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/groups/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster group name"
+              }
+            ]
+          },
+          "docs": "Gets a specific cluster group."
+        },
+        {
+          "info": {
+            "name": "Rename the cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/1.0/cluster/groups/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster group name"
+              }
+            ]
+          },
+          "docs": "Renames an existing cluster group."
+        },
+        {
+          "info": {
+            "name": "Update the cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/1.0/cluster/groups/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster group name"
+              }
+            ]
+          },
+          "docs": "Updates the entire cluster group configuration."
+        },
+        {
+          "info": {
+            "name": "Update the cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/1.0/cluster/groups/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster group name"
+              }
+            ]
+          },
+          "docs": "Updates the cluster group configuration."
+        },
+        {
+          "info": {
+            "name": "Delete the cluster group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/1.0/cluster/groups/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "Cluster group name"
+              }
+            ]
+          },
+          "docs": "Removes the cluster group."
+        },
+        {
+          "info": {
+            "name": "Get the cluster groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/1.0/cluster/groups?recursion=1"
+          },
+          "docs": "Returns a list of cluster groups (structs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
