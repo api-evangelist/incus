@@ -24,6 +24,12 @@ tags:
   - Virtual Machines
   - Virtualization
   - Linux
+  - Open-Source
+tags_raw:
+  - Containers
+  - Virtual Machines
+  - Virtualization
+  - Linux
   - Open Source
 url: https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -35,6 +41,8 @@ apis:
   description: The certificates API from Incus — 4 operation(s) for certificates.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Certificates
+  tags_raw:
   - certificates
   properties:
   - type: OpenAPI
@@ -52,6 +60,8 @@ apis:
   description: The cluster API from Incus — 7 operation(s) for cluster.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Cluster
+  tags_raw:
   - cluster
   properties:
   - type: OpenAPI
@@ -69,6 +79,8 @@ apis:
   description: The cluster-groups API from Incus — 3 operation(s) for cluster-groups.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - ClusterGroups
+  tags_raw:
   - cluster-groups
   properties:
   - type: OpenAPI
@@ -86,6 +98,8 @@ apis:
   description: The images API from Incus — 14 operation(s) for images.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Image
+  tags_raw:
   - images
   properties:
   - type: OpenAPI
@@ -103,6 +117,8 @@ apis:
   description: The instances API from Incus — 28 operation(s) for instances.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Instances
+  tags_raw:
   - instances
   properties:
   - type: OpenAPI
@@ -137,6 +153,8 @@ apis:
   description: The metrics API from Incus — 1 operation(s) for metrics.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Metrics
+  tags_raw:
   - metrics
   properties:
   - type: OpenAPI
@@ -154,6 +172,8 @@ apis:
   description: The network-acls API from Incus — 4 operation(s) for network-acls.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Network ACLs
+  tags_raw:
   - network-acls
   properties:
   - type: OpenAPI
@@ -273,6 +293,8 @@ apis:
   description: The network-zones API from Incus — 6 operation(s) for network-zones.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Network Zones
+  tags_raw:
   - network-zones
   properties:
   - type: OpenAPI
@@ -290,6 +312,8 @@ apis:
   description: The networks API from Incus — 5 operation(s) for networks.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Networks
+  tags_raw:
   - networks
   properties:
   - type: OpenAPI
@@ -306,7 +330,8 @@ apis:
   name: Incus operations API
   description: The operations API from Incus — 7 operation(s) for operations.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
-  tags:
+  tags: []
+  tags_raw:
   - operations
   properties:
   - type: OpenAPI
@@ -324,6 +349,8 @@ apis:
   description: The profiles API from Incus — 3 operation(s) for profiles.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Profiles
+  tags_raw:
   - profiles
   properties:
   - type: OpenAPI
@@ -341,6 +368,8 @@ apis:
   description: The projects API from Incus — 5 operation(s) for projects.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Project
+  tags_raw:
   - projects
   properties:
   - type: OpenAPI
@@ -358,6 +387,8 @@ apis:
   description: The server API from Incus — 5 operation(s) for server.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Server
+  tags_raw:
   - server
   properties:
   - type: OpenAPI
@@ -375,6 +406,8 @@ apis:
   description: The storage API from Incus — 39 operation(s) for storage.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
+  - Storage
+  tags_raw:
   - storage
   properties:
   - type: OpenAPI
