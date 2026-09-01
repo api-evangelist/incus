@@ -92,7 +92,7 @@ apis:
   description: The cluster-groups API from Incus — 3 operation(s) for cluster-groups.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
-  - cluster-groups
+  - ClusterGroups
   tags_raw:
   - cluster-groups
   properties:
@@ -185,7 +185,7 @@ apis:
   description: The network-acls API from Incus — 4 operation(s) for network-acls.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
-  - network-acls
+  - Network ACLs
   tags_raw:
   - network-acls
   properties:
@@ -306,7 +306,7 @@ apis:
   description: The network-zones API from Incus — 6 operation(s) for network-zones.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
-  - network-zones
+  - Network Zones
   tags_raw:
   - network-zones
   properties:
@@ -325,7 +325,7 @@ apis:
   description: The networks API from Incus — 5 operation(s) for networks.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
-  - networks
+  - Networks
   tags_raw:
   - networks
   properties:
