@@ -400,7 +400,7 @@ apis:
   description: The server API from Incus — 5 operation(s) for server.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
-  - Server
+  - Servers
   tags_raw:
   - server
   properties:
