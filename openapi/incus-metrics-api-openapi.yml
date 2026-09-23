@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   contact:
     email: lxc-devel@lists.linuxcontainers.org
@@ -19,10 +19,10 @@ info:
   license:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  title: Incus external REST certificates metrics API
+  title: Incus external REST Metrics API
   version: '1.0'
 tags:
-- name: metrics
+- name: Metrics
 paths:
   /1.0/metrics:
     get:
@@ -33,61 +33,68 @@ paths:
         example: default
         in: query
         name: project
-        type: string
+        schema:
+          type: string
       - description: Cluster member name
         example: server01
         in: query
         name: target
-        type: string
-      produces:
-      - text/plain
+        schema:
+          type: string
       responses:
         '200':
           description: Metrics
-          schema:
-            description: Instance metrics
-            type: string
+          content:
+            text/plain:
+              schema:
+                description: Instance metrics
+                type: string
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Get metrics
       tags:
-      - metrics
-responses:
-  Forbidden:
-    description: Forbidden
-    schema:
-      properties:
-        error:
-          example: not authorized
-          type: string
-          x-go-name: Error
-        error_code:
-          example: 403
-          format: int64
-          type: integer
-          x-go-name: ErrorCode
-        type:
-          example: error
-          type: string
-          x-go-name: Type
-      type: object
-  InternalServerError:
-    description: Internal Server Error
-    schema:
-      properties:
-        error:
-          example: internal server error
-          type: string
-          x-go-name: Error
-        error_code:
-          example: 500
-          format: int64
-          type: integer
-          x-go-name: ErrorCode
-        type:
-          example: error
-          type: string
-          x-go-name: Type
-      type: object
+      - Metrics
+components:
+  responses:
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object

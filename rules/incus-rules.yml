@@ -1,5 +1,5 @@
-aid: incus:incus-rest-api
-name: Incus REST API Rules
+x-aid: incus:incus-rest-api
+x-name: Incus REST API Rules
 description: >-
   Operational guardrails and conventions for working with the Incus REST API.
   These rules document expectations around authentication, project scoping,

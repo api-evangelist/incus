@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   contact:
     email: lxc-devel@lists.linuxcontainers.org
@@ -19,7 +19,7 @@ info:
   license:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  title: Incus external REST certificates network-peers API
+  title: Incus external REST Network Peers API
   version: '1.0'
 tags:
 - name: network-peers
@@ -33,54 +33,55 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
+        schema:
+          type: string
       - description: Collection filter
         example: default
         in: query
         name: filter
-        type: string
-      produces:
-      - application/json
+        schema:
+          type: string
       responses:
         '200':
           description: API endpoints
-          schema:
-            description: Sync response
-            properties:
-              metadata:
-                description: List of endpoints
-                example: "[\n  \"/1.0/networks/mybr0/peers/my-peer-1\",\n  \"/1.0/networks/mybr0/peers/my-peer-2\"\n]"
-                items:
-                  type: string
-                type: array
-              status:
-                description: Status description
-                example: Success
-                type: string
-              status_code:
-                description: Status code
-                example: 200
-                type: integer
-              type:
-                description: Response type
-                example: sync
-                type: string
-            type: object
+          content:
+            application/json:
+              schema:
+                description: Sync response
+                properties:
+                  metadata:
+                    description: List of endpoints
+                    example: "[\n  \"/1.0/networks/mybr0/peers/my-peer-1\",\n  \"/1.0/networks/mybr0/peers/my-peer-2\"\n]"
+                    items:
+                      type: string
+                    type: array
+                  status:
+                    description: Status description
+                    example: Success
+                    type: string
+                  status_code:
+                    description: Status code
+                    example: 200
+                    type: integer
+                  type:
+                    description: Response type
+                    example: sync
+                    type: string
+                type: object
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Get the network peers
       tags:
       - network-peers
     post:
-      consumes:
-      - application/json
       description: Initiates/creates a new network peering.
       operationId: network_peers_post
       parameters:
@@ -88,34 +89,35 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
-      - description: Peer
-        in: body
-        name: peer
-        required: true
         schema:
-          $ref: '#/definitions/NetworkPeersPost'
-      produces:
-      - application/json
+          type: string
       responses:
         '200':
-          $ref: '#/responses/EmptySyncResponse'
+          $ref: '#/components/responses/EmptySyncResponse'
         '202':
-          $ref: '#/responses/EmptySyncResponse'
+          $ref: '#/components/responses/EmptySyncResponse'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/components/responses/BadRequest'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Add a network peer
       tags:
       - network-peers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkPeersPost'
+        description: Peer
+        required: true
   /1.0/networks/{networkName}/peers/{peerName}:
     delete:
       description: Removes the network peering.
@@ -125,28 +127,29 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Peer name
         in: path
         name: peerName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
-      produces:
-      - application/json
+        schema:
+          type: string
       responses:
         '200':
-          $ref: '#/responses/EmptySyncResponse'
+          $ref: '#/components/responses/EmptySyncResponse'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/components/responses/BadRequest'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Delete the network peer
       tags:
       - network-peers
@@ -158,50 +161,51 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Peer name
         in: path
         name: peerName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
-      produces:
-      - application/json
+        schema:
+          type: string
       responses:
         '200':
           description: Peer
-          schema:
-            description: Sync response
-            properties:
-              metadata:
-                $ref: '#/definitions/NetworkPeer'
-              status:
-                description: Status description
-                example: Success
-                type: string
-              status_code:
-                description: Status code
-                example: 200
-                type: integer
-              type:
-                description: Response type
-                example: sync
-                type: string
-            type: object
+          content:
+            application/json:
+              schema:
+                description: Sync response
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/NetworkPeer'
+                  status:
+                    description: Status description
+                    example: Success
+                    type: string
+                  status_code:
+                    description: Status code
+                    example: 200
+                    type: integer
+                  type:
+                    description: Response type
+                    example: sync
+                    type: string
+                type: object
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Get the network peer
       tags:
       - network-peers
     patch:
-      consumes:
-      - application/json
       description: Updates a subset of the network peering configuration.
       operationId: network_peer_patch
       parameters:
@@ -209,42 +213,42 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Peer name
         in: path
         name: peerName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
-      - description: Peer configuration
-        in: body
-        name: Peer
-        required: true
         schema:
-          $ref: '#/definitions/NetworkPeerPut'
-      produces:
-      - application/json
+          type: string
       responses:
         '200':
-          $ref: '#/responses/EmptySyncResponse'
+          $ref: '#/components/responses/EmptySyncResponse'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/components/responses/BadRequest'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '412':
-          $ref: '#/responses/PreconditionFailed'
+          $ref: '#/components/responses/PreconditionFailed'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Partially update the network peer
       tags:
       - network-peers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkPeerPut'
+        description: Peer configuration
+        required: true
     put:
-      consumes:
-      - application/json
       description: Updates the entire network peering configuration.
       operationId: network_peer_put
       parameters:
@@ -252,39 +256,41 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Peer name
         in: path
         name: peerName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
-      - description: Peer configuration
-        in: body
-        name: peer
-        required: true
         schema:
-          $ref: '#/definitions/NetworkPeerPut'
-      produces:
-      - application/json
+          type: string
       responses:
         '200':
-          $ref: '#/responses/EmptySyncResponse'
+          $ref: '#/components/responses/EmptySyncResponse'
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/components/responses/BadRequest'
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '412':
-          $ref: '#/responses/PreconditionFailed'
+          $ref: '#/components/responses/PreconditionFailed'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Update the network peer
       tags:
       - network-peers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkPeerPut'
+        description: Peer configuration
+        required: true
   /1.0/networks/{networkName}/peers?recursion=1:
     get:
       description: Returns a list of network peers (structs).
@@ -294,256 +300,270 @@ paths:
         in: path
         name: networkName
         required: true
-        type: string
+        schema:
+          type: string
       - description: Project name
         example: default
         in: query
         name: project
-        type: string
+        schema:
+          type: string
       - description: Collection filter
         example: default
         in: query
         name: filter
-        type: string
-      produces:
-      - application/json
+        schema:
+          type: string
       responses:
         '200':
           description: API endpoints
-          schema:
-            description: Sync response
-            properties:
-              metadata:
-                description: List of network peers
-                items:
-                  $ref: '#/definitions/NetworkPeer'
-                type: array
-              status:
-                description: Status description
-                example: Success
-                type: string
-              status_code:
-                description: Status code
-                example: 200
-                type: integer
-              type:
-                description: Response type
-                example: sync
-                type: string
-            type: object
+          content:
+            application/json:
+              schema:
+                description: Sync response
+                properties:
+                  metadata:
+                    description: List of network peers
+                    items:
+                      $ref: '#/components/schemas/NetworkPeer'
+                    type: array
+                  status:
+                    description: Status description
+                    example: Success
+                    type: string
+                  status_code:
+                    description: Status code
+                    example: 200
+                    type: integer
+                  type:
+                    description: Response type
+                    example: sync
+                    type: string
+                type: object
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: '#/components/responses/Forbidden'
         '500':
-          $ref: '#/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerError'
       summary: Get the network peers
       tags:
       - network-peers
-definitions:
-  NetworkPeer:
-    properties:
-      config:
-        description: Peer configuration map (refer to doc/network-peers.md)
-        example:
-          user.mykey: foo
-        type: object
-        x-go-name: Config
-      description:
-        description: Description of the peer
-        example: Peering with network1 in project1
-        type: string
-        x-go-name: Description
-      name:
-        description: Name of the peer
-        example: project1-network1
-        readOnly: true
-        type: string
-        x-go-name: Name
-      status:
-        description: The state of the peering
-        example: Pending
-        readOnly: true
-        type: string
-        x-go-name: Status
-      target_integration:
-        description: Name of the target integration
-        example: ovn-ic1
-        type: string
-        x-go-name: TargetIntegration
-      target_network:
-        description: Name of the target network
-        example: network1
-        readOnly: true
-        type: string
-        x-go-name: TargetNetwork
-      target_project:
-        description: Name of the target project
-        example: project1
-        readOnly: true
-        type: string
-        x-go-name: TargetProject
-      type:
-        description: Type of peer
-        example: local
-        type: string
-        x-go-name: Type
-      used_by:
-        description: List of URLs of objects using this network peering
-        example:
-        - /1.0/network-acls/test
-        - /1.0/network-acls/foo
-        items:
-          type: string
-        readOnly: true
-        type: array
-        x-go-name: UsedBy
-    title: NetworkPeer used for displaying a network peering.
-    type: object
-    x-go-package: github.com/lxc/incus/v7/shared/api
-  NetworkPeerPut:
-    description: NetworkPeerPut represents the modifiable fields of a network peering
-    properties:
-      config:
-        description: Peer configuration map (refer to doc/network-peers.md)
-        example:
-          user.mykey: foo
-        type: object
-        x-go-name: Config
-      description:
-        description: Description of the peer
-        example: Peering with network1 in project1
-        type: string
-        x-go-name: Description
-    type: object
-    x-go-package: github.com/lxc/incus/v7/shared/api
-  NetworkPeersPost:
-    description: NetworkPeersPost represents the fields of a new network peering
-    properties:
-      config:
-        description: Peer configuration map (refer to doc/network-peers.md)
-        example:
-          user.mykey: foo
-        type: object
-        x-go-name: Config
-      description:
-        description: Description of the peer
-        example: Peering with network1 in project1
-        type: string
-        x-go-name: Description
-      name:
-        description: Name of the peer
-        example: project1-network1
-        type: string
-        x-go-name: Name
-      target_integration:
-        description: Name of the target integration
-        example: ovn-ic1
-        type: string
-        x-go-name: TargetIntegration
-      target_network:
-        description: Name of the target network
-        example: network1
-        type: string
-        x-go-name: TargetNetwork
-      target_project:
-        description: Name of the target project
-        example: project1
-        type: string
-        x-go-name: TargetProject
-      type:
-        description: Type of peer
-        example: local
-        type: string
-        x-go-name: Type
-    type: object
-    x-go-package: github.com/lxc/incus/v7/shared/api
-responses:
-  Forbidden:
-    description: Forbidden
-    schema:
+components:
+  responses:
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+  schemas:
+    NetworkPeerPut:
+      description: NetworkPeerPut represents the modifiable fields of a network peering
       properties:
-        error:
-          example: not authorized
+        config:
+          description: Peer configuration map (refer to doc/network-peers.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the peer
+          example: Peering with network1 in project1
           type: string
-          x-go-name: Error
-        error_code:
-          example: 403
-          format: int64
-          type: integer
-          x-go-name: ErrorCode
-        type:
-          example: error
-          type: string
-          x-go-name: Type
+          x-go-name: Description
       type: object
-  BadRequest:
-    description: Bad Request
-    schema:
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkPeer:
       properties:
-        error:
-          example: bad request
+        config:
+          description: Peer configuration map (refer to doc/network-peers.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the peer
+          example: Peering with network1 in project1
           type: string
-          x-go-name: Error
-        error_code:
-          example: 400
-          format: int64
-          type: integer
-          x-go-name: ErrorCode
-        type:
-          example: error
+          x-go-name: Description
+        name:
+          description: Name of the peer
+          example: project1-network1
+          readOnly: true
           type: string
-          x-go-name: Type
-      type: object
-  PreconditionFailed:
-    description: Precondition Failed
-    schema:
-      properties:
-        error:
-          example: precondition failed
-          type: string
-          x-go-name: Error
-        error_code:
-          example: 412
-          format: int64
-          type: integer
-          x-go-name: ErrorCode
-        type:
-          example: error
-          type: string
-          x-go-name: Type
-      type: object
-  EmptySyncResponse:
-    description: Empty sync response
-    schema:
-      properties:
+          x-go-name: Name
         status:
-          example: Success
+          description: The state of the peering
+          example: Pending
+          readOnly: true
           type: string
           x-go-name: Status
-        status_code:
-          example: 200
-          format: int64
-          type: integer
-          x-go-name: StatusCode
+        target_integration:
+          description: Name of the target integration
+          example: ovn-ic1
+          type: string
+          x-go-name: TargetIntegration
+        target_network:
+          description: Name of the target network
+          example: network1
+          readOnly: true
+          type: string
+          x-go-name: TargetNetwork
+        target_project:
+          description: Name of the target project
+          example: project1
+          readOnly: true
+          type: string
+          x-go-name: TargetProject
         type:
-          example: sync
+          description: Type of peer
+          example: local
           type: string
           x-go-name: Type
+        used_by:
+          description: List of URLs of objects using this network peering
+          example:
+          - /1.0/network-acls/test
+          - /1.0/network-acls/foo
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-go-name: UsedBy
+      title: NetworkPeer used for displaying a network peering.
       type: object
-  InternalServerError:
-    description: Internal Server Error
-    schema:
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkPeersPost:
+      description: NetworkPeersPost represents the fields of a new network peering
       properties:
-        error:
-          example: internal server error
+        config:
+          description: Peer configuration map (refer to doc/network-peers.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the peer
+          example: Peering with network1 in project1
           type: string
-          x-go-name: Error
-        error_code:
-          example: 500
-          format: int64
-          type: integer
-          x-go-name: ErrorCode
+          x-go-name: Description
+        name:
+          description: Name of the peer
+          example: project1-network1
+          type: string
+          x-go-name: Name
+        target_integration:
+          description: Name of the target integration
+          example: ovn-ic1
+          type: string
+          x-go-name: TargetIntegration
+        target_network:
+          description: Name of the target network
+          example: network1
+          type: string
+          x-go-name: TargetNetwork
+        target_project:
+          description: Name of the target project
+          example: project1
+          type: string
+          x-go-name: TargetProject
         type:
-          example: error
+          description: Type of peer
+          example: local
           type: string
           x-go-name: Type
       type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
