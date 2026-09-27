@@ -352,26 +352,6 @@ paths:
       - Profiles
 components:
   responses:
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
     PreconditionFailed:
       description: Precondition Failed
       content:
@@ -452,7 +432,67 @@ components:
                 type: string
                 x-go-name: Type
             type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
   schemas:
+    ProfilePost:
+      description: ProfilePost represents the fields required to rename a profile
+      properties:
+        name:
+          description: The new name for the profile
+          example: bar
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProfilePut:
+      description: ProfilePut represents the modifiable fields of a profile
+      properties:
+        config:
+          description: Instance configuration map (refer to doc/instances.md)
+          example:
+            limits.cpu: '4'
+            limits.memory: 4GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the profile
+          example: Medium size instances
+          type: string
+          x-go-name: Description
+        devices:
+          description: List of devices
+          example:
+            eth0:
+              name: eth0
+              network: mybr0
+              type: nic
+            root:
+              path: /
+              pool: default
+              type: disk
+          type: object
+          x-go-name: Devices
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
     ProfilesPost:
       description: ProfilesPost represents the fields of a new profile
       properties:
@@ -484,16 +524,6 @@ components:
         name:
           description: The name of the new profile
           example: foo
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProfilePost:
-      description: ProfilePost represents the fields required to rename a profile
-      properties:
-        name:
-          description: The new name for the profile
-          example: bar
           type: string
           x-go-name: Name
       type: object
@@ -547,35 +577,5 @@ components:
           readOnly: true
           type: array
           x-go-name: UsedBy
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProfilePut:
-      description: ProfilePut represents the modifiable fields of a profile
-      properties:
-        config:
-          description: Instance configuration map (refer to doc/instances.md)
-          example:
-            limits.cpu: '4'
-            limits.memory: 4GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the profile
-          example: Medium size instances
-          type: string
-          x-go-name: Description
-        devices:
-          description: List of devices
-          example:
-            eth0:
-              name: eth0
-              network: mybr0
-              type: nic
-            root:
-              path: /
-              pool: default
-              type: disk
-          type: object
-          x-go-name: Devices
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api

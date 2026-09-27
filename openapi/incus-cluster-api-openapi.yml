@@ -465,28 +465,6 @@ paths:
       - Cluster
 components:
   schemas:
-    Cluster:
-      properties:
-        enabled:
-          description: Whether clustering is enabled
-          example: true
-          type: boolean
-          x-go-name: Enabled
-        member_config:
-          description: List of member configuration keys (used during join)
-          example: []
-          items:
-            $ref: '#/components/schemas/ClusterMemberConfigKey'
-          type: array
-          x-go-name: MemberConfig
-        server_name:
-          description: Name of the cluster member answering the request
-          example: server01
-          type: string
-          x-go-name: ServerName
-      title: Cluster represents high-level information about a cluster.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
     ClusterMemberPut:
       description: ClusterMemberPut represents the modifiable fields of a cluster member
       properties:
@@ -525,14 +503,178 @@ components:
           x-go-name: Roles
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterMemberPost:
+    ClusterCertificatePut:
+      description: ClusterCertificatePut represents the certificate and key pair for all cluster members
       properties:
-        server_name:
-          description: The new name of the cluster member
-          example: server02
+        cluster_certificate:
+          description: The new certificate (X509 PEM encoded) for the cluster
+          example: X509 PEM certificate
           type: string
-          x-go-name: ServerName
-      title: ClusterMemberPost represents the fields required to rename a cluster member.
+          x-go-name: ClusterCertificate
+        cluster_certificate_key:
+          description: The new certificate key (X509 PEM encoded) for the cluster
+          example: X509 PEM certificate key
+          type: string
+          x-go-name: ClusterCertificateKey
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterMemberStatePost:
+      properties:
+        action:
+          description: The action to be performed. Valid actions are "evacuate" and "restore".
+          example: evacuate
+          type: string
+          x-go-name: Action
+        mode:
+          description: Override the configured evacuation mode.
+          example: stop
+          type: string
+          x-go-name: Mode
+      title: ClusterMemberStatePost represents the fields required to evacuate a cluster member.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ResourcesStoragePoolInodes:
+      description: ResourcesStoragePoolInodes represents the inodes available to a given storage pool
+      properties:
+        total:
+          description: Total inodes
+          example: 30709993797
+          format: uint64
+          type: integer
+          x-go-name: Total
+        used:
+          description: Used inodes
+          example: 23937695
+          format: uint64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterGroupsPost:
+      properties:
+        config:
+          description: Cluster group configuration map
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: The description of the cluster group
+          example: amd64 servers
+          type: string
+          x-go-name: Description
+        members:
+          description: List of members in this group
+          example:
+          - server01
+          - server02
+          items:
+            type: string
+          type: array
+          x-go-name: Members
+        name:
+          description: The new name of the cluster group
+          example: group1
+          type: string
+          x-go-name: Name
+      title: ClusterGroupsPost represents the fields available for a new cluster group.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ResourcesStoragePoolSpace:
+      description: ResourcesStoragePoolSpace represents the space available to a given storage pool
+      properties:
+        total:
+          description: Total disk space (bytes)
+          example: 420100937728
+          format: uint64
+          type: integer
+          x-go-name: Total
+        used:
+          description: Used disk space (bytes)
+          example: 343537419776
+          format: uint64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterMemberConfigKey:
+      description: 'The Value field is empty when getting clustering information with GET
+
+        1.0/cluster, and should be filled by the joining server when performing a PUT
+
+        1.0/cluster join request.'
+      properties:
+        description:
+          description: A human friendly description key
+          example: '"source" property for storage pool "local"'
+          type: string
+          x-go-name: Description
+        entity:
+          description: The kind of configuration key (network, storage-pool, ...)
+          example: storage-pool
+          type: string
+          x-go-name: Entity
+        key:
+          description: The name of the key
+          example: source
+          type: string
+          x-go-name: Key
+        name:
+          description: The name of the object requiring this key
+          example: local
+          type: string
+          x-go-name: Name
+        value:
+          description: The value on the answering cluster member
+          example: /dev/sdb
+          type: string
+          x-go-name: Value
+      title: 'ClusterMemberConfigKey represents a single config key that a new member of
+
+        the cluster is required to provide when joining.'
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterMemberSysInfo:
+      properties:
+        buffered_ram:
+          format: uint64
+          type: integer
+          x-go-name: BufferRAM
+        free_ram:
+          format: uint64
+          type: integer
+          x-go-name: FreeRAM
+        free_swap:
+          format: uint64
+          type: integer
+          x-go-name: FreeSwap
+        load_averages:
+          items:
+            format: double
+            type: number
+          type: array
+          x-go-name: LoadAverages
+        processes:
+          format: uint16
+          type: integer
+          x-go-name: Processes
+        shared_ram:
+          format: uint64
+          type: integer
+          x-go-name: SharedRAM
+        total_ram:
+          format: uint64
+          type: integer
+          x-go-name: TotalRAM
+        total_swap:
+          format: uint64
+          type: integer
+          x-go-name: TotalSwap
+        uptime:
+          format: int64
+          type: integer
+          x-go-name: Uptime
+      title: ClusterMemberSysInfo represents the sysinfo of a cluster member.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     ClusterMember:
@@ -601,6 +743,74 @@ components:
           type: string
           x-go-name: URL
       title: ClusterMember represents a member of a cluster.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    Cluster:
+      properties:
+        enabled:
+          description: Whether clustering is enabled
+          example: true
+          type: boolean
+          x-go-name: Enabled
+        member_config:
+          description: List of member configuration keys (used during join)
+          example: []
+          items:
+            $ref: '#/components/schemas/ClusterMemberConfigKey'
+          type: array
+          x-go-name: MemberConfig
+        server_name:
+          description: Name of the cluster member answering the request
+          example: server01
+          type: string
+          x-go-name: ServerName
+      title: Cluster represents high-level information about a cluster.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterMembersPost:
+      properties:
+        server_name:
+          description: The name of the new cluster member
+          example: server02
+          type: string
+          x-go-name: ServerName
+      title: ClusterMembersPost represents the fields required to request a join token to add a member to the cluster.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StoragePoolState:
+      properties:
+        inodes:
+          $ref: '#/components/schemas/ResourcesStoragePoolInodes'
+        space:
+          $ref: '#/components/schemas/ResourcesStoragePoolSpace'
+      title: StoragePoolState represents the state of a storage pool.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterMemberPost:
+      properties:
+        server_name:
+          description: The new name of the cluster member
+          example: server02
+          type: string
+          x-go-name: ServerName
+      title: ClusterMemberPost represents the fields required to rename a cluster member.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ClusterMemberState:
+      properties:
+        storage_pools:
+          additionalProperties:
+            $ref: '#/components/schemas/StoragePoolState'
+          type: object
+          x-go-name: StoragePools
+        sysinfo:
+          $ref: '#/components/schemas/ClusterMemberSysInfo'
+      title: ClusterMemberState represents the state of a cluster member.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
@@ -686,78 +896,6 @@ components:
           x-go-name: UpdatedAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterMemberStatePost:
-      properties:
-        action:
-          description: The action to be performed. Valid actions are "evacuate" and "restore".
-          example: evacuate
-          type: string
-          x-go-name: Action
-        mode:
-          description: Override the configured evacuation mode.
-          example: stop
-          type: string
-          x-go-name: Mode
-      title: ClusterMemberStatePost represents the fields required to evacuate a cluster member.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterMembersPost:
-      properties:
-        server_name:
-          description: The name of the new cluster member
-          example: server02
-          type: string
-          x-go-name: ServerName
-      title: ClusterMembersPost represents the fields required to request a join token to add a member to the cluster.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterGroupsPost:
-      properties:
-        config:
-          description: Cluster group configuration map
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: The description of the cluster group
-          example: amd64 servers
-          type: string
-          x-go-name: Description
-        members:
-          description: List of members in this group
-          example:
-          - server01
-          - server02
-          items:
-            type: string
-          type: array
-          x-go-name: Members
-        name:
-          description: The new name of the cluster group
-          example: group1
-          type: string
-          x-go-name: Name
-      title: ClusterGroupsPost represents the fields available for a new cluster group.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterMemberState:
-      properties:
-        storage_pools:
-          additionalProperties:
-            $ref: '#/components/schemas/StoragePoolState'
-          type: object
-          x-go-name: StoragePools
-        sysinfo:
-          $ref: '#/components/schemas/ClusterMemberSysInfo'
-      title: ClusterMemberState represents the state of a cluster member.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
     ClusterPut:
       properties:
         cluster_address:
@@ -798,144 +936,6 @@ components:
           type: string
           x-go-name: ServerName
       title: ClusterPut represents the fields required to bootstrap or join a cluster.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ResourcesStoragePoolInodes:
-      description: ResourcesStoragePoolInodes represents the inodes available to a given storage pool
-      properties:
-        total:
-          description: Total inodes
-          example: 30709993797
-          format: uint64
-          type: integer
-          x-go-name: Total
-        used:
-          description: Used inodes
-          example: 23937695
-          format: uint64
-          type: integer
-          x-go-name: Used
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterMemberConfigKey:
-      description: 'The Value field is empty when getting clustering information with GET
-
-        1.0/cluster, and should be filled by the joining server when performing a PUT
-
-        1.0/cluster join request.'
-      properties:
-        description:
-          description: A human friendly description key
-          example: '"source" property for storage pool "local"'
-          type: string
-          x-go-name: Description
-        entity:
-          description: The kind of configuration key (network, storage-pool, ...)
-          example: storage-pool
-          type: string
-          x-go-name: Entity
-        key:
-          description: The name of the key
-          example: source
-          type: string
-          x-go-name: Key
-        name:
-          description: The name of the object requiring this key
-          example: local
-          type: string
-          x-go-name: Name
-        value:
-          description: The value on the answering cluster member
-          example: /dev/sdb
-          type: string
-          x-go-name: Value
-      title: 'ClusterMemberConfigKey represents a single config key that a new member of
-
-        the cluster is required to provide when joining.'
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ResourcesStoragePoolSpace:
-      description: ResourcesStoragePoolSpace represents the space available to a given storage pool
-      properties:
-        total:
-          description: Total disk space (bytes)
-          example: 420100937728
-          format: uint64
-          type: integer
-          x-go-name: Total
-        used:
-          description: Used disk space (bytes)
-          example: 343537419776
-          format: uint64
-          type: integer
-          x-go-name: Used
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterMemberSysInfo:
-      properties:
-        buffered_ram:
-          format: uint64
-          type: integer
-          x-go-name: BufferRAM
-        free_ram:
-          format: uint64
-          type: integer
-          x-go-name: FreeRAM
-        free_swap:
-          format: uint64
-          type: integer
-          x-go-name: FreeSwap
-        load_averages:
-          items:
-            format: double
-            type: number
-          type: array
-          x-go-name: LoadAverages
-        processes:
-          format: uint16
-          type: integer
-          x-go-name: Processes
-        shared_ram:
-          format: uint64
-          type: integer
-          x-go-name: SharedRAM
-        total_ram:
-          format: uint64
-          type: integer
-          x-go-name: TotalRAM
-        total_swap:
-          format: uint64
-          type: integer
-          x-go-name: TotalSwap
-        uptime:
-          format: int64
-          type: integer
-          x-go-name: Uptime
-      title: ClusterMemberSysInfo represents the sysinfo of a cluster member.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ClusterCertificatePut:
-      description: ClusterCertificatePut represents the certificate and key pair for all cluster members
-      properties:
-        cluster_certificate:
-          description: The new certificate (X509 PEM encoded) for the cluster
-          example: X509 PEM certificate
-          type: string
-          x-go-name: ClusterCertificate
-        cluster_certificate_key:
-          description: The new certificate key (X509 PEM encoded) for the cluster
-          example: X509 PEM certificate key
-          type: string
-          x-go-name: ClusterCertificateKey
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StoragePoolState:
-      properties:
-        inodes:
-          $ref: '#/components/schemas/ResourcesStoragePoolInodes'
-        space:
-          $ref: '#/components/schemas/ResourcesStoragePoolSpace'
-      title: StoragePoolState represents the state of a storage pool.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
   responses:
@@ -979,6 +979,52 @@ components:
                 type: string
                 x-go-name: Type
             type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    Operation:
+      description: Operation
+      content:
+        application/json:
+          schema:
+            properties:
+              metadata:
+                $ref: '#/components/schemas/Operation'
+              operation:
+                example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
+                type: string
+                x-go-name: Operation
+              status:
+                example: Operation created
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 100
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: async
+                type: string
+                x-go-name: Type
+            type: object
     BadRequest:
       description: Bad Request
       content:
@@ -1016,52 +1062,6 @@ components:
                 x-go-name: ErrorCode
               type:
                 example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Operation:
-      description: Operation
-      content:
-        application/json:
-          schema:
-            properties:
-              metadata:
-                $ref: '#/components/schemas/Operation'
-              operation:
-                example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
-                type: string
-                x-go-name: Operation
-              status:
-                example: Operation created
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 100
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: async
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
                 type: string
                 x-go-name: Type
             type: object

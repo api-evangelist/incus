@@ -37,20 +37,21 @@ tags:
   - Virtual Machines
   - Virtualization
   - Linux
-  - Open-Source
+  - Open Source
 tags_raw:
   - Containers
   - Virtual Machines
   - Virtualization
   - Linux
   - Open Source
+  - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml
 created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
 - aid: incus:incus-certificates-api
-  name: Incus certificates API
+  name: Incus Certificates API
   description: The certificates API from Incus — 4 operation(s) for certificates.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -69,7 +70,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-cluster-api
-  name: Incus cluster API
+  name: Incus Cluster API
   description: The cluster API from Incus — 7 operation(s) for cluster.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -88,7 +89,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-cluster-groups-api
-  name: Incus cluster-groups API
+  name: Incus Cluster Groups API
   description: The cluster-groups API from Incus — 3 operation(s) for cluster-groups.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -107,7 +108,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-images-api
-  name: Incus images API
+  name: Incus Images API
   description: The images API from Incus — 14 operation(s) for images.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -126,7 +127,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-instances-api
-  name: Incus instances API
+  name: Incus Instances API
   description: The instances API from Incus — 28 operation(s) for instances.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -162,7 +163,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-metrics-api
-  name: Incus metrics API
+  name: Incus Metrics API
   description: The metrics API from Incus — 1 operation(s) for metrics.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -181,7 +182,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-acls-api
-  name: Incus network-acls API
+  name: Incus Network Acls API
   description: The network-acls API from Incus — 4 operation(s) for network-acls.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -200,7 +201,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-address-sets-api
-  name: Incus network-address-sets API
+  name: Incus Network Address Sets API
   description: The network-address-sets API from Incus — 3 operation(s) for network-address-sets.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -217,7 +218,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-allocations-api
-  name: Incus network-allocations API
+  name: Incus Network Allocations API
   description: The network-allocations API from Incus — 1 operation(s) for network-allocations.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -234,7 +235,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-forwards-api
-  name: Incus network-forwards API
+  name: Incus Network Forwards API
   description: The network-forwards API from Incus — 3 operation(s) for network-forwards.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -251,7 +252,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-integrations-api
-  name: Incus network-integrations API
+  name: Incus Network Integrations API
   description: The network-integrations API from Incus — 3 operation(s) for network-integrations.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -268,7 +269,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-load-balancers-api
-  name: Incus network-load-balancers API
+  name: Incus Network Load Balancers API
   description: The network-load-balancers API from Incus — 4 operation(s) for network-load-balancers.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -285,7 +286,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-peers-api
-  name: Incus network-peers API
+  name: Incus Network Peers API
   description: The network-peers API from Incus — 3 operation(s) for network-peers.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -302,7 +303,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-network-zones-api
-  name: Incus network-zones API
+  name: Incus Network Zones API
   description: The network-zones API from Incus — 6 operation(s) for network-zones.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -321,7 +322,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-networks-api
-  name: Incus networks API
+  name: Incus Networks API
   description: The networks API from Incus — 5 operation(s) for networks.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -340,7 +341,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-operations-api
-  name: Incus operations API
+  name: Incus Operations API
   description: The operations API from Incus — 7 operation(s) for operations.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags: []
@@ -358,7 +359,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-profiles-api
-  name: Incus profiles API
+  name: Incus Profiles API
   description: The profiles API from Incus — 3 operation(s) for profiles.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -377,7 +378,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-projects-api
-  name: Incus projects API
+  name: Incus Projects API
   description: The projects API from Incus — 5 operation(s) for projects.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -396,7 +397,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-server-api
-  name: Incus server API
+  name: Incus Server API
   description: The server API from Incus — 5 operation(s) for server.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -415,7 +416,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-storage-api
-  name: Incus storage API
+  name: Incus Storage API
   description: The storage API from Incus — 39 operation(s) for storage.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
@@ -434,7 +435,7 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 - aid: incus:incus-warnings-api
-  name: Incus warnings API
+  name: Incus Warnings API
   description: The warnings API from Incus — 3 operation(s) for warnings.
   humanURL: https://linuxcontainers.org/incus/docs/main/rest-api/
   tags:
