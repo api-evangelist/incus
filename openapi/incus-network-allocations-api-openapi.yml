@@ -73,35 +73,6 @@ paths:
       tags:
       - network-allocations
 components:
-  schemas:
-    NetworkAllocations:
-      description: 'NetworkAllocations used for displaying network addresses used by a consuming entity
-
-        e.g, instance, network forward, load-balancer, network...'
-      properties:
-        addresses:
-          description: The network address of the allocation (in CIDR format)
-          example: 192.0.2.1/24
-          type: string
-          x-go-name: Address
-        hwaddr:
-          description: Hwaddr is the MAC address of the entity consuming the network address
-          type: string
-          x-go-name: Hwaddr
-        nat:
-          description: Whether the entity comes from a network that performs egress source NAT
-          type: boolean
-          x-go-name: NAT
-        type:
-          description: Type of the entity consuming the network address
-          type: string
-          x-go-name: Type
-        used_by:
-          description: Name of the entity consuming the network address
-          type: string
-          x-go-name: UsedBy
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
   responses:
     InternalServerError:
       description: Internal Server Error
@@ -143,3 +114,32 @@ components:
                 type: string
                 x-go-name: Type
             type: object
+  schemas:
+    NetworkAllocations:
+      description: 'NetworkAllocations used for displaying network addresses used by a consuming entity
+
+        e.g, instance, network forward, load-balancer, network...'
+      properties:
+        addresses:
+          description: The network address of the allocation (in CIDR format)
+          example: 192.0.2.1/24
+          type: string
+          x-go-name: Address
+        hwaddr:
+          description: Hwaddr is the MAC address of the entity consuming the network address
+          type: string
+          x-go-name: Hwaddr
+        nat:
+          description: Whether the entity comes from a network that performs egress source NAT
+          type: boolean
+          x-go-name: NAT
+        type:
+          description: Type of the entity consuming the network address
+          type: string
+          x-go-name: Type
+        used_by:
+          description: Name of the entity consuming the network address
+          type: string
+          x-go-name: UsedBy
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api

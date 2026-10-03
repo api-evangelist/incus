@@ -349,18 +349,18 @@ paths:
       - network-peers
 components:
   responses:
-    PreconditionFailed:
-      description: Precondition Failed
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             properties:
               error:
-                example: precondition failed
+                example: bad request
                 type: string
                 x-go-name: Error
               error_code:
-                example: 412
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -386,26 +386,6 @@ components:
                 x-go-name: StatusCode
               type:
                 example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
                 type: string
                 x-go-name: Type
             type: object
@@ -449,6 +429,26 @@ components:
                 type: string
                 x-go-name: Type
             type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
   schemas:
     NetworkPeerPut:
       description: NetworkPeerPut represents the modifiable fields of a network peering
@@ -464,6 +464,47 @@ components:
           example: Peering with network1 in project1
           type: string
           x-go-name: Description
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkPeersPost:
+      description: NetworkPeersPost represents the fields of a new network peering
+      properties:
+        config:
+          description: Peer configuration map (refer to doc/network-peers.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the peer
+          example: Peering with network1 in project1
+          type: string
+          x-go-name: Description
+        name:
+          description: Name of the peer
+          example: project1-network1
+          type: string
+          x-go-name: Name
+        target_integration:
+          description: Name of the target integration
+          example: ovn-ic1
+          type: string
+          x-go-name: TargetIntegration
+        target_network:
+          description: Name of the target network
+          example: network1
+          type: string
+          x-go-name: TargetNetwork
+        target_project:
+          description: Name of the target project
+          example: project1
+          type: string
+          x-go-name: TargetProject
+        type:
+          description: Type of peer
+          example: local
+          type: string
+          x-go-name: Type
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkPeer:
@@ -524,46 +565,5 @@ components:
           type: array
           x-go-name: UsedBy
       title: NetworkPeer used for displaying a network peering.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkPeersPost:
-      description: NetworkPeersPost represents the fields of a new network peering
-      properties:
-        config:
-          description: Peer configuration map (refer to doc/network-peers.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the peer
-          example: Peering with network1 in project1
-          type: string
-          x-go-name: Description
-        name:
-          description: Name of the peer
-          example: project1-network1
-          type: string
-          x-go-name: Name
-        target_integration:
-          description: Name of the target integration
-          example: ovn-ic1
-          type: string
-          x-go-name: TargetIntegration
-        target_network:
-          description: Name of the target network
-          example: network1
-          type: string
-          x-go-name: TargetNetwork
-        target_project:
-          description: Name of the target project
-          example: project1
-          type: string
-          x-go-name: TargetProject
-        type:
-          description: Type of peer
-          example: local
-          type: string
-          x-go-name: Type
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api

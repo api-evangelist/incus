@@ -3933,154 +3933,14 @@ paths:
       - Storage
 components:
   schemas:
-    StorageVolumeBackup:
-      description: StorageVolumeBackup represents a volume backup
+    StorageBucketBackupPost:
+      description: StorageBucketBackupPost represents the fields available for the renaming of a bucket backup
       properties:
-        created_at:
-          description: When the backup was created
-          example: '2021-03-23T16:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: CreatedAt
-        expires_at:
-          description: When the backup expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
         name:
-          description: Backup name
-          example: backup0
+          description: New backup name
+          example: backup1
           type: string
           x-go-name: Name
-        optimized_storage:
-          description: Whether to use a pool-optimized binary format (instead of plain tarball)
-          example: true
-          type: boolean
-          x-go-name: OptimizedStorage
-        volume_only:
-          description: Whether to ignore snapshots
-          example: false
-          type: boolean
-          x-go-name: VolumeOnly
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketsPost:
-      description: StorageBucketsPost represents the fields of a new storage pool bucket
-      properties:
-        config:
-          description: Storage bucket configuration map
-          example:
-            size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage bucket
-          example: My custom bucket
-          type: string
-          x-go-name: Description
-        name:
-          description: Bucket name
-          example: foo
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketKeyPut:
-      description: StorageBucketKeyPut represents the modifiable fields of a storage pool bucket key
-      properties:
-        access-key:
-          description: Access key
-          example: 33UgkaIBLBIxb7O1
-          type: string
-          x-go-name: AccessKey
-        description:
-          description: Description of the storage bucket key
-          example: My read-only bucket key
-          type: string
-          x-go-name: Description
-        role:
-          description: Whether the key can perform write actions or not.
-          example: read-only
-          type: string
-          x-go-name: Role
-        secret-key:
-          description: Secret key
-          example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
-          type: string
-          x-go-name: SecretKey
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeSnapshotPut:
-      description: StorageVolumeSnapshotPut represents the modifiable fields of a storage volume
-      properties:
-        description:
-          description: Description of the storage volume
-          example: My custom volume
-          type: string
-          x-go-name: Description
-        expires_at:
-          description: When the snapshot expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeBackupsPost:
-      description: StorageVolumeBackupsPost represents the fields available for a new volume backup
-      properties:
-        compression_algorithm:
-          description: What compression algorithm to use
-          example: gzip
-          type: string
-          x-go-name: CompressionAlgorithm
-        expires_at:
-          description: When the backup expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-        name:
-          description: Backup name
-          example: backup0
-          type: string
-          x-go-name: Name
-        optimized_storage:
-          description: Whether to use a pool-optimized binary format (instead of plain tarball)
-          example: true
-          type: boolean
-          x-go-name: OptimizedStorage
-        target:
-          $ref: '#/components/schemas/BackupTarget'
-        volume_only:
-          description: Whether to ignore snapshots
-          example: false
-          type: boolean
-          x-go-name: VolumeOnly
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumePostTarget:
-      description: StorageVolumePostTarget represents the migration target host and operation
-      properties:
-        certificate:
-          description: The certificate of the migration target
-          example: X509 PEM certificate
-          type: string
-          x-go-name: Certificate
-        operation:
-          description: Remote operation URL (for migration)
-          example: https://1.2.3.4:8443/1.0/operations/1721ae08-b6a8-416a-9614-3f89302466e1
-          type: string
-          x-go-name: Operation
-        secrets:
-          additionalProperties:
-            type: string
-          description: Migration websockets credentials
-          example:
-            migration: random-string
-          type: object
-          x-go-name: Websockets
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     StorageVolumePut:
@@ -4103,447 +3963,6 @@ components:
           example: snap0
           type: string
           x-go-name: Restore
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucket:
-      description: StorageBucket represents the fields of a storage pool bucket
-      properties:
-        config:
-          description: Storage bucket configuration map
-          example:
-            size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage bucket
-          example: My custom bucket
-          type: string
-          x-go-name: Description
-        location:
-          description: What cluster member this record was found on
-          example: server01
-          type: string
-          x-go-name: Location
-        name:
-          description: Bucket name
-          example: foo
-          type: string
-          x-go-name: Name
-        project:
-          description: Project name
-          example: project1
-          type: string
-          x-go-name: Project
-        s3_url:
-          description: Bucket S3 URL
-          example: https://127.0.0.1:8080/foo
-          type: string
-          x-go-name: S3URL
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StoragePoolsPost:
-      description: StoragePoolsPost represents the fields of a new storage pool
-      properties:
-        config:
-          description: Storage pool configuration map (refer to doc/storage.md)
-          example:
-            volume.block.filesystem: ext4
-            volume.size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage pool
-          example: Local SSD pool
-          type: string
-          x-go-name: Description
-        driver:
-          description: Storage pool driver (btrfs, ceph, cephfs, cephobject, dir, lvm, lvmcluster or zfs)
-          example: zfs
-          type: string
-          x-go-name: Driver
-        name:
-          description: Storage pool name
-          example: local
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketKeysPost:
-      description: StorageBucketKeysPost represents the fields of a new storage pool bucket key
-      properties:
-        access-key:
-          description: Access key
-          example: 33UgkaIBLBIxb7O1
-          type: string
-          x-go-name: AccessKey
-        description:
-          description: Description of the storage bucket key
-          example: My read-only bucket key
-          type: string
-          x-go-name: Description
-        name:
-          description: Key name
-          example: my-read-only-key
-          type: string
-          x-go-name: Name
-        role:
-          description: Whether the key can perform write actions or not.
-          example: read-only
-          type: string
-          x-go-name: Role
-        secret-key:
-          description: Secret key
-          example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
-          type: string
-          x-go-name: SecretKey
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketBackup:
-      description: StorageBucketBackup represents the fields available for a new storage bucket backup
-      properties:
-        created_at:
-          description: When the backup was created
-          example: '2021-03-23T16:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: CreatedAt
-        expires_at:
-          description: When the backup expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-        name:
-          description: Backup name
-          example: backup0
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ResourcesStoragePoolInodes:
-      description: ResourcesStoragePoolInodes represents the inodes available to a given storage pool
-      properties:
-        total:
-          description: Total inodes
-          example: 30709993797
-          format: uint64
-          type: integer
-          x-go-name: Total
-        used:
-          description: Used inodes
-          example: 23937695
-          format: uint64
-          type: integer
-          x-go-name: Used
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    BackupTarget:
-      properties:
-        access_key:
-          description: AccessKey is the S3 API access key
-          example: GOOG1234
-          type: string
-          x-go-name: AccessKey
-        bucket_name:
-          description: BucketName is the name of the S3 bucket.
-          example: my_bucket
-          type: string
-          x-go-name: BucketName
-        path:
-          description: Path is the target path.
-          example: foo/test.tar
-          type: string
-          x-go-name: Path
-        protocol:
-          description: Protocol is the upload protocol.
-          example: S3
-          type: string
-          x-go-name: Protocol
-        secret_key:
-          description: SecretKey is the S3 API access key
-          example: secret123
-          type: string
-          x-go-name: SecretKey
-        url:
-          description: URL is the HTTPS URL for the backup
-          example: https://storage.googleapis.com
-          type: string
-          x-go-name: URL
-      title: BackupTarget represents the target storage server for an instance or volume backup.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ResourcesStoragePoolSpace:
-      description: ResourcesStoragePoolSpace represents the space available to a given storage pool
-      properties:
-        total:
-          description: Total disk space (bytes)
-          example: 420100937728
-          format: uint64
-          type: integer
-          x-go-name: Total
-        used:
-          description: Used disk space (bytes)
-          example: 343537419776
-          format: uint64
-          type: integer
-          x-go-name: Used
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StoragePool:
-      properties:
-        config:
-          description: Storage pool configuration map (refer to doc/storage.md)
-          example:
-            volume.block.filesystem: ext4
-            volume.size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage pool
-          example: Local SSD pool
-          type: string
-          x-go-name: Description
-        driver:
-          description: Storage pool driver (btrfs, ceph, cephfs, cephobject, dir, lvm, lvmcluster or zfs)
-          example: zfs
-          type: string
-          x-go-name: Driver
-        locations:
-          description: Cluster members on which the storage pool has been defined
-          example:
-          - server01
-          - server02
-          - server03
-          items:
-            type: string
-          readOnly: true
-          type: array
-          x-go-name: Locations
-        name:
-          description: Storage pool name
-          example: local
-          type: string
-          x-go-name: Name
-        status:
-          description: Pool status (Pending, Created, Errored or Unknown)
-          example: Created
-          readOnly: true
-          type: string
-          x-go-name: Status
-        used_by:
-          description: List of URLs of objects using this storage pool
-          example:
-          - /1.0/profiles/default
-          - /1.0/instances/c1
-          items:
-            type: string
-          type: array
-          x-go-name: UsedBy
-      title: StoragePool represents the fields of a storage pool.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketBackupsPost:
-      description: StorageBucketBackupsPost represents the fields available for a new storage bucket backup
-      properties:
-        compression_algorithm:
-          description: What compression algorithm to use
-          example: gzip
-          type: string
-          x-go-name: CompressionAlgorithm
-        expires_at:
-          description: When the backup expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-        name:
-          description: Backup name
-          example: backup0
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketPut:
-      description: StorageBucketPut represents the modifiable fields of a storage pool bucket
-      properties:
-        config:
-          description: Storage bucket configuration map
-          example:
-            size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage bucket
-          example: My custom bucket
-          type: string
-          x-go-name: Description
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeSnapshotsPost:
-      description: StorageVolumeSnapshotsPost represents the fields available for a new storage volume snapshot
-      properties:
-        expires_at:
-          description: When the snapshot expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-        name:
-          description: Snapshot name
-          example: snap0
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeSnapshot:
-      description: StorageVolumeSnapshot represents a storage volume snapshot
-      properties:
-        config:
-          description: Storage volume configuration map (refer to doc/storage.md)
-          example:
-            size: 50GiB
-            zfs.remove_snapshots: 'true'
-          type: object
-          x-go-name: Config
-        content_type:
-          description: The content type (filesystem or block)
-          example: filesystem
-          type: string
-          x-go-name: ContentType
-        created_at:
-          description: Volume snapshot creation timestamp
-          example: '2021-03-23T20:00:00-04:00'
-          format: date-time
-          type: string
-          x-go-name: CreatedAt
-        description:
-          description: Description of the storage volume
-          example: My custom volume
-          type: string
-          x-go-name: Description
-        expires_at:
-          description: When the snapshot expires (gets auto-deleted)
-          example: '2021-03-23T17:38:37.753398689-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-        name:
-          description: Snapshot name
-          example: snap0
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketFull:
-      properties:
-        backups:
-          description: List of backups.
-          items:
-            $ref: '#/components/schemas/StorageBucketBackup'
-          type: array
-          x-go-name: Backups
-        config:
-          description: Storage bucket configuration map
-          example:
-            size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage bucket
-          example: My custom bucket
-          type: string
-          x-go-name: Description
-        keys:
-          description: List of keys.
-          items:
-            $ref: '#/components/schemas/StorageBucketKey'
-          type: array
-          x-go-name: Keys
-        location:
-          description: What cluster member this record was found on
-          example: server01
-          type: string
-          x-go-name: Location
-        name:
-          description: Bucket name
-          example: foo
-          type: string
-          x-go-name: Name
-        project:
-          description: Project name
-          example: project1
-          type: string
-          x-go-name: Project
-        s3_url:
-          description: Bucket S3 URL
-          example: https://127.0.0.1:8080/foo
-          type: string
-          x-go-name: S3URL
-      title: StorageBucketFull is a combination of StorageBucket, StorageBucketBackup and StorageBucketKey.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketKey:
-      description: StorageBucketKey represents the fields of a storage pool bucket key
-      properties:
-        access-key:
-          description: Access key
-          example: 33UgkaIBLBIxb7O1
-          type: string
-          x-go-name: AccessKey
-        description:
-          description: Description of the storage bucket key
-          example: My read-only bucket key
-          type: string
-          x-go-name: Description
-        name:
-          description: Key name
-          example: my-read-only-key
-          type: string
-          x-go-name: Name
-        role:
-          description: Whether the key can perform write actions or not.
-          example: read-only
-          type: string
-          x-go-name: Role
-        secret-key:
-          description: Secret key
-          example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
-          type: string
-          x-go-name: SecretKey
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeStateUsage:
-      description: StorageVolumeStateUsage represents the disk usage of a volume
-      properties:
-        total:
-          description: Storage volume size in bytes
-          example: 5189222192
-          format: int64
-          type: integer
-          x-go-name: Total
-        used:
-          description: Used space in bytes
-          example: 1693552640
-          format: uint64
-          type: integer
-          x-go-name: Used
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StoragePoolPut:
-      properties:
-        config:
-          description: Storage pool configuration map (refer to doc/storage.md)
-          example:
-            volume.block.filesystem: ext4
-            volume.size: 50GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the storage pool
-          example: Local SSD pool
-          type: string
-          x-go-name: Description
-      title: StoragePoolPut represents the modifiable fields of a storage pool.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     StorageVolumePost:
@@ -4580,101 +3999,53 @@ components:
           x-go-name: VolumeOnly
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeFull:
+    StorageBucketPut:
+      description: StorageBucketPut represents the modifiable fields of a storage pool bucket
       properties:
-        backups:
-          description: List of backups.
-          items:
-            $ref: '#/components/schemas/StorageVolumeBackup'
-          type: array
-          x-go-name: Backups
         config:
-          description: Storage volume configuration map (refer to doc/storage.md)
+          description: Storage bucket configuration map
           example:
             size: 50GiB
-            zfs.remove_snapshots: 'true'
           type: object
           x-go-name: Config
-        content_type:
-          description: Volume content type (filesystem or block)
-          example: filesystem
+        description:
+          description: Description of the storage bucket
+          example: My custom bucket
           type: string
-          x-go-name: ContentType
-        created_at:
-          description: Volume creation timestamp
-          example: '2021-03-23T20:00:00-04:00'
-          format: date-time
-          type: string
-          x-go-name: CreatedAt
+          x-go-name: Description
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ResourcesStoragePoolInodes:
+      description: ResourcesStoragePoolInodes represents the inodes available to a given storage pool
+      properties:
+        total:
+          description: Total inodes
+          example: 30709993797
+          format: uint64
+          type: integer
+          x-go-name: Total
+        used:
+          description: Used inodes
+          example: 23937695
+          format: uint64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeSnapshotPut:
+      description: StorageVolumeSnapshotPut represents the modifiable fields of a storage volume
+      properties:
         description:
           description: Description of the storage volume
           example: My custom volume
           type: string
           x-go-name: Description
-        location:
-          description: What cluster member this record was found on
-          example: server01
+        expires_at:
+          description: When the snapshot expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
           type: string
-          x-go-name: Location
-        name:
-          description: Volume name
-          example: foo
-          type: string
-          x-go-name: Name
-        project:
-          description: Project containing the volume.
-          example: default
-          type: string
-          x-go-name: Project
-        restore:
-          description: Name of a snapshot to restore
-          example: snap0
-          type: string
-          x-go-name: Restore
-        snapshots:
-          description: List of snapshots.
-          items:
-            $ref: '#/components/schemas/StorageVolumeSnapshot'
-          type: array
-          x-go-name: Snapshots
-        state:
-          $ref: '#/components/schemas/StorageVolumeState'
-        type:
-          description: Volume type
-          example: custom
-          type: string
-          x-go-name: Type
-        used_by:
-          description: List of URLs of objects using this storage volume
-          example:
-          - /1.0/instances/blah
-          items:
-            type: string
-          type: array
-          x-go-name: UsedBy
-      title: StorageVolumeFull is a combination of StorageVolume, StorageVolumeBackup, StorageVolumeSnapshot and StorageVolumeState.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeSnapshotPost:
-      description: StorageVolumeSnapshotPost represents the fields required to rename/move a storage volume snapshot
-      properties:
-        migration:
-          description: Initiate volume snapshot migration
-          example: false
-          type: boolean
-          x-go-name: Migration
-        name:
-          description: New snapshot name
-          example: snap1
-          type: string
-          x-go-name: Name
-        target:
-          $ref: '#/components/schemas/StorageVolumePostTarget'
+          x-go-name: ExpiresAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
@@ -4760,24 +4131,13 @@ components:
           x-go-name: UpdatedAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeState:
-      description: StorageVolumeState represents the live state of the volume
-      properties:
-        usage:
-          $ref: '#/components/schemas/StorageVolumeStateUsage'
-      type: object
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
       x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageBucketBackupPost:
-      description: StorageBucketBackupPost represents the fields available for the renaming of a bucket backup
-      properties:
-        name:
-          description: New backup name
-          example: backup1
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolume:
+    StorageVolumesPost:
+      description: StorageVolumesPost represents the fields of a new storage pool volume
       properties:
         config:
           description: Storage volume configuration map (refer to doc/storage.md)
@@ -4791,51 +4151,162 @@ components:
           example: filesystem
           type: string
           x-go-name: ContentType
-        created_at:
-          description: Volume creation timestamp
-          example: '2021-03-23T20:00:00-04:00'
-          format: date-time
-          type: string
-          x-go-name: CreatedAt
         description:
           description: Description of the storage volume
           example: My custom volume
           type: string
           x-go-name: Description
-        location:
-          description: What cluster member this record was found on
-          example: server01
-          type: string
-          x-go-name: Location
         name:
           description: Volume name
           example: foo
           type: string
           x-go-name: Name
-        project:
-          description: Project containing the volume.
-          example: default
-          type: string
-          x-go-name: Project
         restore:
           description: Name of a snapshot to restore
           example: snap0
           type: string
           x-go-name: Restore
+        source:
+          $ref: '#/components/schemas/StorageVolumeSource'
         type:
-          description: Volume type
+          description: Volume type (container, custom, image or virtual-machine)
           example: custom
           type: string
           x-go-name: Type
-        used_by:
-          description: List of URLs of objects using this storage volume
-          example:
-          - /1.0/instances/blah
-          items:
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeBitmapsPost:
+      description: StorageVolumeBitmapsPost represents the fields available for a new volume bitmap
+      properties:
+        disabled:
+          description: The bitmap is created in the disabled state
+          example: false
+          type: boolean
+          x-go-name: Disabled
+        granularity:
+          description: Granularity of the dirty bitmap in bytes
+          example: 32768
+          format: int64
+          type: integer
+          x-go-name: Granularity
+        name:
+          description: Bitmap name
+          example: bitmap0
+          type: string
+          x-go-name: Name
+        persistent:
+          description: true if the bitmap was stored on disk, is scheduled to be stored on disk, or both
+          example: false
+          type: boolean
+          x-go-name: Persistent
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageBucketBackupsPost:
+      description: StorageBucketBackupsPost represents the fields available for a new storage bucket backup
+      properties:
+        compression_algorithm:
+          description: What compression algorithm to use
+          example: gzip
+          type: string
+          x-go-name: CompressionAlgorithm
+        expires_at:
+          description: When the backup expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: ExpiresAt
+        name:
+          description: Backup name
+          example: backup0
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumePostTarget:
+      description: StorageVolumePostTarget represents the migration target host and operation
+      properties:
+        certificate:
+          description: The certificate of the migration target
+          example: X509 PEM certificate
+          type: string
+          x-go-name: Certificate
+        operation:
+          description: Remote operation URL (for migration)
+          example: https://1.2.3.4:8443/1.0/operations/1721ae08-b6a8-416a-9614-3f89302466e1
+          type: string
+          x-go-name: Operation
+        secrets:
+          additionalProperties:
             type: string
-          type: array
-          x-go-name: UsedBy
-      title: StorageVolume represents the fields of a storage volume.
+          description: Migration websockets credentials
+          example:
+            migration: random-string
+          type: object
+          x-go-name: Websockets
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageBucketBackup:
+      description: StorageBucketBackup represents the fields available for a new storage bucket backup
+      properties:
+        created_at:
+          description: When the backup was created
+          example: '2021-03-23T16:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          description: When the backup expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: ExpiresAt
+        name:
+          description: Backup name
+          example: backup0
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeSnapshotPost:
+      description: StorageVolumeSnapshotPost represents the fields required to rename/move a storage volume snapshot
+      properties:
+        migration:
+          description: Initiate volume snapshot migration
+          example: false
+          type: boolean
+          x-go-name: Migration
+        name:
+          description: New snapshot name
+          example: snap1
+          type: string
+          x-go-name: Name
+        target:
+          $ref: '#/components/schemas/StorageVolumePostTarget'
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageBucketKeyPut:
+      description: StorageBucketKeyPut represents the modifiable fields of a storage pool bucket key
+      properties:
+        access-key:
+          description: Access key
+          example: 33UgkaIBLBIxb7O1
+          type: string
+          x-go-name: AccessKey
+        description:
+          description: Description of the storage bucket key
+          example: My read-only bucket key
+          type: string
+          x-go-name: Description
+        role:
+          description: Whether the key can perform write actions or not.
+          example: read-only
+          type: string
+          x-go-name: Role
+        secret-key:
+          description: Secret key
+          example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
+          type: string
+          x-go-name: SecretKey
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     StorageVolumeSource:
@@ -4906,17 +4377,92 @@ components:
           x-go-name: VolumeOnly
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ResourcesStoragePool:
-      description: ResourcesStoragePool represents the resources available to a given storage pool
+    StorageBucket:
+      description: StorageBucket represents the fields of a storage pool bucket
       properties:
-        inodes:
-          $ref: '#/components/schemas/ResourcesStoragePoolInodes'
-        space:
-          $ref: '#/components/schemas/ResourcesStoragePoolSpace'
+        config:
+          description: Storage bucket configuration map
+          example:
+            size: 50GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the storage bucket
+          example: My custom bucket
+          type: string
+          x-go-name: Description
+        location:
+          description: What cluster member this record was found on
+          example: server01
+          type: string
+          x-go-name: Location
+        name:
+          description: Bucket name
+          example: foo
+          type: string
+          x-go-name: Name
+        project:
+          description: Project name
+          example: project1
+          type: string
+          x-go-name: Project
+        s3_url:
+          description: Bucket S3 URL
+          example: https://127.0.0.1:8080/foo
+          type: string
+          x-go-name: S3URL
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumesPost:
-      description: StorageVolumesPost represents the fields of a new storage pool volume
+    StorageBucketFull:
+      properties:
+        backups:
+          description: List of backups.
+          items:
+            $ref: '#/components/schemas/StorageBucketBackup'
+          type: array
+          x-go-name: Backups
+        config:
+          description: Storage bucket configuration map
+          example:
+            size: 50GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the storage bucket
+          example: My custom bucket
+          type: string
+          x-go-name: Description
+        keys:
+          description: List of keys.
+          items:
+            $ref: '#/components/schemas/StorageBucketKey'
+          type: array
+          x-go-name: Keys
+        location:
+          description: What cluster member this record was found on
+          example: server01
+          type: string
+          x-go-name: Location
+        name:
+          description: Bucket name
+          example: foo
+          type: string
+          x-go-name: Name
+        project:
+          description: Project name
+          example: project1
+          type: string
+          x-go-name: Project
+        s3_url:
+          description: Bucket S3 URL
+          example: https://127.0.0.1:8080/foo
+          type: string
+          x-go-name: S3URL
+      title: StorageBucketFull is a combination of StorageBucket, StorageBucketBackup and StorageBucketKey.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeSnapshot:
+      description: StorageVolumeSnapshot represents a storage volume snapshot
       properties:
         config:
           description: Storage volume configuration map (refer to doc/storage.md)
@@ -4926,32 +4472,32 @@ components:
           type: object
           x-go-name: Config
         content_type:
-          description: Volume content type (filesystem or block)
+          description: The content type (filesystem or block)
           example: filesystem
           type: string
           x-go-name: ContentType
+        created_at:
+          description: Volume snapshot creation timestamp
+          example: '2021-03-23T20:00:00-04:00'
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
         description:
           description: Description of the storage volume
           example: My custom volume
           type: string
           x-go-name: Description
-        name:
-          description: Volume name
-          example: foo
+        expires_at:
+          description: When the snapshot expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
           type: string
-          x-go-name: Name
-        restore:
-          description: Name of a snapshot to restore
+          x-go-name: ExpiresAt
+        name:
+          description: Snapshot name
           example: snap0
           type: string
-          x-go-name: Restore
-        source:
-          $ref: '#/components/schemas/StorageVolumeSource'
-        type:
-          description: Volume type (container, custom, image or virtual-machine)
-          example: custom
-          type: string
-          x-go-name: Type
+          x-go-name: Name
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     StorageVolumeBitmap:
@@ -4996,50 +4542,504 @@ components:
           x-go-name: Recording
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    StorageVolumeBitmapsPost:
-      description: StorageVolumeBitmapsPost represents the fields available for a new volume bitmap
+    StorageBucketKeysPost:
+      description: StorageBucketKeysPost represents the fields of a new storage pool bucket key
       properties:
-        disabled:
-          description: The bitmap is created in the disabled state
-          example: false
-          type: boolean
-          x-go-name: Disabled
-        granularity:
-          description: Granularity of the dirty bitmap in bytes
-          example: 32768
-          format: int64
-          type: integer
-          x-go-name: Granularity
+        access-key:
+          description: Access key
+          example: 33UgkaIBLBIxb7O1
+          type: string
+          x-go-name: AccessKey
+        description:
+          description: Description of the storage bucket key
+          example: My read-only bucket key
+          type: string
+          x-go-name: Description
         name:
-          description: Bitmap name
-          example: bitmap0
+          description: Key name
+          example: my-read-only-key
           type: string
           x-go-name: Name
-        persistent:
-          description: true if the bitmap was stored on disk, is scheduled to be stored on disk, or both
+        role:
+          description: Whether the key can perform write actions or not.
+          example: read-only
+          type: string
+          x-go-name: Role
+        secret-key:
+          description: Secret key
+          example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
+          type: string
+          x-go-name: SecretKey
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    BackupTarget:
+      properties:
+        access_key:
+          description: AccessKey is the S3 API access key
+          example: GOOG1234
+          type: string
+          x-go-name: AccessKey
+        bucket_name:
+          description: BucketName is the name of the S3 bucket.
+          example: my_bucket
+          type: string
+          x-go-name: BucketName
+        path:
+          description: Path is the target path.
+          example: foo/test.tar
+          type: string
+          x-go-name: Path
+        protocol:
+          description: Protocol is the upload protocol.
+          example: S3
+          type: string
+          x-go-name: Protocol
+        secret_key:
+          description: SecretKey is the S3 API access key
+          example: secret123
+          type: string
+          x-go-name: SecretKey
+        url:
+          description: URL is the HTTPS URL for the backup
+          example: https://storage.googleapis.com
+          type: string
+          x-go-name: URL
+      title: BackupTarget represents the target storage server for an instance or volume backup.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolume:
+      properties:
+        config:
+          description: Storage volume configuration map (refer to doc/storage.md)
+          example:
+            size: 50GiB
+            zfs.remove_snapshots: 'true'
+          type: object
+          x-go-name: Config
+        content_type:
+          description: Volume content type (filesystem or block)
+          example: filesystem
+          type: string
+          x-go-name: ContentType
+        created_at:
+          description: Volume creation timestamp
+          example: '2021-03-23T20:00:00-04:00'
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
+        description:
+          description: Description of the storage volume
+          example: My custom volume
+          type: string
+          x-go-name: Description
+        location:
+          description: What cluster member this record was found on
+          example: server01
+          type: string
+          x-go-name: Location
+        name:
+          description: Volume name
+          example: foo
+          type: string
+          x-go-name: Name
+        project:
+          description: Project containing the volume.
+          example: default
+          type: string
+          x-go-name: Project
+        restore:
+          description: Name of a snapshot to restore
+          example: snap0
+          type: string
+          x-go-name: Restore
+        type:
+          description: Volume type
+          example: custom
+          type: string
+          x-go-name: Type
+        used_by:
+          description: List of URLs of objects using this storage volume
+          example:
+          - /1.0/instances/blah
+          items:
+            type: string
+          type: array
+          x-go-name: UsedBy
+      title: StorageVolume represents the fields of a storage volume.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageBucketsPost:
+      description: StorageBucketsPost represents the fields of a new storage pool bucket
+      properties:
+        config:
+          description: Storage bucket configuration map
+          example:
+            size: 50GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the storage bucket
+          example: My custom bucket
+          type: string
+          x-go-name: Description
+        name:
+          description: Bucket name
+          example: foo
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ResourcesStoragePoolSpace:
+      description: ResourcesStoragePoolSpace represents the space available to a given storage pool
+      properties:
+        total:
+          description: Total disk space (bytes)
+          example: 420100937728
+          format: uint64
+          type: integer
+          x-go-name: Total
+        used:
+          description: Used disk space (bytes)
+          example: 343537419776
+          format: uint64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeBackup:
+      description: StorageVolumeBackup represents a volume backup
+      properties:
+        created_at:
+          description: When the backup was created
+          example: '2021-03-23T16:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
+        expires_at:
+          description: When the backup expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: ExpiresAt
+        name:
+          description: Backup name
+          example: backup0
+          type: string
+          x-go-name: Name
+        optimized_storage:
+          description: Whether to use a pool-optimized binary format (instead of plain tarball)
+          example: true
+          type: boolean
+          x-go-name: OptimizedStorage
+        volume_only:
+          description: Whether to ignore snapshots
           example: false
           type: boolean
-          x-go-name: Persistent
+          x-go-name: VolumeOnly
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StoragePoolPut:
+      properties:
+        config:
+          description: Storage pool configuration map (refer to doc/storage.md)
+          example:
+            volume.block.filesystem: ext4
+            volume.size: 50GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the storage pool
+          example: Local SSD pool
+          type: string
+          x-go-name: Description
+      title: StoragePoolPut represents the modifiable fields of a storage pool.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeFull:
+      properties:
+        backups:
+          description: List of backups.
+          items:
+            $ref: '#/components/schemas/StorageVolumeBackup'
+          type: array
+          x-go-name: Backups
+        config:
+          description: Storage volume configuration map (refer to doc/storage.md)
+          example:
+            size: 50GiB
+            zfs.remove_snapshots: 'true'
+          type: object
+          x-go-name: Config
+        content_type:
+          description: Volume content type (filesystem or block)
+          example: filesystem
+          type: string
+          x-go-name: ContentType
+        created_at:
+          description: Volume creation timestamp
+          example: '2021-03-23T20:00:00-04:00'
+          format: date-time
+          type: string
+          x-go-name: CreatedAt
+        description:
+          description: Description of the storage volume
+          example: My custom volume
+          type: string
+          x-go-name: Description
+        location:
+          description: What cluster member this record was found on
+          example: server01
+          type: string
+          x-go-name: Location
+        name:
+          description: Volume name
+          example: foo
+          type: string
+          x-go-name: Name
+        project:
+          description: Project containing the volume.
+          example: default
+          type: string
+          x-go-name: Project
+        restore:
+          description: Name of a snapshot to restore
+          example: snap0
+          type: string
+          x-go-name: Restore
+        snapshots:
+          description: List of snapshots.
+          items:
+            $ref: '#/components/schemas/StorageVolumeSnapshot'
+          type: array
+          x-go-name: Snapshots
+        state:
+          $ref: '#/components/schemas/StorageVolumeState'
+        type:
+          description: Volume type
+          example: custom
+          type: string
+          x-go-name: Type
+        used_by:
+          description: List of URLs of objects using this storage volume
+          example:
+          - /1.0/instances/blah
+          items:
+            type: string
+          type: array
+          x-go-name: UsedBy
+      title: StorageVolumeFull is a combination of StorageVolume, StorageVolumeBackup, StorageVolumeSnapshot and StorageVolumeState.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeBackupsPost:
+      description: StorageVolumeBackupsPost represents the fields available for a new volume backup
+      properties:
+        compression_algorithm:
+          description: What compression algorithm to use
+          example: gzip
+          type: string
+          x-go-name: CompressionAlgorithm
+        expires_at:
+          description: When the backup expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: ExpiresAt
+        name:
+          description: Backup name
+          example: backup0
+          type: string
+          x-go-name: Name
+        optimized_storage:
+          description: Whether to use a pool-optimized binary format (instead of plain tarball)
+          example: true
+          type: boolean
+          x-go-name: OptimizedStorage
+        target:
+          $ref: '#/components/schemas/BackupTarget'
+        volume_only:
+          description: Whether to ignore snapshots
+          example: false
+          type: boolean
+          x-go-name: VolumeOnly
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageBucketKey:
+      description: StorageBucketKey represents the fields of a storage pool bucket key
+      properties:
+        access-key:
+          description: Access key
+          example: 33UgkaIBLBIxb7O1
+          type: string
+          x-go-name: AccessKey
+        description:
+          description: Description of the storage bucket key
+          example: My read-only bucket key
+          type: string
+          x-go-name: Description
+        name:
+          description: Key name
+          example: my-read-only-key
+          type: string
+          x-go-name: Name
+        role:
+          description: Whether the key can perform write actions or not.
+          example: read-only
+          type: string
+          x-go-name: Role
+        secret-key:
+          description: Secret key
+          example: kDQD6AOgwHgaQI1UIJBJpPaiLgZuJbq0
+          type: string
+          x-go-name: SecretKey
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeSnapshotsPost:
+      description: StorageVolumeSnapshotsPost represents the fields available for a new storage volume snapshot
+      properties:
+        expires_at:
+          description: When the snapshot expires (gets auto-deleted)
+          example: '2021-03-23T17:38:37.753398689-04:00'
+          format: date-time
+          type: string
+          x-go-name: ExpiresAt
+        name:
+          description: Snapshot name
+          example: snap0
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeState:
+      description: StorageVolumeState represents the live state of the volume
+      properties:
+        usage:
+          $ref: '#/components/schemas/StorageVolumeStateUsage'
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StoragePoolsPost:
+      description: StoragePoolsPost represents the fields of a new storage pool
+      properties:
+        config:
+          description: Storage pool configuration map (refer to doc/storage.md)
+          example:
+            volume.block.filesystem: ext4
+            volume.size: 50GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the storage pool
+          example: Local SSD pool
+          type: string
+          x-go-name: Description
+        driver:
+          description: Storage pool driver (btrfs, ceph, cephfs, cephobject, dir, lvm, lvmcluster or zfs)
+          example: zfs
+          type: string
+          x-go-name: Driver
+        name:
+          description: Storage pool name
+          example: local
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StoragePool:
+      properties:
+        config:
+          description: Storage pool configuration map (refer to doc/storage.md)
+          example:
+            volume.block.filesystem: ext4
+            volume.size: 50GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the storage pool
+          example: Local SSD pool
+          type: string
+          x-go-name: Description
+        driver:
+          description: Storage pool driver (btrfs, ceph, cephfs, cephobject, dir, lvm, lvmcluster or zfs)
+          example: zfs
+          type: string
+          x-go-name: Driver
+        locations:
+          description: Cluster members on which the storage pool has been defined
+          example:
+          - server01
+          - server02
+          - server03
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-go-name: Locations
+        name:
+          description: Storage pool name
+          example: local
+          type: string
+          x-go-name: Name
+        status:
+          description: Pool status (Pending, Created, Errored or Unknown)
+          example: Created
+          readOnly: true
+          type: string
+          x-go-name: Status
+        used_by:
+          description: List of URLs of objects using this storage pool
+          example:
+          - /1.0/profiles/default
+          - /1.0/instances/c1
+          items:
+            type: string
+          type: array
+          x-go-name: UsedBy
+      title: StoragePool represents the fields of a storage pool.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StorageVolumeStateUsage:
+      description: StorageVolumeStateUsage represents the disk usage of a volume
+      properties:
+        total:
+          description: Storage volume size in bytes
+          example: 5189222192
+          format: int64
+          type: integer
+          x-go-name: Total
+        used:
+          description: Used space in bytes
+          example: 1693552640
+          format: uint64
+          type: integer
+          x-go-name: Used
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ResourcesStoragePool:
+      description: ResourcesStoragePool represents the resources available to a given storage pool
+      properties:
+        inodes:
+          $ref: '#/components/schemas/ResourcesStoragePoolInodes'
+        space:
+          $ref: '#/components/schemas/ResourcesStoragePoolSpace'
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
   responses:
-    Forbidden:
-      description: Forbidden
+    EmptySyncResponse:
+      description: Empty sync response
       content:
         application/json:
           schema:
             properties:
-              error:
-                example: not authorized
+              status:
+                example: Success
                 type: string
-                x-go-name: Error
-              error_code:
-                example: 403
+                x-go-name: Status
+              status_code:
+                example: 200
                 format: int64
                 type: integer
-                x-go-name: ErrorCode
+                x-go-name: StatusCode
               type:
-                example: error
+                example: sync
                 type: string
                 x-go-name: Type
             type: object
@@ -5063,23 +5063,43 @@ components:
                 type: string
                 x-go-name: Type
             type: object
-    EmptySyncResponse:
-      description: Empty sync response
+    InternalServerError:
+      description: Internal Server Error
       content:
         application/json:
           schema:
             properties:
-              status:
-                example: Success
+              error:
+                example: internal server error
                 type: string
-                x-go-name: Status
-              status_code:
-                example: 200
+                x-go-name: Error
+              error_code:
+                example: 500
                 format: int64
                 type: integer
-                x-go-name: StatusCode
+                x-go-name: ErrorCode
               type:
-                example: sync
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
                 type: string
                 x-go-name: Type
             type: object
@@ -5109,46 +5129,6 @@ components:
                 type: string
                 x-go-name: Type
             type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
     NotFound:
       description: Not found
       content:
@@ -5161,6 +5141,26 @@ components:
                 x-go-name: Error
               error_code:
                 example: 404
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
                 format: int64
                 type: integer
                 x-go-name: ErrorCode

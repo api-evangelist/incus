@@ -379,18 +379,18 @@ paths:
       - Network ACLs
 components:
   responses:
-    PreconditionFailed:
-      description: Precondition Failed
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             properties:
               error:
-                example: precondition failed
+                example: bad request
                 type: string
                 x-go-name: Error
               error_code:
-                example: 412
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -416,26 +416,6 @@ components:
                 x-go-name: StatusCode
               type:
                 example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
                 type: string
                 x-go-name: Type
             type: object
@@ -479,17 +459,27 @@ components:
                 type: string
                 x-go-name: Type
             type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
   schemas:
-    NetworkACLPost:
-      properties:
-        name:
-          description: The new name for the ACL
-          example: bar
-          type: string
-          x-go-name: Name
-      title: NetworkACLPost used for renaming an ACL.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkACL:
       properties:
         config:
@@ -537,34 +527,6 @@ components:
           type: array
           x-go-name: UsedBy
       title: NetworkACL used for displaying an ACL.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkACLPut:
-      properties:
-        config:
-          description: ACL configuration map (refer to doc/network-acls.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the ACL
-          example: Web servers
-          type: string
-          x-go-name: Description
-        egress:
-          description: List of egress rules (order independent)
-          items:
-            $ref: '#/components/schemas/NetworkACLRule'
-          type: array
-          x-go-name: Egress
-        ingress:
-          description: List of ingress rules (order independent)
-          items:
-            $ref: '#/components/schemas/NetworkACLRule'
-          type: array
-          x-go-name: Ingress
-      title: NetworkACLPut used for updating an ACL.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkACLRule:
@@ -621,6 +583,44 @@ components:
           type: string
           x-go-name: State
       title: NetworkACLRule represents a single rule in an ACL ruleset.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkACLPost:
+      properties:
+        name:
+          description: The new name for the ACL
+          example: bar
+          type: string
+          x-go-name: Name
+      title: NetworkACLPost used for renaming an ACL.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkACLPut:
+      properties:
+        config:
+          description: ACL configuration map (refer to doc/network-acls.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the ACL
+          example: Web servers
+          type: string
+          x-go-name: Description
+        egress:
+          description: List of egress rules (order independent)
+          items:
+            $ref: '#/components/schemas/NetworkACLRule'
+          type: array
+          x-go-name: Egress
+        ingress:
+          description: List of ingress rules (order independent)
+          items:
+            $ref: '#/components/schemas/NetworkACLRule'
+          type: array
+          x-go-name: Ingress
+      title: NetworkACLPut used for updating an ACL.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkACLsPost:

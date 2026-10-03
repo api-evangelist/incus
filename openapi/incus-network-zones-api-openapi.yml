@@ -638,6 +638,113 @@ paths:
       - network-zones
 components:
   schemas:
+    NetworkZonePut:
+      description: NetworkZonePut represents the modifiable fields of a network zone
+      properties:
+        config:
+          description: Zone configuration map (refer to doc/network-zones.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the network zone
+          example: Internal domain
+          type: string
+          x-go-name: Description
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkZonesPost:
+      description: NetworkZonesPost represents the fields of a new network zone
+      properties:
+        config:
+          description: Zone configuration map (refer to doc/network-zones.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the network zone
+          example: Internal domain
+          type: string
+          x-go-name: Description
+        name:
+          description: The name of the zone (DNS domain name)
+          example: example.net
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkZoneRecordEntry:
+      description: NetworkZoneRecordEntry represents the fields in a record entry
+      properties:
+        ttl:
+          description: TTL for the entry
+          example: 3600
+          format: uint64
+          type: integer
+          x-go-name: TTL
+        type:
+          description: Type of DNS entry
+          example: TXT
+          type: string
+          x-go-name: Type
+        value:
+          description: Value for the record
+          example: v=spf1 mx ~all
+          type: string
+          x-go-name: Value
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkZoneRecord:
+      properties:
+        config:
+          description: Advanced configuration for the record
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the record
+          example: SPF record
+          type: string
+          x-go-name: Description
+        entries:
+          description: Entries in the record
+          items:
+            $ref: '#/components/schemas/NetworkZoneRecordEntry'
+          type: array
+          x-go-name: Entries
+        name:
+          description: The name of the record
+          example: '@'
+          type: string
+          x-go-name: Name
+      title: NetworkZoneRecord represents a network zone (DNS) record.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkZoneRecordPut:
+      description: NetworkZoneRecordPut represents the modifiable fields of a network zone record
+      properties:
+        config:
+          description: Advanced configuration for the record
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the record
+          example: SPF record
+          type: string
+          x-go-name: Description
+        entries:
+          description: Entries in the record
+          items:
+            $ref: '#/components/schemas/NetworkZoneRecordEntry'
+          type: array
+          x-go-name: Entries
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkZoneRecordsPost:
       description: NetworkZoneRecordsPost represents the fields of a new network zone record
       properties:
@@ -663,28 +770,6 @@ components:
           example: '@'
           type: string
           x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkZoneRecordPut:
-      description: NetworkZoneRecordPut represents the modifiable fields of a network zone record
-      properties:
-        config:
-          description: Advanced configuration for the record
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the record
-          example: SPF record
-          type: string
-          x-go-name: Description
-        entries:
-          description: Entries in the record
-          items:
-            $ref: '#/components/schemas/NetworkZoneRecordEntry'
-          type: array
-          x-go-name: Entries
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkZone:
@@ -723,104 +808,19 @@ components:
       title: NetworkZone represents a network zone (DNS).
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkZonesPost:
-      description: NetworkZonesPost represents the fields of a new network zone
-      properties:
-        config:
-          description: Zone configuration map (refer to doc/network-zones.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the network zone
-          example: Internal domain
-          type: string
-          x-go-name: Description
-        name:
-          description: The name of the zone (DNS domain name)
-          example: example.net
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkZoneRecord:
-      properties:
-        config:
-          description: Advanced configuration for the record
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the record
-          example: SPF record
-          type: string
-          x-go-name: Description
-        entries:
-          description: Entries in the record
-          items:
-            $ref: '#/components/schemas/NetworkZoneRecordEntry'
-          type: array
-          x-go-name: Entries
-        name:
-          description: The name of the record
-          example: '@'
-          type: string
-          x-go-name: Name
-      title: NetworkZoneRecord represents a network zone (DNS) record.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkZoneRecordEntry:
-      description: NetworkZoneRecordEntry represents the fields in a record entry
-      properties:
-        ttl:
-          description: TTL for the entry
-          example: 3600
-          format: uint64
-          type: integer
-          x-go-name: TTL
-        type:
-          description: Type of DNS entry
-          example: TXT
-          type: string
-          x-go-name: Type
-        value:
-          description: Value for the record
-          example: v=spf1 mx ~all
-          type: string
-          x-go-name: Value
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkZonePut:
-      description: NetworkZonePut represents the modifiable fields of a network zone
-      properties:
-        config:
-          description: Zone configuration map (refer to doc/network-zones.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the network zone
-          example: Internal domain
-          type: string
-          x-go-name: Description
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
   responses:
-    PreconditionFailed:
-      description: Precondition Failed
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             properties:
               error:
-                example: precondition failed
+                example: bad request
                 type: string
                 x-go-name: Error
               error_code:
-                example: 412
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -846,26 +846,6 @@ components:
                 x-go-name: StatusCode
               type:
                 example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
                 type: string
                 x-go-name: Type
             type: object
@@ -901,6 +881,26 @@ components:
                 x-go-name: Error
               error_code:
                 example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
                 format: int64
                 type: integer
                 x-go-name: ErrorCode

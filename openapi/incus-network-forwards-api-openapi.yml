@@ -347,18 +347,18 @@ paths:
       - network-forwards
 components:
   responses:
-    PreconditionFailed:
-      description: Precondition Failed
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             properties:
               error:
-                example: precondition failed
+                example: bad request
                 type: string
                 x-go-name: Error
               error_code:
-                example: 412
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -384,26 +384,6 @@ components:
                 x-go-name: StatusCode
               type:
                 example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
                 type: string
                 x-go-name: Type
             type: object
@@ -447,34 +427,27 @@ components:
                 type: string
                 x-go-name: Type
             type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
   schemas:
-    NetworkForwardsPost:
-      description: NetworkForwardsPost represents the fields of a new network address forward
-      properties:
-        config:
-          description: Forward configuration map (refer to doc/network-forwards.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the forward listen IP
-          example: My public IP forward
-          type: string
-          x-go-name: Description
-        listen_address:
-          description: The listen address of the forward
-          example: 192.0.2.1
-          type: string
-          x-go-name: ListenAddress
-        ports:
-          description: Port forwards (optional)
-          items:
-            $ref: '#/components/schemas/NetworkForwardPort'
-          type: array
-          x-go-name: Ports
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkForward:
       properties:
         config:
@@ -540,6 +513,33 @@ components:
           example: 80,81,8080-8090
           type: string
           x-go-name: TargetPort
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkForwardsPost:
+      description: NetworkForwardsPost represents the fields of a new network address forward
+      properties:
+        config:
+          description: Forward configuration map (refer to doc/network-forwards.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the forward listen IP
+          example: My public IP forward
+          type: string
+          x-go-name: Description
+        listen_address:
+          description: The listen address of the forward
+          example: 192.0.2.1
+          type: string
+          x-go-name: ListenAddress
+        ports:
+          description: Port forwards (optional)
+          items:
+            $ref: '#/components/schemas/NetworkForwardPort'
+          type: array
+          x-go-name: Ports
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkForwardPut:

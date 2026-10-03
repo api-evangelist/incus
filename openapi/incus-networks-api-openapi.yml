@@ -486,6 +486,107 @@ paths:
       tags:
       - Networks
 components:
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
   schemas:
     NetworkPost:
       description: NetworkPost represents the fields required to rename a network
@@ -495,6 +596,94 @@ components:
           example: mybr1
           type: string
           x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkStateBridge:
+      description: NetworkStateBridge represents bridge specific state
+      properties:
+        forward_delay:
+          description: Delay on port join (ms)
+          example: 1500
+          format: uint64
+          type: integer
+          x-go-name: ForwardDelay
+        id:
+          description: Bridge ID
+          example: 8000.0a0f7c6edbd9
+          type: string
+          x-go-name: ID
+        stp:
+          description: Whether STP is enabled
+          example: false
+          type: boolean
+          x-go-name: STP
+        upper_devices:
+          description: List of devices that are in the bridge
+          example:
+          - eth0
+          - eth1
+          items:
+            type: string
+          type: array
+          x-go-name: UpperDevices
+        vlan_default:
+          description: Default VLAN ID
+          example: 1
+          format: uint64
+          type: integer
+          x-go-name: VLANDefault
+        vlan_filtering:
+          description: Whether VLAN filtering is enabled
+          example: false
+          type: boolean
+          x-go-name: VLANFiltering
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkStateBond:
+      description: NetworkStateBond represents bond specific state
+      properties:
+        down_delay:
+          description: Delay on link down (ms)
+          example: 0
+          format: uint64
+          type: integer
+          x-go-name: DownDelay
+        lower_devices:
+          description: List of devices that are part of the bond
+          example:
+          - eth0
+          - eth1
+          items:
+            type: string
+          type: array
+          x-go-name: LowerDevices
+        mii_frequency:
+          description: How often to check for link state (ms)
+          example: 100
+          format: uint64
+          type: integer
+          x-go-name: MIIFrequency
+        mii_state:
+          description: Bond link state
+          example: up
+          type: string
+          x-go-name: MIIState
+        mode:
+          description: Bonding mode
+          example: 802.3ad
+          type: string
+          x-go-name: Mode
+        transmit_policy:
+          description: Transmit balancing policy
+          example: layer3+4
+          type: string
+          x-go-name: TransmitPolicy
+        up_delay:
+          description: Delay on link up (ms)
+          example: 0
+          format: uint64
+          type: integer
+          x-go-name: UpDelay
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworksPost:
@@ -525,34 +714,20 @@ components:
           x-go-name: Type
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkLease:
-      description: NetworkLease represents a DHCP lease
+    NetworkStateVLAN:
+      description: NetworkStateVLAN represents VLAN specific state
       properties:
-        address:
-          description: The IP address
-          example: 10.0.0.98
+        lower_device:
+          description: Parent device
+          example: eth0
           type: string
-          x-go-name: Address
-        hostname:
-          description: The hostname associated with the record
-          example: c1
-          type: string
-          x-go-name: Hostname
-        hwaddr:
-          description: The MAC address
-          example: 10:66:6a:2c:89:d9
-          type: string
-          x-go-name: Hwaddr
-        location:
-          description: What cluster member this record was found on
-          example: server01
-          type: string
-          x-go-name: Location
-        type:
-          description: The type of record (static or dynamic)
-          example: dynamic
-          type: string
-          x-go-name: Type
+          x-go-name: LowerDevice
+        vid:
+          description: VLAN ID
+          example: 100
+          format: uint64
+          type: integer
+          x-go-name: VID
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     Network:
@@ -623,108 +798,136 @@ components:
           x-go-name: UsedBy
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkStateVLAN:
-      description: NetworkStateVLAN represents VLAN specific state
+    NetworkStateOVN:
+      description: NetworkStateOVN represents OVN specific state
       properties:
-        lower_device:
-          description: Parent device
-          example: eth0
+        chassis:
+          description: OVN network chassis name
+          example: server01
           type: string
-          x-go-name: LowerDevice
-        vid:
-          description: VLAN ID
-          example: 100
-          format: uint64
-          type: integer
-          x-go-name: VID
+          x-go-name: Chassis
+        logical_router:
+          description: OVN logical router name
+          example: incus-net1-lr
+          type: string
+          x-go-name: LogicalRouter
+        logical_switch:
+          description: OVN logical switch name
+          example: incus-net1-ls-int
+          type: string
+          x-go-name: LogicalSwitch
+        uplink_ipv4:
+          description: OVN network uplink ipv4 address
+          example: 10.0.0.1
+          type: string
+          x-go-name: UplinkIPv4
+        uplink_ipv6:
+          description: OVN network uplink ipv6 address
+          example: 2001:0000:130F:0000:0000:09C0:876A:130B.
+          type: string
+          x-go-name: UplinkIPv6
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkStateBond:
-      description: NetworkStateBond represents bond specific state
+    NetworkLease:
+      description: NetworkLease represents a DHCP lease
       properties:
-        down_delay:
-          description: Delay on link down (ms)
-          example: 0
-          format: uint64
-          type: integer
-          x-go-name: DownDelay
-        lower_devices:
-          description: List of devices that are part of the bond
-          example:
-          - eth0
-          - eth1
-          items:
-            type: string
-          type: array
-          x-go-name: LowerDevices
-        mii_frequency:
-          description: How often to check for link state (ms)
-          example: 100
-          format: uint64
-          type: integer
-          x-go-name: MIIFrequency
-        mii_state:
-          description: Bond link state
-          example: up
+        address:
+          description: The IP address
+          example: 10.0.0.98
           type: string
-          x-go-name: MIIState
-        mode:
-          description: Bonding mode
-          example: 802.3ad
+          x-go-name: Address
+        hostname:
+          description: The hostname associated with the record
+          example: c1
           type: string
-          x-go-name: Mode
-        transmit_policy:
-          description: Transmit balancing policy
-          example: layer3+4
+          x-go-name: Hostname
+        hwaddr:
+          description: The MAC address
+          example: 10:66:6a:2c:89:d9
           type: string
-          x-go-name: TransmitPolicy
-        up_delay:
-          description: Delay on link up (ms)
-          example: 0
-          format: uint64
-          type: integer
-          x-go-name: UpDelay
+          x-go-name: Hwaddr
+        location:
+          description: What cluster member this record was found on
+          example: server01
+          type: string
+          x-go-name: Location
+        type:
+          description: The type of record (static or dynamic)
+          example: dynamic
+          type: string
+          x-go-name: Type
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkStateBridge:
-      description: NetworkStateBridge represents bridge specific state
+    NetworkPut:
+      description: NetworkPut represents the modifiable fields of a network
       properties:
-        forward_delay:
-          description: Delay on port join (ms)
-          example: 1500
-          format: uint64
-          type: integer
-          x-go-name: ForwardDelay
-        id:
-          description: Bridge ID
-          example: 8000.0a0f7c6edbd9
-          type: string
-          x-go-name: ID
-        stp:
-          description: Whether STP is enabled
-          example: false
-          type: boolean
-          x-go-name: STP
-        upper_devices:
-          description: List of devices that are in the bridge
+        config:
+          description: Network configuration map (refer to doc/networks.md)
           example:
-          - eth0
-          - eth1
-          items:
-            type: string
-          type: array
-          x-go-name: UpperDevices
-        vlan_default:
-          description: Default VLAN ID
-          example: 1
-          format: uint64
+            ipv4.address: 10.0.0.1/24
+            ipv4.nat: 'true'
+            ipv6.address: none
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the profile
+          example: My new bridge
+          type: string
+          x-go-name: Description
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkStateAddress:
+      description: NetworkStateAddress represents a network address
+      properties:
+        address:
+          description: IP address
+          example: 10.0.0.1
+          type: string
+          x-go-name: Address
+        family:
+          description: Address family
+          example: inet
+          type: string
+          x-go-name: Family
+        netmask:
+          description: IP netmask (CIDR)
+          example: '24'
+          type: string
+          x-go-name: Netmask
+        scope:
+          description: Address scope
+          example: global
+          type: string
+          x-go-name: Scope
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkStateCounters:
+      description: NetworkStateCounters represents packet counters
+      properties:
+        bytes_received:
+          description: Number of bytes received
+          example: 250542118
+          format: int64
           type: integer
-          x-go-name: VLANDefault
-        vlan_filtering:
-          description: Whether VLAN filtering is enabled
-          example: false
-          type: boolean
-          x-go-name: VLANFiltering
+          x-go-name: BytesReceived
+        bytes_sent:
+          description: Number of bytes sent
+          example: 17524040140
+          format: int64
+          type: integer
+          x-go-name: BytesSent
+        packets_received:
+          description: Number of packets received
+          example: 1182515
+          format: int64
+          type: integer
+          x-go-name: PacketsReceived
+        packets_sent:
+          description: Number of packets sent
+          example: 1567934
+          format: int64
+          type: integer
+          x-go-name: PacketsSent
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkState:
@@ -769,206 +972,3 @@ components:
           $ref: '#/components/schemas/NetworkStateVLAN'
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkStateAddress:
-      description: NetworkStateAddress represents a network address
-      properties:
-        address:
-          description: IP address
-          example: 10.0.0.1
-          type: string
-          x-go-name: Address
-        family:
-          description: Address family
-          example: inet
-          type: string
-          x-go-name: Family
-        netmask:
-          description: IP netmask (CIDR)
-          example: '24'
-          type: string
-          x-go-name: Netmask
-        scope:
-          description: Address scope
-          example: global
-          type: string
-          x-go-name: Scope
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkPut:
-      description: NetworkPut represents the modifiable fields of a network
-      properties:
-        config:
-          description: Network configuration map (refer to doc/networks.md)
-          example:
-            ipv4.address: 10.0.0.1/24
-            ipv4.nat: 'true'
-            ipv6.address: none
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the profile
-          example: My new bridge
-          type: string
-          x-go-name: Description
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkStateOVN:
-      description: NetworkStateOVN represents OVN specific state
-      properties:
-        chassis:
-          description: OVN network chassis name
-          example: server01
-          type: string
-          x-go-name: Chassis
-        logical_router:
-          description: OVN logical router name
-          example: incus-net1-lr
-          type: string
-          x-go-name: LogicalRouter
-        logical_switch:
-          description: OVN logical switch name
-          example: incus-net1-ls-int
-          type: string
-          x-go-name: LogicalSwitch
-        uplink_ipv4:
-          description: OVN network uplink ipv4 address
-          example: 10.0.0.1
-          type: string
-          x-go-name: UplinkIPv4
-        uplink_ipv6:
-          description: OVN network uplink ipv6 address
-          example: 2001:0000:130F:0000:0000:09C0:876A:130B.
-          type: string
-          x-go-name: UplinkIPv6
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkStateCounters:
-      description: NetworkStateCounters represents packet counters
-      properties:
-        bytes_received:
-          description: Number of bytes received
-          example: 250542118
-          format: int64
-          type: integer
-          x-go-name: BytesReceived
-        bytes_sent:
-          description: Number of bytes sent
-          example: 17524040140
-          format: int64
-          type: integer
-          x-go-name: BytesSent
-        packets_received:
-          description: Number of packets received
-          example: 1182515
-          format: int64
-          type: integer
-          x-go-name: PacketsReceived
-        packets_sent:
-          description: Number of packets sent
-          example: 1567934
-          format: int64
-          type: integer
-          x-go-name: PacketsSent
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-  responses:
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object

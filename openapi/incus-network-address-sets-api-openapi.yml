@@ -351,107 +351,6 @@ paths:
       tags:
       - network-address-sets
 components:
-  responses:
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
   schemas:
     NetworkAddressSetPut:
       properties:
@@ -476,46 +375,6 @@ components:
           type: string
           x-go-name: Description
       title: NetworkAddressSetPut used for updating an address set.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkAddressSetPost:
-      properties:
-        name:
-          description: The new name of the address set
-          example: '"bar"'
-          type: string
-          x-go-name: Name
-      title: NetworkAddressSetPost used for renaming an address set.
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkAddressSetsPost:
-      properties:
-        addresses:
-          description: List of addresses in the set
-          example:
-          - 192.0.0.1
-          - 2001:0db8:1234::1
-          items:
-            type: string
-          type: array
-          x-go-name: Addresses
-        config:
-          description: Address set configuration map (refer to doc/network-address-sets.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the address set
-          example: Web servers
-          type: string
-          x-go-name: Description
-        name:
-          description: The new name of the address set
-          example: '"bar"'
-          type: string
-          x-go-name: Name
-      title: NetworkAddressSetsPost used for creating a new address set.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkAddressSet:
@@ -565,3 +424,144 @@ components:
       title: NetworkAddressSet represents an address set.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkAddressSetsPost:
+      properties:
+        addresses:
+          description: List of addresses in the set
+          example:
+          - 192.0.0.1
+          - 2001:0db8:1234::1
+          items:
+            type: string
+          type: array
+          x-go-name: Addresses
+        config:
+          description: Address set configuration map (refer to doc/network-address-sets.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the address set
+          example: Web servers
+          type: string
+          x-go-name: Description
+        name:
+          description: The new name of the address set
+          example: '"bar"'
+          type: string
+          x-go-name: Name
+      title: NetworkAddressSetsPost used for creating a new address set.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkAddressSetPost:
+      properties:
+        name:
+          description: The new name of the address set
+          example: '"bar"'
+          type: string
+          x-go-name: Name
+      title: NetworkAddressSetPost used for renaming an address set.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object

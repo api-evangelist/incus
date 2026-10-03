@@ -351,183 +351,7 @@ paths:
       tags:
       - Profiles
 components:
-  responses:
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
   schemas:
-    ProfilePost:
-      description: ProfilePost represents the fields required to rename a profile
-      properties:
-        name:
-          description: The new name for the profile
-          example: bar
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProfilePut:
-      description: ProfilePut represents the modifiable fields of a profile
-      properties:
-        config:
-          description: Instance configuration map (refer to doc/instances.md)
-          example:
-            limits.cpu: '4'
-            limits.memory: 4GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the profile
-          example: Medium size instances
-          type: string
-          x-go-name: Description
-        devices:
-          description: List of devices
-          example:
-            eth0:
-              name: eth0
-              network: mybr0
-              type: nic
-            root:
-              path: /
-              pool: default
-              type: disk
-          type: object
-          x-go-name: Devices
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProfilesPost:
-      description: ProfilesPost represents the fields of a new profile
-      properties:
-        config:
-          description: Instance configuration map (refer to doc/instances.md)
-          example:
-            limits.cpu: '4'
-            limits.memory: 4GiB
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the profile
-          example: Medium size instances
-          type: string
-          x-go-name: Description
-        devices:
-          description: List of devices
-          example:
-            eth0:
-              name: eth0
-              network: mybr0
-              type: nic
-            root:
-              path: /
-              pool: default
-              type: disk
-          type: object
-          x-go-name: Devices
-        name:
-          description: The name of the new profile
-          example: foo
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
     Profile:
       description: Profile represents a profile
       properties:
@@ -579,3 +403,179 @@ components:
           x-go-name: UsedBy
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+    ProfilePost:
+      description: ProfilePost represents the fields required to rename a profile
+      properties:
+        name:
+          description: The new name for the profile
+          example: bar
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProfilesPost:
+      description: ProfilesPost represents the fields of a new profile
+      properties:
+        config:
+          description: Instance configuration map (refer to doc/instances.md)
+          example:
+            limits.cpu: '4'
+            limits.memory: 4GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the profile
+          example: Medium size instances
+          type: string
+          x-go-name: Description
+        devices:
+          description: List of devices
+          example:
+            eth0:
+              name: eth0
+              network: mybr0
+              type: nic
+            root:
+              path: /
+              pool: default
+              type: disk
+          type: object
+          x-go-name: Devices
+        name:
+          description: The name of the new profile
+          example: foo
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProfilePut:
+      description: ProfilePut represents the modifiable fields of a profile
+      properties:
+        config:
+          description: Instance configuration map (refer to doc/instances.md)
+          example:
+            limits.cpu: '4'
+            limits.memory: 4GiB
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the profile
+          example: Medium size instances
+          type: string
+          x-go-name: Description
+        devices:
+          description: List of devices
+          example:
+            eth0:
+              name: eth0
+              network: mybr0
+              type: nic
+            root:
+              path: /
+              pool: default
+              type: disk
+          type: object
+          x-go-name: Devices
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object

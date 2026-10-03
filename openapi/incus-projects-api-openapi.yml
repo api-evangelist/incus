@@ -379,133 +379,6 @@ paths:
       tags:
       - Projects
 components:
-  responses:
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Operation:
-      description: Operation
-      content:
-        application/json:
-          schema:
-            properties:
-              metadata:
-                $ref: '#/components/schemas/Operation'
-              operation:
-                example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
-                type: string
-                x-go-name: Operation
-              status:
-                example: Operation created
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 100
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: async
-                type: string
-                x-go-name: Type
-            type: object
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
   schemas:
     ProjectState:
       description: ProjectState represents the current running state of a project
@@ -524,69 +397,6 @@ components:
           readOnly: true
           type: object
           x-go-name: Resources
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProjectsPost:
-      description: ProjectsPost represents the fields of a new project
-      properties:
-        config:
-          description: Project configuration map (refer to doc/projects.md)
-          example:
-            features.networks: 'false'
-            features.profiles: 'true'
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the project
-          example: My new project
-          type: string
-          x-go-name: Description
-        name:
-          description: The name of the new project
-          example: foo
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProjectPost:
-      description: ProjectPost represents the fields required to rename a project
-      properties:
-        name:
-          description: The new name for the project
-          example: bar
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    Access:
-      items:
-        $ref: '#/components/schemas/AccessEntry'
-      title: Access represents everyone that may access a particular resource.
-      type: array
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    AccessEntry:
-      properties:
-        identifier:
-          description: Certificate fingerprint
-          example: 636b69519d27ae3b0e398cb7928043846ce1e3842f0ca7a589993dd913ab8cc9
-          type: string
-          x-go-name: Identifier
-        provider:
-          description: Which authorization method the certificate uses
-          example: tls, openfga
-          type: string
-          x-go-name: Provider
-        role:
-          description: The role associated with the certificate
-          example: admin, view, operator
-          type: string
-          x-go-name: Role
-      title: AccessEntry represents an entity having access to the resource.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     Project:
@@ -623,6 +433,74 @@ components:
           readOnly: true
           type: array
           x-go-name: UsedBy
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProjectStateResource:
+      description: ProjectStateResource represents the state of a particular resource in a project
+      properties:
+        Limit:
+          description: Limit for the resource (-1 if none)
+          example: 10
+          format: int64
+          type: integer
+        Usage:
+          description: Current usage for the resource
+          example: 4
+          format: int64
+          type: integer
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    Access:
+      items:
+        $ref: '#/components/schemas/AccessEntry'
+      title: Access represents everyone that may access a particular resource.
+      type: array
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProjectPost:
+      description: ProjectPost represents the fields required to rename a project
+      properties:
+        name:
+          description: The new name for the project
+          example: bar
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    AccessEntry:
+      properties:
+        identifier:
+          description: Certificate fingerprint
+          example: 636b69519d27ae3b0e398cb7928043846ce1e3842f0ca7a589993dd913ab8cc9
+          type: string
+          x-go-name: Identifier
+        provider:
+          description: Which authorization method the certificate uses
+          example: tls, openfga
+          type: string
+          x-go-name: Provider
+        role:
+          description: The role associated with the certificate
+          example: admin, view, operator
+          type: string
+          x-go-name: Role
+      title: AccessEntry represents an entity having access to the resource.
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProjectPut:
+      description: ProjectPut represents the modifiable fields of a project
+      properties:
+        config:
+          description: Project configuration map (refer to doc/projects.md)
+          example:
+            features.networks: 'false'
+            features.profiles: 'true'
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the project
+          example: My new project
+          type: string
+          x-go-name: Description
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
@@ -708,23 +586,8 @@ components:
           x-go-name: UpdatedAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ProjectStateResource:
-      description: ProjectStateResource represents the state of a particular resource in a project
-      properties:
-        Limit:
-          description: Limit for the resource (-1 if none)
-          example: 10
-          format: int64
-          type: integer
-        Usage:
-          description: Current usage for the resource
-          example: 4
-          format: int64
-          type: integer
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ProjectPut:
-      description: ProjectPut represents the modifiable fields of a project
+    ProjectsPost:
+      description: ProjectsPost represents the fields of a new project
       properties:
         config:
           description: Project configuration map (refer to doc/projects.md)
@@ -738,5 +601,142 @@ components:
           example: My new project
           type: string
           x-go-name: Description
+        name:
+          description: The name of the new project
+          example: foo
+          type: string
+          x-go-name: Name
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
+      x-go-package: github.com/lxc/incus/v7/shared/api
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Operation:
+      description: Operation
+      content:
+        application/json:
+          schema:
+            properties:
+              metadata:
+                $ref: '#/components/schemas/Operation'
+              operation:
+                example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
+                type: string
+                x-go-name: Operation
+              status:
+                example: Operation created
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 100
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: async
+                type: string
+                x-go-name: Type
+            type: object

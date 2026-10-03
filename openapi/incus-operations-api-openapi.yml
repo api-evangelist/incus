@@ -364,26 +364,6 @@ paths:
       - Operations
 components:
   responses:
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
     BadRequest:
       description: Bad Request
       content:
@@ -401,6 +381,26 @@ components:
                 x-go-name: ErrorCode
               type:
                 example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
                 type: string
                 x-go-name: Type
             type: object
@@ -445,11 +445,6 @@ components:
                 x-go-name: Type
             type: object
   schemas:
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
-      x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
       description: Operation represents a background operation
       properties:
@@ -532,4 +527,9 @@ components:
           type: string
           x-go-name: UpdatedAt
       type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
       x-go-package: github.com/lxc/incus/v7/shared/api
