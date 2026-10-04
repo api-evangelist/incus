@@ -290,134 +290,7 @@ paths:
       tags:
       - network-integrations
 components:
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
   schemas:
-    NetworkIntegrationPut:
-      description: NetworkIntegrationPut represents the modifiable fields of a network integration
-      properties:
-        config:
-          description: Integration configuration map (refer to doc/network-integrations.md)
-          example:
-            user.mykey: foo
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the network integration
-          example: OVN interconnection for region1
-          type: string
-          x-go-name: Description
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkIntegrationPost:
-      description: NetworkIntegrationPost represents the fields required to rename a network integration
-      properties:
-        name:
-          description: The new name for the network integration
-          example: region2
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkIntegration:
       properties:
         config:
@@ -454,6 +327,16 @@ components:
       title: NetworkIntegration represents a network integration.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkIntegrationPost:
+      description: NetworkIntegrationPost represents the fields required to rename a network integration
+      properties:
+        name:
+          description: The new name for the network integration
+          example: region2
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkIntegrationsPost:
       description: NetworkIntegrationsPost represents the fields of a new network integration
       properties:
@@ -480,3 +363,120 @@ components:
           x-go-name: Type
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+    NetworkIntegrationPut:
+      description: NetworkIntegrationPut represents the modifiable fields of a network integration
+      properties:
+        config:
+          description: Integration configuration map (refer to doc/network-integrations.md)
+          example:
+            user.mykey: foo
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the network integration
+          example: OVN interconnection for region1
+          type: string
+          x-go-name: Description
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object

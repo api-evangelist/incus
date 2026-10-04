@@ -378,109 +378,8 @@ paths:
       tags:
       - Network ACLs
 components:
-  responses:
-    BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: bad request
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 400
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: internal server error
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 500
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: not authorized
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 403
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
   schemas:
-    NetworkACL:
+    NetworkACLPut:
       properties:
         config:
           description: ACL configuration map (refer to doc/network-acls.md)
@@ -505,28 +404,7 @@ components:
             $ref: '#/components/schemas/NetworkACLRule'
           type: array
           x-go-name: Ingress
-        name:
-          description: The new name for the ACL
-          example: bar
-          type: string
-          x-go-name: Name
-        project:
-          description: Project name
-          example: project1
-          type: string
-          x-go-name: Project
-        used_by:
-          description: List of URLs of objects using this profile
-          example:
-          - /1.0/instances/c1
-          - /1.0/instances/v1
-          - /1.0/networks/mybr0
-          items:
-            type: string
-          readOnly: true
-          type: array
-          x-go-name: UsedBy
-      title: NetworkACL used for displaying an ACL.
+      title: NetworkACLPut used for updating an ACL.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkACLRule:
@@ -595,7 +473,7 @@ components:
       title: NetworkACLPost used for renaming an ACL.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    NetworkACLPut:
+    NetworkACL:
       properties:
         config:
           description: ACL configuration map (refer to doc/network-acls.md)
@@ -620,7 +498,28 @@ components:
             $ref: '#/components/schemas/NetworkACLRule'
           type: array
           x-go-name: Ingress
-      title: NetworkACLPut used for updating an ACL.
+        name:
+          description: The new name for the ACL
+          example: bar
+          type: string
+          x-go-name: Name
+        project:
+          description: Project name
+          example: project1
+          type: string
+          x-go-name: Project
+        used_by:
+          description: List of URLs of objects using this profile
+          example:
+          - /1.0/instances/c1
+          - /1.0/instances/v1
+          - /1.0/networks/mybr0
+          items:
+            type: string
+          readOnly: true
+          type: array
+          x-go-name: UsedBy
+      title: NetworkACL used for displaying an ACL.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     NetworkACLsPost:
@@ -656,3 +555,104 @@ components:
       title: NetworkACLsPost used for creating an ACL.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: internal server error
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 500
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
+                type: string
+                x-go-name: Type
+            type: object
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    PreconditionFailed:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: precondition failed
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: not authorized
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 403
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object

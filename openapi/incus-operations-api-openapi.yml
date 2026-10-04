@@ -364,18 +364,18 @@ paths:
       - Operations
 components:
   responses:
-    BadRequest:
-      description: Bad Request
+    InternalServerError:
+      description: Internal Server Error
       content:
         application/json:
           schema:
             properties:
               error:
-                example: bad request
+                example: internal server error
                 type: string
                 x-go-name: Error
               error_code:
-                example: 400
+                example: 500
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -404,18 +404,18 @@ components:
                 type: string
                 x-go-name: Type
             type: object
-    InternalServerError:
-      description: Internal Server Error
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             properties:
               error:
-                example: internal server error
+                example: bad request
                 type: string
                 x-go-name: Error
               error_code:
-                example: 500
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -445,6 +445,11 @@ components:
                 x-go-name: Type
             type: object
   schemas:
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
+      x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
       description: Operation represents a background operation
       properties:
@@ -527,9 +532,4 @@ components:
           type: string
           x-go-name: UpdatedAt
       type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
       x-go-package: github.com/lxc/incus/v7/shared/api

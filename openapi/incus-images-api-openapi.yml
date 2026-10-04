@@ -1065,46 +1065,6 @@ paths:
       - Images
 components:
   responses:
-    EmptySyncResponse:
-      description: Empty sync response
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                example: Success
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 200
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: sync
-                type: string
-                x-go-name: Type
-            type: object
-    PreconditionFailed:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            properties:
-              error:
-                example: precondition failed
-                type: string
-                x-go-name: Error
-              error_code:
-                example: 412
-                format: int64
-                type: integer
-                x-go-name: ErrorCode
-              type:
-                example: error
-                type: string
-                x-go-name: Type
-            type: object
     InternalServerError:
       description: Internal Server Error
       content:
@@ -1125,23 +1085,43 @@ components:
                 type: string
                 x-go-name: Type
             type: object
-    BadRequest:
-      description: Bad Request
+    Forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:
             properties:
               error:
-                example: bad request
+                example: not authorized
                 type: string
                 x-go-name: Error
               error_code:
-                example: 400
+                example: 403
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
               type:
                 example: error
+                type: string
+                x-go-name: Type
+            type: object
+    EmptySyncResponse:
+      description: Empty sync response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 200
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: sync
                 type: string
                 x-go-name: Type
             type: object
@@ -1171,18 +1151,38 @@ components:
                 type: string
                 x-go-name: Type
             type: object
-    Forbidden:
-      description: Forbidden
+    PreconditionFailed:
+      description: Precondition Failed
       content:
         application/json:
           schema:
             properties:
               error:
-                example: not authorized
+                example: precondition failed
                 type: string
                 x-go-name: Error
               error_code:
-                example: 403
+                example: 412
+                format: int64
+                type: integer
+                x-go-name: ErrorCode
+              type:
+                example: error
+                type: string
+                x-go-name: Type
+            type: object
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                example: bad request
+                type: string
+                x-go-name: Error
+              error_code:
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -1192,6 +1192,45 @@ components:
                 x-go-name: Type
             type: object
   schemas:
+    ImagePut:
+      description: ImagePut represents the modifiable fields of an image
+      properties:
+        auto_update:
+          description: Whether the image should auto-update when a new build is available
+          example: true
+          type: boolean
+          x-go-name: AutoUpdate
+        expires_at:
+          description: When the image becomes obsolete
+          example: '2025-03-23T20:00:00-04:00'
+          format: date-time
+          type: string
+          x-go-name: ExpiresAt
+        profiles:
+          description: List of profiles to use when creating from this image (if none provided by user)
+          example:
+          - default
+          items:
+            type: string
+          type: array
+          x-go-name: Profiles
+        properties:
+          additionalProperties:
+            type: string
+          description: Descriptive properties
+          example:
+            os: Ubuntu
+            release: jammy
+            variant: cloud
+          type: object
+          x-go-name: Properties
+        public:
+          description: Whether the image is available to unauthenticated users
+          example: false
+          type: boolean
+          x-go-name: Public
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
     Image:
       description: Image represents an image
       properties:
@@ -1293,8 +1332,8 @@ components:
           x-go-name: UploadedAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageAliasesPost:
-      description: ImageAliasesPost represents a new image alias
+    ImageAliasesEntry:
+      description: ImageAliasesEntry represents an image alias
       properties:
         description:
           description: Alias description
@@ -1316,6 +1355,125 @@ components:
           example: container
           type: string
           x-go-name: Type
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ImagesPostSource:
+      description: ImagesPostSource represents the source of a new image
+      properties:
+        alias:
+          description: Source alias to download from
+          example: jammy
+          type: string
+          x-go-name: Alias
+        certificate:
+          description: Source server certificate (if not trusted by system CA)
+          example: X509 PEM certificate
+          type: string
+          x-go-name: Certificate
+        fingerprint:
+          description: Source image fingerprint (for type "image")
+          example: 8ae945c52bb2f2df51c923b04022312f99bbb72c356251f54fa89ea7cf1df1d0
+          type: string
+          x-go-name: Fingerprint
+        image_type:
+          description: Type of image (container or virtual-machine)
+          example: container
+          type: string
+          x-go-name: ImageType
+        mode:
+          description: Transfer mode (push or pull)
+          example: pull
+          type: string
+          x-go-name: Mode
+        name:
+          description: Instance name (for type "instance" or "snapshot")
+          example: c1/snap0
+          type: string
+          x-go-name: Name
+        project:
+          description: Source project name
+          example: project1
+          type: string
+          x-go-name: Project
+        protocol:
+          description: Source server protocol
+          example: simplestreams
+          type: string
+          x-go-name: Protocol
+        secret:
+          description: Source image server secret token (when downloading private images)
+          example: RANDOM-STRING
+          type: string
+          x-go-name: Secret
+        server:
+          description: URL of the source server
+          example: https://images.linuxcontainers.org
+          type: string
+          x-go-name: Server
+        type:
+          description: Type of image source (instance, snapshot, image or url)
+          example: instance
+          type: string
+          x-go-name: Type
+        url:
+          description: Source URL (for type "url")
+          example: https://some-server.com/some-directory/
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ImageExportPost:
+      description: ImageExportPost represents the fields required to export an image
+      properties:
+        aliases:
+          description: List of aliases to set on the image
+          items:
+            $ref: '#/components/schemas/ImageAlias'
+          type: array
+          x-go-name: Aliases
+        certificate:
+          description: Remote server certificate
+          example: X509 PEM certificate
+          type: string
+          x-go-name: Certificate
+        profiles:
+          description: List of profiles to use
+          example:
+          - default
+          items:
+            type: string
+          type: array
+          x-go-name: Profiles
+        project:
+          description: Project name
+          example: project1
+          type: string
+          x-go-name: Project
+        secret:
+          description: Image receive secret
+          example: RANDOM-STRING
+          type: string
+          x-go-name: Secret
+        target:
+          description: Target server URL
+          example: https://1.2.3.4:8443
+          type: string
+          x-go-name: Target
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ImageAliasesEntryPut:
+      description: ImageAliasesEntryPut represents the modifiable fields of an image alias
+      properties:
+        description:
+          description: Alias description
+          example: Our preferred Ubuntu image
+          type: string
+          x-go-name: Description
+        target:
+          description: Target fingerprint for the alias
+          example: 06b86454720d36b20f94e31c6812e05ec51c1b568cf3a8abd273769d213394bb
+          type: string
+          x-go-name: Target
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
@@ -1401,8 +1559,23 @@ components:
           x-go-name: UpdatedAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageAliasesEntry:
-      description: ImageAliasesEntry represents an image alias
+    ImageAlias:
+      description: ImageAlias represents an alias from the alias list of an image
+      properties:
+        description:
+          description: Description of the alias
+          example: Our preferred Ubuntu image
+          type: string
+          x-go-name: Description
+        name:
+          description: Name of the alias
+          example: ubuntu-22.04
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ImageAliasesPost:
+      description: ImageAliasesPost represents a new image alias
       properties:
         description:
           description: Alias description
@@ -1424,185 +1597,6 @@ components:
           example: container
           type: string
           x-go-name: Type
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageAliasesEntryPut:
-      description: ImageAliasesEntryPut represents the modifiable fields of an image alias
-      properties:
-        description:
-          description: Alias description
-          example: Our preferred Ubuntu image
-          type: string
-          x-go-name: Description
-        target:
-          description: Target fingerprint for the alias
-          example: 06b86454720d36b20f94e31c6812e05ec51c1b568cf3a8abd273769d213394bb
-          type: string
-          x-go-name: Target
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ImagePut:
-      description: ImagePut represents the modifiable fields of an image
-      properties:
-        auto_update:
-          description: Whether the image should auto-update when a new build is available
-          example: true
-          type: boolean
-          x-go-name: AutoUpdate
-        expires_at:
-          description: When the image becomes obsolete
-          example: '2025-03-23T20:00:00-04:00'
-          format: date-time
-          type: string
-          x-go-name: ExpiresAt
-        profiles:
-          description: List of profiles to use when creating from this image (if none provided by user)
-          example:
-          - default
-          items:
-            type: string
-          type: array
-          x-go-name: Profiles
-        properties:
-          additionalProperties:
-            type: string
-          description: Descriptive properties
-          example:
-            os: Ubuntu
-            release: jammy
-            variant: cloud
-          type: object
-          x-go-name: Properties
-        public:
-          description: Whether the image is available to unauthenticated users
-          example: false
-          type: boolean
-          x-go-name: Public
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageAlias:
-      description: ImageAlias represents an alias from the alias list of an image
-      properties:
-        description:
-          description: Description of the alias
-          example: Our preferred Ubuntu image
-          type: string
-          x-go-name: Description
-        name:
-          description: Name of the alias
-          example: ubuntu-22.04
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageAliasesEntryPost:
-      description: ImageAliasesEntryPost represents the required fields to rename an image alias
-      properties:
-        name:
-          description: Alias name
-          example: ubuntu-22.04
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageSource:
-      description: ImageSource represents the source of an image
-      properties:
-        alias:
-          description: Source alias to download from
-          example: jammy
-          type: string
-          x-go-name: Alias
-        certificate:
-          description: Source server certificate (if not trusted by system CA)
-          example: X509 PEM certificate
-          type: string
-          x-go-name: Certificate
-        image_type:
-          description: Type of image (container or virtual-machine)
-          example: container
-          type: string
-          x-go-name: ImageType
-        protocol:
-          description: Source server protocol
-          example: simplestreams
-          type: string
-          x-go-name: Protocol
-        server:
-          description: URL of the source server
-          example: https://images.linuxcontainers.org
-          type: string
-          x-go-name: Server
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    ImagesPostSource:
-      description: ImagesPostSource represents the source of a new image
-      properties:
-        alias:
-          description: Source alias to download from
-          example: jammy
-          type: string
-          x-go-name: Alias
-        certificate:
-          description: Source server certificate (if not trusted by system CA)
-          example: X509 PEM certificate
-          type: string
-          x-go-name: Certificate
-        fingerprint:
-          description: Source image fingerprint (for type "image")
-          example: 8ae945c52bb2f2df51c923b04022312f99bbb72c356251f54fa89ea7cf1df1d0
-          type: string
-          x-go-name: Fingerprint
-        image_type:
-          description: Type of image (container or virtual-machine)
-          example: container
-          type: string
-          x-go-name: ImageType
-        mode:
-          description: Transfer mode (push or pull)
-          example: pull
-          type: string
-          x-go-name: Mode
-        name:
-          description: Instance name (for type "instance" or "snapshot")
-          example: c1/snap0
-          type: string
-          x-go-name: Name
-        project:
-          description: Source project name
-          example: project1
-          type: string
-          x-go-name: Project
-        protocol:
-          description: Source server protocol
-          example: simplestreams
-          type: string
-          x-go-name: Protocol
-        secret:
-          description: Source image server secret token (when downloading private images)
-          example: RANDOM-STRING
-          type: string
-          x-go-name: Secret
-        server:
-          description: URL of the source server
-          example: https://images.linuxcontainers.org
-          type: string
-          x-go-name: Server
-        type:
-          description: Type of image source (instance, snapshot, image or url)
-          example: instance
-          type: string
-          x-go-name: Type
-        url:
-          description: Source URL (for type "url")
-          example: https://some-server.com/some-directory/
-          type: string
-          x-go-name: URL
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
     ImagesPost:
@@ -1670,42 +1664,48 @@ components:
           $ref: '#/components/schemas/ImagesPostSource'
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ImageExportPost:
-      description: ImageExportPost represents the fields required to export an image
+    ImageAliasesEntryPost:
+      description: ImageAliasesEntryPost represents the required fields to rename an image alias
       properties:
-        aliases:
-          description: List of aliases to set on the image
-          items:
-            $ref: '#/components/schemas/ImageAlias'
-          type: array
-          x-go-name: Aliases
+        name:
+          description: Alias name
+          example: ubuntu-22.04
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ImageSource:
+      description: ImageSource represents the source of an image
+      properties:
+        alias:
+          description: Source alias to download from
+          example: jammy
+          type: string
+          x-go-name: Alias
         certificate:
-          description: Remote server certificate
+          description: Source server certificate (if not trusted by system CA)
           example: X509 PEM certificate
           type: string
           x-go-name: Certificate
-        profiles:
-          description: List of profiles to use
-          example:
-          - default
-          items:
-            type: string
-          type: array
-          x-go-name: Profiles
-        project:
-          description: Project name
-          example: project1
+        image_type:
+          description: Type of image (container or virtual-machine)
+          example: container
           type: string
-          x-go-name: Project
-        secret:
-          description: Image receive secret
-          example: RANDOM-STRING
+          x-go-name: ImageType
+        protocol:
+          description: Source server protocol
+          example: simplestreams
           type: string
-          x-go-name: Secret
-        target:
-          description: Target server URL
-          example: https://1.2.3.4:8443
+          x-go-name: Protocol
+        server:
+          description: URL of the source server
+          example: https://images.linuxcontainers.org
           type: string
-          x-go-name: Target
+          x-go-name: Server
       type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
       x-go-package: github.com/lxc/incus/v7/shared/api

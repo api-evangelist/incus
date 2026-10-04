@@ -380,6 +380,23 @@ paths:
       - Projects
 components:
   schemas:
+    ProjectPut:
+      description: ProjectPut represents the modifiable fields of a project
+      properties:
+        config:
+          description: Project configuration map (refer to doc/projects.md)
+          example:
+            features.networks: 'false'
+            features.profiles: 'true'
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the project
+          example: My new project
+          type: string
+          x-go-name: Description
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
     ProjectState:
       description: ProjectState represents the current running state of a project
       properties:
@@ -435,6 +452,34 @@ components:
           x-go-name: UsedBy
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
+    Access:
+      items:
+        $ref: '#/components/schemas/AccessEntry'
+      title: Access represents everyone that may access a particular resource.
+      type: array
+      x-go-package: github.com/lxc/incus/v7/shared/api
+    ProjectsPost:
+      description: ProjectsPost represents the fields of a new project
+      properties:
+        config:
+          description: Project configuration map (refer to doc/projects.md)
+          example:
+            features.networks: 'false'
+            features.profiles: 'true'
+          type: object
+          x-go-name: Config
+        description:
+          description: Description of the project
+          example: My new project
+          type: string
+          x-go-name: Description
+        name:
+          description: The name of the new project
+          example: foo
+          type: string
+          x-go-name: Name
+      type: object
+      x-go-package: github.com/lxc/incus/v7/shared/api
     ProjectStateResource:
       description: ProjectStateResource represents the state of a particular resource in a project
       properties:
@@ -449,12 +494,6 @@ components:
           format: int64
           type: integer
       type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    Access:
-      items:
-        $ref: '#/components/schemas/AccessEntry'
-      title: Access represents everyone that may access a particular resource.
-      type: array
       x-go-package: github.com/lxc/incus/v7/shared/api
     ProjectPost:
       description: ProjectPost represents the fields required to rename a project
@@ -486,22 +525,10 @@ components:
       title: AccessEntry represents an entity having access to the resource.
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ProjectPut:
-      description: ProjectPut represents the modifiable fields of a project
-      properties:
-        config:
-          description: Project configuration map (refer to doc/projects.md)
-          example:
-            features.networks: 'false'
-            features.profiles: 'true'
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the project
-          example: My new project
-          type: string
-          x-go-name: Description
-      type: object
+    StatusCode:
+      format: int64
+      title: StatusCode represents a valid operation and container status.
+      type: integer
       x-go-package: github.com/lxc/incus/v7/shared/api
     Operation:
       description: Operation represents a background operation
@@ -586,46 +613,45 @@ components:
           x-go-name: UpdatedAt
       type: object
       x-go-package: github.com/lxc/incus/v7/shared/api
-    ProjectsPost:
-      description: ProjectsPost represents the fields of a new project
-      properties:
-        config:
-          description: Project configuration map (refer to doc/projects.md)
-          example:
-            features.networks: 'false'
-            features.profiles: 'true'
-          type: object
-          x-go-name: Config
-        description:
-          description: Description of the project
-          example: My new project
-          type: string
-          x-go-name: Description
-        name:
-          description: The name of the new project
-          example: foo
-          type: string
-          x-go-name: Name
-      type: object
-      x-go-package: github.com/lxc/incus/v7/shared/api
-    StatusCode:
-      format: int64
-      title: StatusCode represents a valid operation and container status.
-      type: integer
-      x-go-package: github.com/lxc/incus/v7/shared/api
   responses:
-    BadRequest:
-      description: Bad Request
+    Operation:
+      description: Operation
+      content:
+        application/json:
+          schema:
+            properties:
+              metadata:
+                $ref: '#/components/schemas/Operation'
+              operation:
+                example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
+                type: string
+                x-go-name: Operation
+              status:
+                example: Operation created
+                type: string
+                x-go-name: Status
+              status_code:
+                example: 100
+                format: int64
+                type: integer
+                x-go-name: StatusCode
+              type:
+                example: async
+                type: string
+                x-go-name: Type
+            type: object
+    InternalServerError:
+      description: Internal Server Error
       content:
         application/json:
           schema:
             properties:
               error:
-                example: bad request
+                example: internal server error
                 type: string
                 x-go-name: Error
               error_code:
-                example: 400
+                example: 500
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -654,18 +680,18 @@ components:
                 type: string
                 x-go-name: Type
             type: object
-    InternalServerError:
-      description: Internal Server Error
+    BadRequest:
+      description: Bad Request
       content:
         application/json:
           schema:
             properties:
               error:
-                example: internal server error
+                example: bad request
                 type: string
                 x-go-name: Error
               error_code:
-                example: 500
+                example: 400
                 format: int64
                 type: integer
                 x-go-name: ErrorCode
@@ -711,32 +737,6 @@ components:
                 x-go-name: ErrorCode
               type:
                 example: error
-                type: string
-                x-go-name: Type
-            type: object
-    Operation:
-      description: Operation
-      content:
-        application/json:
-          schema:
-            properties:
-              metadata:
-                $ref: '#/components/schemas/Operation'
-              operation:
-                example: /1.0/operations/66e83638-9dd7-4a26-aef2-5462814869a1
-                type: string
-                x-go-name: Operation
-              status:
-                example: Operation created
-                type: string
-                x-go-name: Status
-              status_code:
-                example: 100
-                format: int64
-                type: integer
-                x-go-name: StatusCode
-              type:
-                example: async
                 type: string
                 x-go-name: Type
             type: object
