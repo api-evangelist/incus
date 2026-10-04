@@ -454,6 +454,9 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/incus-capability-edges.yml
+    name: Incus Business Capability Map
   - type: Releases
     url: https://github.com/lxc/incus/releases
   - type: SecurityPolicy

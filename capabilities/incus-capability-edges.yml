@@ -1,0 +1,152 @@
+slug: incus
+provider: Incus
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 14
+edges:
+- tag: Storage
+  spec_file: incus-storage-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.9
+  evidence: POST /1.0/storage-pools 'Add a storage pool'; 'Get storage pool resources information'; schemas
+    StorageVolumePut, StorageBucket
+  reason: CRUD over storage pools, volumes, snapshots and buckets for a hypervisor platform is storage
+    infrastructure provisioning — IT Infrastructure Management. Not inventory or product data despite
+    the noun 'Storage'.
+- tag: Instances
+  spec_file: incus-instances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: '''Create a new instance'', ''Rename or move/migrate an instance'', ''Bulk instance state
+    update'', schemas InstanceSnapshot, InstanceStateNetwork'
+  reason: Core lifecycle management of system containers and virtual machines (create, migrate, snapshot,
+    backup) — compute infrastructure provisioning and operation.
+- tag: Server
+  spec_file: incus-server-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: GET /1.0 server_get 'Get the server environment and configuration'; GET /1.0/resources 'Get
+    system resources information'; schemas ResourcesCPU, ResourcesMemory, ResourcesStorage
+  reason: Operations expose and configure the host server environment and report compute/memory/storage/GPU
+    hardware resources of a container and VM host — this is compute infrastructure management, not a business-domain
+    capability.
+- tag: cluster groups
+  spec_file: incus-cluster-groups-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: GET /1.0/cluster/groups 'Get the cluster groups'; 'Rename the cluster group'; schema ClusterGroup
+  reason: Grouping of cluster member nodes in a container/VM host cluster for placement purposes — compute
+    cluster topology management, i.e. IT infrastructure. Not organisational or user groups.
+- tag: network-forwards
+  spec_file: incus-network-forwards-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /1.0/networks/{networkName}/forwards 'Add a network address forward'; schema NetworkForwardPort
+  reason: Configuration of address/port forwarding rules on virtual networks — network infrastructure
+    management for the virtualisation platform.
+- tag: network-load-balancers
+  spec_file: incus-network-load-balancers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /1.0/networks/{networkName}/load-balancers 'Add a network load balancer'; schema NetworkLoadBalancerStateBackendHealth
+  reason: Creation and state inspection of network load balancers with backends and health ports — core
+    network infrastructure provisioning.
+- tag: Certificates
+  spec_file: incus-certificates-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: '''Add a trusted certificate'' / ''Get the trusted certificates''; description: ''the default
+    authentication method is TLS client certificates'''
+  reason: The tag manages the trust store of client certificates used to authenticate remote users to
+    the Incus API — credential and access administration, i.e. Identity & Access Management for an infrastructure
+    platform.
+- tag: Cluster
+  spec_file: incus-cluster-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: '''Get the cluster configuration'', ''Get the cluster members'', ''Rename the cluster member'',
+    schemas ClusterMemberState, ResourcesStoragePoolSpace'
+  reason: Operations configure and manage the nodes of a container/VM host cluster — compute infrastructure
+    administration, mapping to IT Infrastructure Management.
+- tag: Networks
+  spec_file: incus-networks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: '''Add a network'', ''Get the DHCP leases'', ''Get the network state'', schemas NetworkStateBridge,
+    NetworkStateOVN'
+  reason: Creates and manages virtual networks, bridges, bonds, VLANs and DHCP leases for the host/cluster
+    — network infrastructure management.
+- tag: network-address-sets
+  spec_file: incus-network-address-sets-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /1.0/network-address-sets 'Add a network address set'; schema NetworkAddressSet
+  reason: Management of named sets of network addresses used in Incus network configuration/ACLs — network
+    infrastructure configuration under IT Infrastructure Management.
+- tag: network-integrations
+  spec_file: incus-network-integrations-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /1.0/network-integrations 'Add a network integration'; schema NetworkIntegration
+  reason: Defines integrations between Incus virtual networks and external network fabrics (e.g. OVN interconnect)
+    — network infrastructure configuration, not partner/app integration.
+- tag: network-peers
+  spec_file: incus-network-peers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /1.0/networks/{networkName}/peers 'Add a network peer'; schema NetworkPeer
+  reason: Peering relationships between virtual networks on the platform — network infrastructure configuration.
+    'Peers' here is a network object, not a business counterparty.
+- tag: network-zones
+  spec_file: incus-network-zones-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /1.0/network-zones 'Add a network zone'; POST /1.0/network-zones/{zone}/records 'Add
+    a network zone record'; schema NetworkZoneRecordEntry
+  reason: DNS zone and record management for Incus virtual networks — network/DNS infrastructure configuration
+    under IT Infrastructure Management.
+- tag: network-allocations
+  spec_file: incus-network-allocations-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: GET /1.0/network-allocations 'Get the network allocations in use (`network`, `network-forward`
+    and…'; schema NetworkAllocations
+  reason: Read-only view of IP addresses allocated across networks and forwards on the host — network
+    infrastructure visibility. Single generic operation, so moderate confidence.
