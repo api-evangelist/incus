@@ -454,6 +454,12 @@ apis:
   - type: Rules
     url: rules/incus-rules.yml
 common:
+  - type: Plans
+    url: plans/incus-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/incus-rate-limits.yml
+  - type: FinOps
+    url: finops/incus-finops.yml
   - type: CapabilityMap
     url: capabilities/incus-capability-edges.yml
     name: Incus Business Capability Map
