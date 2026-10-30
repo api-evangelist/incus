@@ -1,4 +1,4 @@
-# Incus (incus)
+# Incus
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,60 +66,165 @@
 
 Incus is a modern open source system container and virtual machine manager maintained by LinuxContainers.org as a community-led fork of Canonical's LXD. It provides a unified experience for running and managing system containers and VMs across single hosts and clusters, with image-based deployment, live migration, snapshots, projects, and a comprehensive RESTful API for automation and tooling integration.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/incus/refs/heads/main/apis.yml)
+**Areas:** Containers · Virtual Machines · Virtualization · Linux · Open Source
 
-## Scope
+## Incus on APIs.io
 
-- **Type:** Index
+Everything profiled for Incus is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/incus/](https://apis.io/providers/incus/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (22)
 
-- Containers
-- Virtual Machines
-- Virtualization
-- Linux
-- Open Source
+- [Incus Certificates API](https://apis.io/apis/incus/incus-certificates-api/) — The certificates API from Incus — 4 operation(s) for certificates.
+- [Incus Cluster API](https://apis.io/apis/incus/incus-cluster-api/) — The cluster API from Incus — 7 operation(s) for cluster.
+- [Incus Cluster Groups API](https://apis.io/apis/incus/incus-cluster-groups-api/) — The cluster-groups API from Incus — 3 operation(s) for cluster-groups.
+- [Incus Images API](https://apis.io/apis/incus/incus-images-api/) — The images API from Incus — 14 operation(s) for images.
+- [Incus Instances API](https://apis.io/apis/incus/incus-instances-api/) — The instances API from Incus — 28 operation(s) for instances.
+- [Incus Metadata API](https://apis.io/apis/incus/incus-metadata-api/) — The Metadata API from Incus — 1 operation(s) for metadata.
+- [Incus Metrics API](https://apis.io/apis/incus/incus-metrics-api/) — The metrics API from Incus — 1 operation(s) for metrics.
+- [Incus Network Acls API](https://apis.io/apis/incus/incus-network-acls-api/) — The network-acls API from Incus — 4 operation(s) for network-acls.
+- [Incus Network Address Sets API](https://apis.io/apis/incus/incus-network-address-sets-api/) — The network-address-sets API from Incus — 3 operation(s) for network-address-sets.
+- [Incus Network Allocations API](https://apis.io/apis/incus/incus-network-allocations-api/) — The network-allocations API from Incus — 1 operation(s) for network-allocations.
+- [Incus Network Forwards API](https://apis.io/apis/incus/incus-network-forwards-api/) — The network-forwards API from Incus — 3 operation(s) for network-forwards.
+- [Incus Network Integrations API](https://apis.io/apis/incus/incus-network-integrations-api/) — The network-integrations API from Incus — 3 operation(s) for network-integrations.
+- [Incus Network Load Balancers API](https://apis.io/apis/incus/incus-network-load-balancers-api/) — The network-load-balancers API from Incus — 4 operation(s) for network-load-balancers.
+- [Incus Network Peers API](https://apis.io/apis/incus/incus-network-peers-api/) — The network-peers API from Incus — 3 operation(s) for network-peers.
+- [Incus Network Zones API](https://apis.io/apis/incus/incus-network-zones-api/) — The network-zones API from Incus — 6 operation(s) for network-zones.
+- [Incus Networks API](https://apis.io/apis/incus/incus-networks-api/) — The networks API from Incus — 5 operation(s) for networks.
+- [Incus Operations API](https://apis.io/apis/incus/incus-operations-api/) — The operations API from Incus — 7 operation(s) for operations.
+- [Incus Profiles API](https://apis.io/apis/incus/incus-profiles-api/) — The profiles API from Incus — 3 operation(s) for profiles.
+- [Incus Projects API](https://apis.io/apis/incus/incus-projects-api/) — The projects API from Incus — 5 operation(s) for projects.
+- [Incus Server API](https://apis.io/apis/incus/incus-server-api/) — The server API from Incus — 5 operation(s) for server.
+- [Incus Storage API](https://apis.io/apis/incus/incus-storage-api/) — The storage API from Incus — 39 operation(s) for storage.
+- [Incus Warnings API](https://apis.io/apis/incus/incus-warnings-api/) — The warnings API from Incus — 3 operation(s) for warnings.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-26
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Incus REST API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Incus REST API is the canonical interface to the Incus container and virtual machine manager. All communication between Incus and its clients happens over HTTP, using TLS for remote access or a Unix socket for local access. The API covers the complete lifecycle of instances, images, networks, storage pools, projects, profiles, certificates, and cluster members, with support for asynchronous operations and WebSocket-based event streams.
+- [Incus Agentic Access](https://apis.io/agentic-access/incus/incus-agentic-access/)
 
-- **Human URL:** [https://linuxcontainers.org/incus/docs/main/rest-api/](https://linuxcontainers.org/incus/docs/main/rest-api/)
+#### Collections (23)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Containers
-- Virtual Machines
-- Cluster Management
-- REST API
+- [Incus external REST API](https://apis.io/collections/incus/open-incus/)
+- [Incus external REST certificates API](https://apis.io/collections/incus/open-incus-certificates-api/)
+- [Incus external REST certificates cluster API](https://apis.io/collections/incus/open-incus-cluster-api/)
+- [Incus external REST certificates cluster-groups API](https://apis.io/collections/incus/open-incus-cluster-groups-api/)
+- [Incus external REST certificates images API](https://apis.io/collections/incus/open-incus-images-api/)
+- [Incus external REST certificates instances API](https://apis.io/collections/incus/open-incus-instances-api/)
+- [Incus external REST certificates Metadata API](https://apis.io/collections/incus/open-incus-metadata-api/)
+- [Incus external REST certificates metrics API](https://apis.io/collections/incus/open-incus-metrics-api/)
+- [Incus external REST certificates network-acls API](https://apis.io/collections/incus/open-incus-network-acls-api/)
+- [Incus external REST certificates network-address-sets API](https://apis.io/collections/incus/open-incus-network-address-sets-api/)
+- [Incus external REST certificates network-allocations API](https://apis.io/collections/incus/open-incus-network-allocations-api/)
+- [Incus external REST certificates network-forwards API](https://apis.io/collections/incus/open-incus-network-forwards-api/)
+- [Incus external REST certificates network-integrations API](https://apis.io/collections/incus/open-incus-network-integrations-api/)
+- [Incus external REST certificates network-load-balancers API](https://apis.io/collections/incus/open-incus-network-load-balancers-api/)
+- [Incus external REST certificates network-peers API](https://apis.io/collections/incus/open-incus-network-peers-api/)
+- [Incus external REST certificates network-zones API](https://apis.io/collections/incus/open-incus-network-zones-api/)
+- [Incus external REST certificates networks API](https://apis.io/collections/incus/open-incus-networks-api/)
+- [Incus external REST certificates operations API](https://apis.io/collections/incus/open-incus-operations-api/)
+- [Incus external REST certificates profiles API](https://apis.io/collections/incus/open-incus-profiles-api/)
+- [Incus external REST certificates projects API](https://apis.io/collections/incus/open-incus-projects-api/)
+- [Incus external REST certificates server API](https://apis.io/collections/incus/open-incus-server-api/)
+- [Incus external REST certificates storage API](https://apis.io/collections/incus/open-incus-storage-api/)
+- [Incus external REST certificates warnings API](https://apis.io/collections/incus/open-incus-warnings-api/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://linuxcontainers.org/incus/docs/main/rest-api/)
-- [Authentication](https://linuxcontainers.org/incus/docs/main/authentication/)
-- [GitHub Repository](https://github.com/lxc/incus)
-- [OpenAPI](openapi/incus-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/incus.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/incus.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Rules](rules/incus-rules.yml)
+Spectral rulesets for the provider's contracts.
 
-## Common Properties
+- [Incus API Rules](https://apis.io/rules/incus/incus-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Incus Domain Security](https://apis.io/security/incus/incus-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Incus Plans Pricing](https://apis.io/plans/incus/incus-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Incus Rate Limits](https://apis.io/rate-limits/incus/incus-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Incus Finops](https://apis.io/finops/incus/incus-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://linuxcontainers.org/incus/)
 - [Documentation](https://linuxcontainers.org/incus/docs/main/)
-- [Getting Started](https://linuxcontainers.org/incus/docs/main/tutorial/first_steps/)
-- [GitHub Repository](https://github.com/lxc/incus)
-- [Forum](https://discuss.linuxcontainers.org/)
-- [Issues](https://github.com/lxc/incus/issues)
+- [Getting started](https://linuxcontainers.org/incus/docs/main/tutorial/first_steps/)
+- [Blog](https://linuxcontainers.org/incus/news.rss)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 40.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 48.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 7.9 |
+
+**Agent readiness 24.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/incus/](https://apis.io/providers/incus/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Incus: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/incus/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
